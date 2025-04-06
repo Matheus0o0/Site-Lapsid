@@ -1,0 +1,24 @@
+
+.header{
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+}
+
+.allHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ulHeader{
+    padding: 1em 1em;
+    border-radius: 1em;
+    background-color: #0056B3;
+}
+.liHeader{
+    color: #f8f9fa;
+    list-style: none;
+    display: inline-block;
+    margin: 0 15px;
+}
