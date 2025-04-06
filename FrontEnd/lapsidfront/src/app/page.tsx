@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main>
+    <main style={{alignItems: 'center', margin: '0 auto'}}>
       <div className={style.ttlBtn}>
         <h1>Descubra Soluções Inovadoras e 
           <div>
@@ -46,11 +46,19 @@ export default function Home() {
                   alt="IFBA Logo"
                   width={500}
                   height={500}
-                  objectFit="coven"
                 />
               </div>
             </div>
       </div>
+      <div className={style.secondContainer}>
+        <h1 className={style.ttl2}>
+            <div className={style.titleResearch}>
+            <span className={style.spanTtl2}>Linhas de pesquisa do LAPSID: </span>
+            Inovação em <div>Tecnologia, Inteligência Artificial e <div>Empreendedorismo</div></div></div>
+          </h1>
+      </div>
+
+
 
     </main>
   );
