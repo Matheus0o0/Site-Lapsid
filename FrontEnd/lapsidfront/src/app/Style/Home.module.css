@@ -1,4 +1,5 @@
 
+
 .logoLapsid{
     background-color: rgb(255, 255, 255);
     border-radius: 1em 0em;
@@ -9,6 +10,7 @@
     display: block;
 }
 
+
 .logoIFBA{
     background-color: rgb(255, 255, 255);
     border-radius: 1em 0em;
@@ -17,13 +19,15 @@
     margin: 0;
     display: flex-inline;
     margin-top: 6em;
+    margin-left: 2em;
 }
 
 .container{
+    margin-top: 2em;
     position: relative;
     background: linear-gradient(0.25turn, #0056B3,#2A9EBE, #359830);
-    border-radius: 1em;
-    width: 50em;
+    border-radius: 2em 1em;
+    width: 84em;
     display: flex;
     justify-content: start;
     flex-direction: column;
@@ -34,6 +38,14 @@
     margin: 0em;
     display: flex;
 }
+.secondLine{
+    height: 100%;
+    width: 100%;
+    margin: 0em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 
 .text{
     color: rgb(255, 255, 255);
@@ -42,10 +54,7 @@
     width: 40em;
 }
 
-.secondLine{
-    margin: 0em;
-    display: flex;
-}
+
 
 .allConent{
     display: flex;
@@ -56,7 +65,7 @@
 .titleArt{
     color: rgb(255, 255, 255);
     font-size: 30px;
-    margin-left: 1.2em;
+    margin-left: 8em;
 }
 
 .ttlBtn{
@@ -86,4 +95,23 @@
     justify-items: end;
     align-items: end;
     width: 10em;
+}
+
+.spanTtl2{
+    color: #0056B3;
+}
+
+.secondContainer{
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ttl2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
