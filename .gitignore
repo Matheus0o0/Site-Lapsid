@@ -1,1 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pyd
+
+# Virtual environments
+env/
+.venv/
+venv/
+ENV/
+*.env
+*.venv
 venv/e
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+media/
+mediafiles/
+staticfiles/
+static/
+
+# VSCode
+.vscode/
+
+# Docker
+*.pid
+*.tar
+*.log
+docker-compose.override.yml
+
+# Migrations (opcional, se você preferir não versionar)
+**/migrations/
+!**/migrations/__init__.py
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Git
+.gitignore
