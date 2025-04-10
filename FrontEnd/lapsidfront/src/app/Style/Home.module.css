@@ -1,5 +1,3 @@
-
-
 .logoLapsid{
     background-color: rgb(255, 255, 255);
     border-radius: 1em 0em;
@@ -27,7 +25,7 @@
     position: relative;
     background: linear-gradient(0.25turn, #0056B3,#2A9EBE, #359830);
     border-radius: 2em 1em;
-    width: 84em;
+    width: 80em;
     display: flex;
     justify-content: start;
     flex-direction: column;
@@ -57,6 +55,7 @@
 
 
 .allConent{
+    max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,31 +73,12 @@
     justify-content: space-around;
     
 }
-
 .spanTtl{
-    color: #0056B3;
-}
-
-.mainBtn{
-    width: 20em;
-    color: rgb(255, 255, 255);
-    text-align: start;
-    justify-content: start;
-    display: flex;
-    border: 0;
-    background-color: #0056B3;
-    border-radius: 1em;
-    padding: 1em;
-}
-
-.iconArrow{
-    justify-items: end;
-    align-items: end;
-    width: 10em;
+    color: #007bff;
 }
 
 .spanTtl2{
-    color: #0056B3;
+    color: #007bff;
 }
 
 .secondContainer{
@@ -110,8 +90,191 @@
 }
 
 .ttl2{
+    text-align: center;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.titleResearch{
+    display: block;
+    justify-content: center;
+}
+
+.cardSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60em;
+}
+
+
+.parentCard {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 10px;
+    width: 60em;
+    height: 50em;
+}
+    
+.divCard1 {
+    border-radius: 1em;
+    background-color: #dddddd;
+    grid-column: span 3 / span 3;
+    grid-row: span 3 / span 3;
+}
+
+.divCard2 {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    border-radius: 1em;
+    grid-column: span 3 / span 3;
+    grid-row: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row-start: 4;
+}
+
+.divCard3 {
+    border-radius: 1em;
+    background-color: #1E293B;
+    grid-column: span 2 / span 2;
+    grid-row: span 5 / span 5;
+    grid-column-start: 8;
+    grid-row-start: 1;
+}
+
+.divCard4 {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    border-radius: 1em;
+    background-color: #1E293B;
+    grid-column: span 2 / span 2;
+    grid-row: span 4 / span 4;
+    grid-column-start: 8;
+    grid-row-start: 6;
+}
+
+.divCard5 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1em;
+    background-color: #ffffff;
+    grid-column: span 4 / span 4;
+    grid-row: span 3 / span 3;
+    grid-column-start: 4;
+    grid-row-start: 4;
+}
+
+.divCard6 {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    border-radius: 0.5em;
+    margin-bottom: 1em;
+    grid-column: span 4 / span 4;
+    grid-row: span 3 / span 3;
+    grid-column-start: 4;
+    grid-row-start: 1;
+}
+
+.divCard7 {
+    border-radius: 1em;
+    background-color: #359830;
+    grid-column: span 3 / span 3;
+    grid-row: span 3 / span 3;
+    grid-column-start: 5;
+    grid-row-start: 7;
+}
+
+.divCard8 {
+    border-radius: 1em;
+    background-color: #c8c8c8;
+    grid-column: span 4 / span 4;
+    grid-row: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row-start: 7;
+}
+.cardImg1{
+    border-radius: 1em;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+.cardImg2{
+    border-radius: 1em;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+.cardImg3{
+    
+    border-radius: 1em;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+.cardImg4{
+    border-radius: 1em;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+
+.gestContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gesth1{
+    font-size: 30px;
+}
+
+.gestDesc{
+    margin-bottom: 6em;
+    margin-left:12em;
+}
+
+.gestP{
+    width: 70em;
+}
+.gestHr{
+
+    width: 60%;
+    height: 0.1em;
+    background-color: #000000;
+    border: none;
+    margin: 2em ;
+}
+
+.divHr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gestLi{
+    list-style: none;
+}
+
+.gestH3{
+    font-size: 25px;
+    color: #007bff;
 }
