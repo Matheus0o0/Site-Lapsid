@@ -3,24 +3,11 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main style={{alignItems: 'center', margin: '0 auto'}}>
+    <main className={style.main} style={{alignItems: 'center', margin: '0 '}}>
       <div className={style.ttlBtn}>
         <h1>Descubra Soluções Inovadoras e 
-          <div>
-          Avançadas com o 
-          <span className={style.spanTtl}>LAPSID!</span>
-          </div>
+          <span className={style.spanTtl}> LAPSID!</span>
         </h1>
-        <button className={style.mainBtn}>
-                Conecte-se para acessar sua área de pesquisa e desenvolvimento
-            <Image
-                className={style.iconArrow}
-                src="LogArrow.svg"
-                alt="Arrow"
-                width={60}
-                height={30}
-            />
-        </button>
       </div>
       <div className={style.allConent}>
             <div className={style.container}>
@@ -53,13 +40,72 @@ export default function Home() {
       <div className={style.secondContainer}>
         <h1 className={style.ttl2}>
             <div className={style.titleResearch}>
-            <span className={style.spanTtl2}>Linhas de pesquisa do LAPSID: </span>
-            Inovação em <div>Tecnologia, Inteligência Artificial e <div>Empreendedorismo</div></div></div>
+              <div className={style.spanTtl2}>
+                Linhas de pesquisa do LAPSID: 
+              </div>
+              <div>Inovação em Tecnologia, Inteligência Artificial e</div>
+              <div>Empreendedorismo</div>
+            </div>
           </h1>
       </div>
+      <section className={style.cardSection}>
+          <div className={style.parentCard}>
+              <div className={style.divCard1}></div>
+              <div className={style.divCard2}><Image className={style.cardImg2} src="CardImgs/Frame(2).svg" alt="LAPSID Logo" width={300} height={500}/></div>
+              <div className={style.divCard3}></div>
+              <div className={style.divCard4}><Image className={style.cardImg1}  src="CardImgs/Frame(1).svg" alt="LAPSID Logo" width={400} height={400}/></div>
+              <div className={style.divCard5}><Image className={style.logoLapsid2} src="logos/lapsidlogo2.svg" alt="LAPSID Logo" width={300} height={500}/></div>
+              <div className={style.divCard6}><Image className={style.cardImg3} src="CardImgs/Frame(3).svg" alt="LAPSID Logo" width={300} height={500}/></div>
+              <div className={style.divCard7}></div>
+              <div className={style.divCard8}><Image className={style.cardImg4} src="CardImgs/Frame(5).svg" alt="LAPSID Logo" width={300} height={500}/></div>
+          </div>
+      </section>
+      <section>
 
+        <div className={style.gestContent}>
+          <h1 className={style.gesth1}>Gestão do conhecimento</h1>
+        </div>
 
+        <div className={style.gestDesc}>
+          <h2 className={style.gestH2}>Parcerias:</h2>
+          <li className={style.gestLi}>
+            <ul className={style.gestUl}><p>ÌmòLab - Laboratório de Inovação em Gestão e Computação Aplicada (UFBA)</p></ul>
+          </li>
 
+        </div>
+        <div className={style.divHr}>
+          <hr className={style.gestHr}/>
+        </div>
+        <div className={style.gestDesc}>
+          <h2 className={style.gestH2}>Projetos:</h2>
+          <li className={style.gestLi}>
+            <ul className={style.gestUl}>
+              <h3 className={style.gestH3}>Inovar para pessoas negras</h3>
+                  <p className={style.gestP}>O projeto visa mobilizar o desenvolvimento colaborativo de pesquisas científicas em inovação no que diz respeito a dois
+                  eixos conceituais científicos: a) Inovação social, através do desenvolvimento de soluções de negócios digitais que
+                  impactem no desenvolvimento social de pessoas negras, empreendedores e trabalhadores informais; b) Inovação
+                  computacional, a partir da implementação de soluções tecnológicas, que impactem no avanço científico e aplicado da
+                  Engenharia de Software, Inteligência Artificial e Ciência de Dados em negócios digitais.
+                  Nesse sentido, os tópicos chaves de investigação são: Gestão e Processos de Negócios Digitais; Ciência de Dados;
+                  Desenvolvimento de Software; Inovação Tecnológica e Gestão da Diversidade.</p>
+                </ul>
+              <ul className={style.gestUl}>
+                <h3 className={style.gestH3}>NuFuturo - Parceria IFBA - UFBA - Nubank</h3>
+                  <p className={style.gestP}>Projeto de PD&I centrado na formação dos alunos. Em particular, ao final de sua jornada pelo projeto, visamos fazer com
+                  que o aluno seja capaz de: Identificar e modelar problemas avançados nos quais as técnicas das áreas de concentração
+                  do programa podem se aplicar; Analisar, projetar, implementar, avaliar e documentar soluções para problemas os
+                  inseridos no escopo do programa; Compreender e dominar meios de implantar os valores importantes dentro do contexto
+                  do programa, sejam eles técnicos, como abordagens centradas no usuário, agilidade e excelência técnica, sejam eles
+                  além-técnicos, como liderança positiva, respeito à diversidade, capacidade de análise crítica, atenção à questões sociais,
+                  entre outros; Colaborar de forma efetiva em projetos reais, entendendo o seu papel, suas responsabilidades e
+                  respeitando a diversidade da equipe.</p>
+                </ul>
+          </li>
+
+        </div>
+
+      </section>
     </main>
   );
 }
+
