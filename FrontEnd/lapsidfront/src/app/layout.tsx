@@ -15,12 +15,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" >
-      <body >
+    <html lang="pt-BR"  style={{ margin: "0 auto", padding: "0 auto", height: "100%"}}>
+      <body style={{ margin: "0 auto", padding: "0 auto", height: "100%"}}>
         <Header />
-        {children}
+          {children}
+        <Footer/>
       </body>
-      <Footer/>
     </html>
   );
 }

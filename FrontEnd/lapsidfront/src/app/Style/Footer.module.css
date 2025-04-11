@@ -1,5 +1,6 @@
 .footer{
-    margin-top: 200em;
+
+    height: 3em;
     display: flex;
     align-items: center;
     justify-content: space-between;
