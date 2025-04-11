@@ -172,6 +172,7 @@
 
 .divCard6 {
     display: flex;
+
     align-items: start;
     justify-content: center;
     border-radius: 0.5em;
@@ -277,4 +278,110 @@
 .gestH3{
     font-size: 25px;
     color: #007bff;
+}
+
+.spanCard1{
+    color: #0056B3;
+    font-size: 20px;
+}
+
+.divCard1Content{
+    margin: 2em;
+
+
+}
+
+.divCard7Content{
+    margin: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divCard7Title{
+    color: #ffffff;
+    font-size: 30px;
+    text-align: center;
+}
+
+.divCard6Content{
+    background-image:url('../../app/../../public/CardImgs/Frame3.svg') ;
+    background-size: cover;
+    justify-content: center;
+    height: 244px;
+    border-radius: 1em;
+
+}
+.divCard6Title{
+    color: #ffffff;
+    margin-left: 2em;
+}
+
+.divCard6P{
+    color: #ffffff;
+    margin-left: 2em;
+}
+
+.divCard2Content{
+    background-image:url('../../app/../../public/CardImgs/Frame(2).svg') ;
+    background-size: cover;
+    justify-content: center;
+    height: 244px;
+    border-radius: 1em;
+}
+
+.divCard2Title{
+    color: #ffffff;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.divCard2P{
+    color: #ffffff;
+    margin-left: 2em;
+}
+.divCard3P{
+    color: #ffffff;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.divCard3Title{
+    color: #ffffff;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.divCard3Content{
+    padding: 1em;
+    align-items: center;
+    justify-content: center;
+}
+
+.divCard4Content{
+    background-image:url('../../app/../../public/CardImgs/Frame(1).svg') ;
+    background-size: cover;
+    justify-content: center;
+    height: 350px;
+    border-radius: 1em;
+}
+
+.divCard4P{
+    color: #ffffff;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.divCard4Title{
+    color: #ffffff;
+    margin-left: 1em;
+    margin-right: 1em;
+
+}
+
+.main{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }

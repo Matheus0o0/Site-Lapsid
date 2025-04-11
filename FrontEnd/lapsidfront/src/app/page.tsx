@@ -50,13 +50,49 @@ export default function Home() {
       </div>
       <section className={style.cardSection}>
           <div className={style.parentCard}>
-              <div className={style.divCard1}></div>
-              <div className={style.divCard2}><Image className={style.cardImg2} src="CardImgs/Frame(2).svg" alt="LAPSID Logo" width={300} height={500}/></div>
-              <div className={style.divCard3}></div>
-              <div className={style.divCard4}><Image className={style.cardImg1}  src="CardImgs/Frame(1).svg" alt="LAPSID Logo" width={400} height={400}/></div>
+              <div className={style.divCard1}>
+                <div className={style.divCard1Content}><span className={style.spanCard1}><b>Arquitetura Orientada a Serviços</b></span>
+                    <div>Investigamos soluções arquiteturais que promovem a flexibilidade e escalabilidade dos sistemas, centradas no uso eficaz de serviços para otimizar a entrega de funcionalidades.
+                    </div>
+                </div>
+              </div>
+              <div className={style.divCard2}>
+                <div className={style.divCard2Content}>
+                  <h3 className={style.divCard2Title}>Internet das Coisas (IoT)</h3>
+                  <p style={{fontSize: '1em'}} className={style.divCard2P}>Exploramos as vastas possibilidades oferecidas pela interconexão de dispositivos, buscando soluções inovadoras que impulsionem a IoT e suas aplicações em diversas áreas, desde a indústria até o cotidiano.</p>
+                  {/* <Image className={style.cardImg2} src="CardImgs/Frame(2).svg" alt="LAPSID Logo" width={300} height={500}/> */}
+                </div>
+              </div>
+              <div className={style.divCard3}>
+              <div className={style.divCard3Content}>
+                  <h3 className={style.divCard3Title}>Internet das Coisas (IoT)</h3>
+                  <p style={{fontSize: '1em'}} className={style.divCard3P}>Exploramos as vastas possibilidades oferecidas pela interconexão de dispositivos, buscando soluções inovadoras que impulsionem a IoT e suas aplicações em diversas áreas, desde a indústria até o cotidiano.</p>
+                  {/* <Image className={style.cardImg2} src="CardImgs/Frame(2).svg" alt="LAPSID Logo" width={300} height={500}/> */}
+                </div>
+              </div>
+              <div className={style.divCard4}>
+                <div className={style.divCard4Content}>
+                  <h3 className={style.divCard4Title}>Empreendedorismo Inovador</h3>
+                  <p style={{fontSize: '1em'}} className={style.divCard4P}>Encorajamos o espírito empreendedor, investigando estratégias e práticas inovadoras.</p>
+                  {/* <Image className={style.cardImg1}  src="CardImgs/Frame(1).svg" alt="LAPSID Logo" width={400} height={400}/> */}
+                </div>
+              </div>
               <div className={style.divCard5}><Image className={style.logoLapsid2} src="logos/lapsidlogo2.svg" alt="LAPSID Logo" width={300} height={500}/></div>
-              <div className={style.divCard6}><Image className={style.cardImg3} src="CardImgs/Frame(3).svg" alt="LAPSID Logo" width={300} height={500}/></div>
-              <div className={style.divCard7}></div>
+              <div className={style.divCard6}>
+                <div className={style.divCard6Content}>
+                  <h3 className={style.divCard6Title}>Engenharia de Software</h3>
+                  <p style={{fontSize: '1em'}} className={style.divCard6P}>Comprometidos em aprimorar práticas de desenvolvimento de software, estudamos metodologias ágeis, boas práticas de engenharia de software e técnicas avançadas para melhorar a qualidade e eficiência dos produtos desenvolvidos.</p>
+                {/* <Image className={style.cardImg3} src="CardImgs/Frame3.svg" alt="LAPSID Logo" width={300} height={500}/> */}
+                </div>
+
+              </div>
+              <div className={style.divCard7}>
+                <div className={style.divCard7Content}>
+                  <h2 className={style.divCard7Title}>
+                    Conectando <br /> ideias, <br /> aumentando a inovação
+                  </h2>
+                </div>
+              </div>
               <div className={style.divCard8}><Image className={style.cardImg4} src="CardImgs/Frame(5).svg" alt="LAPSID Logo" width={300} height={500}/></div>
           </div>
       </section>
