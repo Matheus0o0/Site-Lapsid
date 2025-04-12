@@ -2,7 +2,7 @@ import style from '../Style/Equipe.module.css';
 
 export default function Equipe() {
     return(
-        <main>
+        <main className={style.main}>
             <div className={style.containerTtl}>
                 <h1 className={style.ttlH1}>Venha conhecer a equipe da <span className={style.spanTtl}>LAPSID!</span></h1>
             </div>

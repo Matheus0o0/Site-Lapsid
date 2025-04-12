@@ -3,7 +3,7 @@ import Map from '../Components/Map';
 import style from '../Style/Contatos.module.css';
 export default function Contatos() {
     return (
-        <main>
+        <main className={style.main}>
             <h1 className={style.title}>Contatos</h1>
             <section className={style.sectionCont}>
                     <div className={style.divCont}>
