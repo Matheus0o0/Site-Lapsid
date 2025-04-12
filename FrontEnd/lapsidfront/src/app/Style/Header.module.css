@@ -22,3 +22,16 @@
     display: inline-block;
     margin: 0 15px;
 }
+
+.aHeader{
+    text-decoration: none;
+    color: #e0e0e0;
+    font-size: 1.2em;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.aHeader:hover {
+    cursor: pointer;
+    color: #ffffff; 
+    transform: scale(1.1); 
+}
