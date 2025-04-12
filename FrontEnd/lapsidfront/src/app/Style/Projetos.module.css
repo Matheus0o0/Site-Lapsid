@@ -10,13 +10,14 @@
 
 .imgPrj{
     margin-right: 1em;
-    width: 40%;
+    width: 30em;
     height: 40%;
 }
 
 .divPrj{
     margin-left: 5em;
     display: flex;
+    justify-content: center;
     margin-bottom: 6em;
 }
 
@@ -40,4 +41,9 @@
 
 .main{
     margin-top: 8em;
+}
+
+.h2Prj{
+    text-align: center;
+
 }

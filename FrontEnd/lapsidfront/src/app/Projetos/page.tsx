@@ -10,7 +10,10 @@ export default function Projetos() {
                     <h2 className={style.h2Prj}>Projeto 1</h2>
                     <div className={style.divPrj}>
                         <Image className={style.imgPrj} src={"CardImgs/Frame3.svg"} alt="Projeto 1" width={100} height={100}/>
-                        <p className={style.pPrj}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique, quaerat, omnis fugit at voluptas voluptatum tempora deleniti perferendis alias expedita quos nobis dolores soluta, iusto aperiam dolorum error? Earum vel hic quisquam! Mollitia similique dignissimos eligendi molestias accusantium eveniet minima.</p>
+                        <div className={style.contentDivPrj}>
+                            <p className={style.pPrj}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique, quaerat, omnis fugit at voluptas voluptatum tempora deleniti perferendis alias expedita quos nobis dolores soluta, iusto aperiam dolorum error? Earum vel hic quisquam! Mollitia similique dignissimos eligendi molestias accusantium eveniet minima.</p>
+                            <p> <b>Nome do autor</b>: Sem Nome</p>
+                        </div>
                     </div>
                 </div>
                 <div className={style.divHr}>
@@ -20,7 +23,10 @@ export default function Projetos() {
                     <h2 className={style.h2Prj}>Projeto 2</h2>
                     <div className={style.divPrj}>
                         <Image className={style.imgPrj} src={"CardImgs/Frame3.svg"} alt="Projeto 1" width={100} height={100}/>
-                        <p className={style.pPrj}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique, quaerat, omnis fugit at voluptas voluptatum tempora deleniti perferendis alias expedita quos nobis dolores soluta, iusto aperiam dolorum error? Earum vel hic quisquam! Mollitia similique dignissimos eligendi molestias accusantium eveniet minima.</p>
+                        <div className={style.contentDivPrj}>
+                            <p className={style.pPrj}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique, quaerat, omnis fugit at voluptas voluptatum tempora deleniti perferendis alias expedita quos nobis dolores soluta, iusto aperiam dolorum error? Earum vel hic quisquam! Mollitia similique dignissimos eligendi molestias accusantium eveniet minima.</p>
+                            <p> <b>Nome do autor</b>: Sem Nome</p>
+                        </div>
                     </div>
                 </div>
 
