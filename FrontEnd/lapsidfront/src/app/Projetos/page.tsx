@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Projetos() {
     return (
-        <main>
+        <main className={style.main}>
             <h1 className={style.title}>Projetos</h1>
             <section>
                 <div className={style.prj}>
