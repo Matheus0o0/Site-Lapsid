@@ -1,6 +1,8 @@
 import style from '../app/Style/Home.module.css';
 import Image from 'next/image';
 
+
+
 export default function Home() {
   return (
     <main className={style.main} style={{alignItems: 'center', margin: '0 '}}>

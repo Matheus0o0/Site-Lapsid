@@ -1,0 +1,39 @@
+
+.title{
+    margin-left: 3em;
+    margin-bottom: 2em;
+}
+
+.prj{
+    margin-left: 12em;
+}
+
+.imgPrj{
+    margin-right: 1em;
+    width: 40%;
+    height: 40%;
+}
+
+.divPrj{
+    margin-left: 5em;
+    display: flex;
+    margin-bottom: 6em;
+}
+
+.pPrj{
+    width: 30rem;
+}
+
+.hr{
+    width: 60%;
+    height: 0.1em;
+    background-color: #000000;
+    border: none;
+    margin: 2em ;
+}
+
+.divHr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

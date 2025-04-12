@@ -1,0 +1,25 @@
+
+
+.liCont{
+    list-style: none;
+}
+
+.sectionCont{
+    display: block;
+    margin-left: 3em;
+}
+
+.divCont{
+    margin-left: 8em;
+    margin-bottom: 6em;
+}
+
+.ulCont{
+    margin-bottom: 3em;
+}
+
+.title{
+    font-size: 30px;
+    margin-left: 3em;
+    margin-bottom: 2em;
+}
