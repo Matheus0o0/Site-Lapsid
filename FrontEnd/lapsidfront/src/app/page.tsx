@@ -21,8 +21,9 @@ export default function Home() {
   return (
     <main className={style.main} style={{ alignItems: "center", margin: "0 " }}>
       <div className={style.ttlBtn}>
-        <h1>
-          Descubra Soluções Inovadoras e
+
+      <h1 className={style.ttlH1}>Descubra Soluções Inovadoras e 
+
           <span className={style.spanTtl}> LAPSID!</span>
         </h1>
       </div>
@@ -160,7 +161,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section>
+
+
+      <section className={style.gest}>
         <div className={style.gestContent}>
           <h1 className={style.gesth1}>Gestão do conhecimento</h1>
         </div>
