@@ -5,7 +5,7 @@ export default function Parcerias() {
     return (
         <main className={style.main}>
             <div className={style.container}>
-                <h1>Parcerias</h1>
+                <h1 className={style.ttlH1}>Parcerias</h1>
                 <div className={style.parcContent}>
                     <Image src={"logos/logoufba.svg"} alt="Parcerias" width={200} height={200}/>
                     <div className={style.Parce}>

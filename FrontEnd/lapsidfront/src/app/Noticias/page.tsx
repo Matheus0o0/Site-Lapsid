@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function Noticias() {
     return (
         <main className={style.main}>
-            <h1>Notícias</h1>
+            <h1 className={style.ttlH1}>Notícias</h1>
             <section>
                 <div className={style.ultNewContent}>
                     <h2 className={style.ultNewTitle} >Ultimas notícias</h2>

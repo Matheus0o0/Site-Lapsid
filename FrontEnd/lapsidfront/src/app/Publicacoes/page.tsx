@@ -2,7 +2,7 @@ import style from '../Style/Publicacoes.module.css';
 export default function Publicacoes() {
     return (
         <main className={style.mainPubli}>
-            <h1>Publicações</h1>
+            <h1 className={style.title}>Publicações</h1>
             <div className={style.container}>
                 <div>
                     <h2>2024</h2>

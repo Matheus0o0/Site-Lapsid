@@ -8,6 +8,10 @@
     display: block;
 }
 
+.ttlH1{
+    font-size: 2.5em;
+}
+
 
 .logoIFBA{
     background-color: rgb(255, 255, 255);
@@ -25,7 +29,6 @@
     position: relative;
     background: linear-gradient(0.25turn, #0056B3,#2A9EBE, #359830);
     border-radius: 2em 1em;
-    width: 80em;
     display: flex;
     justify-content: start;
     flex-direction: column;
@@ -37,8 +40,6 @@
     display: flex;
 }
 .secondLine{
-    height: 100%;
-    width: 100%;
     margin: 0em;
     display: flex;
     align-items: center;
@@ -55,7 +56,6 @@
 
 
 .allConent{
-    max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -386,3 +386,40 @@
     flex: 1;
     margin-top: 8em;
 }
+
+
+
+@media (max-width: 1200px) {
+
+   
+}
+
+@media (max-width: 768px) {
+ 
+}
+
+@media (max-width: 480px) {
+    .ttlH1{
+        text-align: center;
+    }
+    .logoLapsid2{
+        display: none;
+    }
+    .logoIFBA{
+        display: none;
+    }
+    .logoLapsid{
+        display: none;
+    }
+    .text{
+        text-align: center;
+        margin: 0px;
+    }
+    .titleArt{
+        margin: 0;
+    }
+    .secondLine{
+        margin: 0;
+    }
+}
+
