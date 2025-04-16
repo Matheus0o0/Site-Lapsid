@@ -87,7 +87,9 @@
 .ultNewBtn{
     border: 0px;
     padding: 1em 2em 1em 2em;
-    border-radius: 2em;
+    border-radius: 1em;
     background-color: #0056B3;
     color: aliceblue;
+    border: 1px solid #000;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
 }

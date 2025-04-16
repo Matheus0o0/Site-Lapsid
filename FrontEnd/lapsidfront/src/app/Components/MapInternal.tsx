@@ -15,8 +15,8 @@ const position: [number, number] = [-12.2668, -38.9669];
 
 const MapInternal = () => {
   return (
-    <div style={{ height: "400px", width: "100%" }}>
-      <MapContainer center={position} zoom={13} style={{ height: "30em", width: "30em" }}>
+    <div style={{ height: "390px", width: "100%", display: "flex", justifyContent: "center"}}>
+      <MapContainer center={position} zoom={13} style={{ height: "30em", width: "100em" }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
