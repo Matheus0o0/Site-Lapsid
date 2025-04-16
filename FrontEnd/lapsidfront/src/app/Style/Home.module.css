@@ -1,58 +1,125 @@
 .logoLapsid{
-    background-color: rgb(255, 255, 255);
-    border-radius: 1em 0em;
-    height: 7.5em;
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 15em;
-    margin: 0;
-    align-items: start;
-    display: block;
+    height: 6em;
+    overflow: visible;
+    background-color: #fff;
+    border-radius: 0 0 1em; 
 }
 
+.logoLapsidImage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
 
-.logoIFBA{
-    background-color: rgb(255, 255, 255);
-    border-radius: 1em 0em;
-    height: 8em;
+  .logoLapsid::after{
+    content: "";
+    position: absolute;
+    width: 2.125em;
+    height: 2.125em;
+  }
+  .logoLapsid::after{
+    background-color: transparent;
+    top: 0;  
+    right: -2.125em;
+    border-top-left-radius: 1em;
+    box-shadow: -0.4em -0.4em #fff;
+  }
+
+  .curve_two{
+    content: "";
+    position: absolute;
+    width: 2.125em;
+    height: 2.125em;
+ }
+ .curve_two{
+    background-color: transparent;
+    left: 0;
+    top: 6em;
+    border-top-left-radius: 1em;
+    box-shadow: -0.4em -0.4em #fff;
+ }
+ .blurBlue{
+    position: absolute;
+    top: 700px;
+    left: 0;
+    width: 400px;
+    height: 300px;
+    background-color: #0057b3;
+    border-radius: 100%;
+    filter: blur(200px);
+    z-index: -15;
+ }
+ .blurGreen{
+    position: absolute;
+    top: 1500px;
+    right: 0;
+    width: 400px;
+    height: 300px;
+    background-color: #359830;
+    border-radius: 100%;
+    filter: blur(200px);
+    z-index: -15;
+ }
+.logoIFBA {
+    position: absolute;
+    right: 0;
+    bottom: 0;
     width: 15em;
-    margin: 0;
-    display: flex-inline;
-    margin-top: 6em;
-    margin-left: 2em;
-}
+    height: 7em;
+    overflow: visible;
+    background-color: #fff;
+    border-radius: 1em 0 0; 
+  }
+  
+  .logoIFBAImage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+  }
 
+  .logoIFBA::after{
+    content: "";
+    position: absolute;
+    width: 2.125em;
+    height: 2.125em;
+  }
+  .logoIFBA::after{
+    background-color: transparent;
+    top: -2.125em;  
+    right: 0;
+    border-bottom-right-radius: 1em;
+    box-shadow: 0.4em 0.4em #fff;
+  }
+ .curve_one{
+    content: "";
+    position: absolute;
+    width: 2.125em;
+    height: 2.125em;
+ }
+ .curve_one{
+    background-color: transparent;
+    right: 14.97em;
+    bottom: 0;
+    border-bottom-right-radius: 1em;
+    box-shadow: 0.4em 0.4em #fff;
+ }
 .container{
-    margin-top: 2em;
     position: relative;
     background: linear-gradient(0.25turn, #0056B3,#2A9EBE, #359830);
-    border-radius: 2em 1em;
-    width: 80em;
+    border-radius: 2em;
+    margin-top: 2em;
+    width: 65em;
+    height: 28em;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     flex-direction: column;
 }
-.fistLine{
-    align-items: center;
-    justify-content: start;
-    margin: 0em;
-    display: flex;
-}
-.secondLine{
-    height: 100%;
-    width: 100%;
-    margin: 0em;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.text{
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    margin-left: 7em;
-    width: 40em;
-}
-
-
 
 .allConent{
     max-width: 100%;
@@ -61,25 +128,31 @@
     align-items: center;
 }
 
+.text{
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    line-height: 35px;
+    margin: 0em 0em 5em 5em;
+    width: 40em;
+}
+
+
 .titleArt{
     color: rgb(255, 255, 255);
-    font-size: 30px;
-    margin-left: 8em;
+    font-size: 50px;
+    margin-left: 6em;
 }
 
 .ttlBtn{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    
+    font-size: 25px;
 }
-.spanTtl{
+.spanTtl, .spanTtl2{
     color: #007bff;
 }
 
-.spanTtl2{
-    color: #007bff;
-}
 
 .secondContainer{
     margin-top: 3em;
@@ -94,6 +167,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 45px;
 }
 
 .titleResearch{
@@ -117,13 +191,15 @@
     gap: 10px;
     width: 60em;
     height: 50em;
+    
 }
     
 .divCard1 {
     border-radius: 1em;
-    background-color: #dddddd;
+    background-color: #fff;
     grid-column: span 3 / span 3;
     grid-row: span 3 / span 3;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCard2 {
@@ -135,15 +211,17 @@
     grid-row: span 3 / span 3;
     grid-column-start: 1;
     grid-row-start: 4;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCard3 {
     border-radius: 1em;
     background-color: #1E293B;
-    grid-column: span 2 / span 2;
+    grid-column: span 4 / span 4;
     grid-row: span 5 / span 5;
     grid-column-start: 8;
     grid-row-start: 1;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCard4 {
@@ -152,10 +230,11 @@
     justify-content: center;
     border-radius: 1em;
     background-color: #1E293B;
-    grid-column: span 2 / span 2;
+    grid-column: span 4 / span 4;
     grid-row: span 4 / span 4;
     grid-column-start: 8;
     grid-row-start: 6;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCard5 {
@@ -168,19 +247,20 @@
     grid-row: span 3 / span 3;
     grid-column-start: 4;
     grid-row-start: 4;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCard6 {
     display: flex;
-
     align-items: start;
     justify-content: center;
-    border-radius: 0.5em;
+    border-radius: 1em;
     margin-bottom: 1em;
     grid-column: span 4 / span 4;
     grid-row: span 3 / span 3;
     grid-column-start: 4;
     grid-row-start: 1;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCard7 {
@@ -190,6 +270,7 @@
     grid-row: span 3 / span 3;
     grid-column-start: 5;
     grid-row-start: 7;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCard8 {
@@ -199,6 +280,7 @@
     grid-row: span 3 / span 3;
     grid-column-start: 1;
     grid-row-start: 7;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
 }
 .cardImg1{
     border-radius: 1em;
@@ -308,25 +390,23 @@
     background-image:url('../../app/../../public/CardImgs/Frame3.svg') ;
     background-size: cover;
     justify-content: center;
-    height: 244px;
-    border-radius: 1em;
-
+    height: 100%;
 }
 .divCard6Title{
     color: #ffffff;
-    margin-left: 2em;
+    margin-left: 1em;
 }
 
 .divCard6P{
     color: #ffffff;
-    margin-left: 2em;
+    margin-left: 1em;
 }
 
 .divCard2Content{
     background-image:url('../../app/../../public/CardImgs/Frame(2).svg') ;
     background-size: cover;
     justify-content: center;
-    height: 244px;
+    height: 100%;
     border-radius: 1em;
 }
 
@@ -384,5 +464,102 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-top: 8em;
 }
+
+@keyframes slideFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0; /* Começa invisível */
+    }
+    100% {
+      opacity: 1; /* Fica totalmente visível */
+    }
+  }
+  /* Estilos padrão pra deixar invisível antes da animação */
+  .divCard1,
+  .divCard2,
+  .divCard3,
+  .divCard4,
+  .divCard5,
+  .divCard6,
+  .divCard7,
+  .divCard8 {
+    opacity: 0;
+    transition: all 0.8s ease;
+  }
+  
+  /* Animações específicas quando ganham a classe animate */
+  .divCard1.animate {
+    animation: slideFromLeft 1s ease forwards;
+  }
+  .divCard2.animate {
+    animation: slideFromLeft 1s ease forwards;
+    animation-delay: 0.2s;
+  }
+  .divCard3.animate {
+    animation: slideFromTop 1s ease forwards;
+    animation-delay: 0.4s;
+  }
+  .divCard4.animate {
+    animation: slideFromBottom 1s ease forwards;
+    animation-delay: 0.6s;
+  }
+  .divCard5.animate {
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.8s;
+  }
+  .divCard6.animate {
+    animation: slideFromTop 1s ease forwards;
+    animation-delay: 1s;
+  }
+  .divCard7.animate {
+    animation: slideFromBottom 1s ease forwards;
+    animation-delay: 1.2s;
+  }
+  .divCard8.animate {
+    animation: slideFromBottom 1s ease forwards;
+    animation-delay: 1.4s;
+  }
+  

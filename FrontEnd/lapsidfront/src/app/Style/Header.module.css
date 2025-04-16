@@ -13,25 +13,25 @@
 
 .ulHeader{
     padding: 1em 1em;
-    border-radius: 1em;
+    border-radius: 1.5em;
     background-color: #0056B3;
 }
 .liHeader{
     color: #f8f9fa;
     list-style: none;
     display: inline-block;
-    margin: 0 15px;
+    margin: 0 10px;
 }
 
 .aHeader{
     text-decoration: none;
-    color: #e0e0e0;
+    color: #fff;
     font-size: 1.2em;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .aHeader:hover {
     cursor: pointer;
-    color: #ffffff; 
-    transform: scale(1.1); 
+    color: #e0e0e0; 
+    transform: scale(1.5); 
 }
