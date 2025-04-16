@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className={style.main} style={{alignItems: 'center', margin: '0 '}}>
       <div className={style.ttlBtn}>
-        <h1>Descubra Soluções Inovadoras e 
+        <h1 className={style.ttlH1}>Descubra Soluções Inovadoras e 
           <span className={style.spanTtl}> LAPSID!</span>
         </h1>
       </div>
@@ -98,7 +98,7 @@ export default function Home() {
               <div className={style.divCard8}><Image className={style.cardImg4} src="CardImgs/Frame(5).svg" alt="LAPSID Logo" width={300} height={500}/></div>
           </div>
       </section>
-      <section>
+      <section className={style.gest}>
 
         <div className={style.gestContent}>
           <h1 className={style.gesth1}>Gestão do conhecimento</h1>
