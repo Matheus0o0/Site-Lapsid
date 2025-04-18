@@ -23,7 +23,6 @@ export default function Home() {
       <div className={style.ttlBtn}>
 
       <h1 className={style.ttlH1}>Descubra Soluções Inovadoras e 
-
           <span className={style.spanTtl}> LAPSID!</span>
         </h1>
       </div>
