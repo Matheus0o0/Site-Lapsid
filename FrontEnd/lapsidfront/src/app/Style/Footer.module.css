@@ -1,10 +1,10 @@
 .footer{
 
-    height: 3em;
+    height: 3vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 16em;
+    height: 16vh;
     margin: 0 auto;
     margin-bottom: 3em;
 
@@ -19,3 +19,13 @@
     margin-right: 3em;
 }
 
+@media (max-width: 480px) {
+    .footer{
+        margin: 2em;
+        display: block;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100%;
+    }
+}

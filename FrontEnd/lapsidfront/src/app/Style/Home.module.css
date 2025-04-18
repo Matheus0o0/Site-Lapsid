@@ -115,8 +115,8 @@
 .container{
     position: relative;
     background: linear-gradient(0.25turn, #0056B3,#2A9EBE, #359830);
-    width: 65em;
-    height: 28em;
+    width: 70vw;
+    height: 40vh;
     border-radius: 2em 1em;
     display: flex;
     justify-content: center;
@@ -134,7 +134,7 @@
     font-size: 20px;
     line-height: 35px;
     margin: 0em 0em 5em 5em;
-    width: 40em;
+    width: 55vw;
 }
 
 
@@ -169,6 +169,7 @@
     align-items: center;
     justify-content: center;
     font-size: 45px;
+    width: 70vw;
 }
 
 .titleResearch{
@@ -181,7 +182,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 60em;
+    height: 100vh;
 }
 
 
@@ -189,8 +190,8 @@
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(9, 1fr);
-    gap: 10px;
-    width: 60em;
+    gap: 1em;
+    width: 50vw;
     height: 50em;
     
 }
@@ -332,12 +333,12 @@
 }
 
 .gestDesc{
+    width: 80vw;
     margin-bottom: 6em;
-    margin-left:12em;
 }
 
 .gestP{
-    width: 70em;
+    width: 60vw;
 }
 .gestHr{
 
@@ -598,5 +599,41 @@
     .secondLine{
         margin: 0;
     }
+    .container{
+        display: flex;
+        height: 60em;
+    }
+    .titleArt{
+        margin: 1em;
+        text-align: center;
+    }
+    .text{
+        margin: 1em;
+        text-align: center;
+    }
+
+    .logoLapsidImage{
+        display: none;
+    }
+    .logoIFBA{
+        display: none;
+    }
+    .curve_two{
+        display: none;
+    }
+    .curve_one{
+        display: none;
+    }
+    .main{
+        align-items: center;
+    }
+
+    .gestDesc{
+        margin: 0px;
+    }
+    .ttl2{
+        margin-left: 1em;
+    }
+
 }
 
