@@ -170,6 +170,7 @@
     justify-content: center;
     font-size: 45px;
     width: 70vw;
+    height: 70vh;
 }
 
 .titleResearch{
@@ -577,18 +578,22 @@
 }
 
 @media (max-width: 480px) {
+    .cardSection{
+        margin: 0;
+    }
+
+    .main{
+        margin: 1em;
+    }
     .ttlH1{
         text-align: center;
+        font-size: 40px;
+        margin-bottom: 2em;
     }
     .logoLapsid2{
         display: none;
     }
-    .logoIFBA{
-        display: none;
-    }
-    .logoLapsid{
-        display: none;
-    }
+
     .text{
         text-align: center;
         margin: 0px;
@@ -600,8 +605,11 @@
         margin: 0;
     }
     .container{
+        width: 20em;
         display: flex;
-        height: 60em;
+        align-items: center;
+        justify-content: center;
+        height: 70em;
     }
     .titleArt{
         margin: 1em;
@@ -612,12 +620,6 @@
         text-align: center;
     }
 
-    .logoLapsidImage{
-        display: none;
-    }
-    .logoIFBA{
-        display: none;
-    }
     .curve_two{
         display: none;
     }
@@ -633,7 +635,44 @@
     }
     .ttl2{
         margin-left: 1em;
+        font-size: 30px;
+    }
+    .blurBlue{
+        display: none;
+
+     }
+     .blurGreen{
+        display: none;
+     }
+     .parentCard {
+        display: block;
+    }
+    
+    .divCard1{
+        display: none;
+    }
+    .divCard2{
+        display: none;
+    }
+    .divCard3{
+        display: none;
+    }
+    .divCard4{
+        display: none;
+    }
+    .divCard7{
+        display: none;
     }
 
+
+    .divCard8{
+        width: 10vw;
+    }
+    .divCard6{
+        width: 10vw;
+    }
+    .divCard5{
+        width: 10vw;
+    }
 }
 
