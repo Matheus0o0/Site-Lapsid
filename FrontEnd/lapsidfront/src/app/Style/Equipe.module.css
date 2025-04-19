@@ -36,8 +36,9 @@
 }
 
 .table {
-	width:70em;
 	border:1px solid grey;
+	width: 80%;
+    min-width:370px;
 }
 
 .tableHeader {
@@ -108,4 +109,32 @@
 
 .main{
 	margin-bottom: 8em;
+}
+
+
+@media (max-width: 480px) {
+  .containerIndent{
+	margin-left: 0px;
+  }
+  .frstTable{
+	margin-left: 0px;
+  }
+  .table_data{
+	width: 100px;
+  }
+  .main{
+	align-items: center;
+	justify-content: center;
+
+  }
+  .containerIndent{
+	margin-left: 0.5em;
+  }
+  .containerTtl{
+	margin-left: 0.5em;
+  }
+	.ttlTable{
+		margin-left: 0.5em;
+	}
+
 }
