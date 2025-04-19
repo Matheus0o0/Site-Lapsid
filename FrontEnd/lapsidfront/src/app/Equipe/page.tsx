@@ -7,7 +7,7 @@ export default function Equipe() {
                 <h1 className={style.ttlH1}>Venha conhecer a equipe da <span className={style.spanTtl}>LAPSID!</span></h1>
             </div>
             <div className={style.containerIndent}>
-                <h2>Identificação</h2>
+                <h2 >Identificação</h2>
                 <ul>
                     <li><b>Situação do grupo: </b> Certificado</li>
                     <li><b>Ano de formação:</b> 2024</li>
@@ -20,7 +20,7 @@ export default function Equipe() {
                 </ul>
             </div>
             <div className={style.frstTable}>
-                <h2>Linhas de pesquisa</h2>
+                <h2 className={style.ttlTable}>Linhas de pesquisa</h2>
                 <div className={style.content}>
                     <div className={style.table}>
                         <div className={style.tableHeader}>
@@ -59,7 +59,7 @@ export default function Equipe() {
                 </div>
             </div>
             <div className={style.frstTable}>
-                <h2>Recursos humanos</h2>
+                <h2 className={style.ttlTable}>Recursos humanos</h2>
                 <div className={style.content}>
                     <div className={style.table}>
                         <div className={style.tableHeader}>
