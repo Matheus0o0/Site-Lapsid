@@ -8,7 +8,9 @@ export default function Noticias() {
                 <div className={style.ultNewContent}>
                     <h2 className={style.ultNewTitle} >Ultimas notícias</h2>
                     <div className={style.ultNewCard}>
-                        <Image className={style.ultNewImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={600} height={300}/>
+                        <div className={style.ultNewImgContent}>
+                            <Image className={style.ultNewImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={600} height={300}/>
+                        </div>
                         <div className={style.ultNewsPrev}>
                             <h2 className={style.ultNewH2}>Título da notícia</h2>
                             <p className={style.ultNewText}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat cupiditate, blanditiis aspernatur accusamus quod consequatur hic beatae odit non id commodi dolore, sed facere expedita est consequuntur libero reprehenderit. Nihil cupiditate odit accusantium veritatis neque provident earum dignissimos est reiciendis. Voluptatibus ducimus minima sapiente consequatur animi, veniam vero, eaque delectus sint repellat possimus iusto laboriosam excepturi. Assumenda, accusantium? Illo, molestias.</p>

@@ -93,3 +93,47 @@
     border: 1px solid #000;
     box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
 }
+
+@media (max-width: 480px) {
+    .main{
+        margin: 0px;
+    }
+    .ttlH1{
+        text-align: center;
+    }
+    .ultNewCard{
+        display: block;
+        justify-content: center;
+        align-items: center;
+    }
+    .ultNewImg{
+        width: 280px;
+
+    }
+    .ultNewImgContent{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .ultNewText{
+        width: 90%;
+    }
+    .allNewsCardContent{
+        display: block;
+        justify-content: center;
+        align-items: center;
+        margin: 2em;
+    }
+    .allNewsCard{
+        display: block;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .allNewsH3{
+        width: 90%;
+        margin: 0;
+    }
+
+}
