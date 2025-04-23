@@ -134,11 +134,12 @@
     font-size: 20px;
     line-height: 35px;
     margin: 0em 0em 5em 5em;
-    width: 55vw;
+    width: 45vw;
 }
 
 
 .titleArt{
+    margin-top: 2em;
     color: rgb(255, 255, 255);
     font-size: 50px;
     margin-left: 6em;
@@ -192,9 +193,9 @@
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(9, 1fr);
     gap: 1em;
-    width: 50vw;
+    width: 60vw;
     height: 50em;
-    
+    grid-row: auto;
 }
     
 .divCard1 {
@@ -590,33 +591,25 @@
         font-size: 40px;
         margin-bottom: 2em;
     }
-    .logoLapsid2{
-        display: none;
+    .logoLapsid, .logoIFBA{
+        width: 10em;
     }
 
     .text{
         text-align: center;
         margin: 0px;
-    }
-    .titleArt{
-        margin: 0;
-    }
-    .secondLine{
-        margin: 0;
+        line-height: 25px;
+        width: 90%;
     }
     .container{
         width: 20em;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 70em;
+        height: 45em;
     }
     .titleArt{
-        margin: 1em;
-        text-align: center;
-    }
-    .text{
-        margin: 1em;
+        margin: 0.5em 0em 0.5em 0em;
         text-align: center;
     }
 
@@ -629,13 +622,15 @@
     .main{
         align-items: center;
     }
-
     .gestDesc{
         margin: 0px;
     }
     .ttl2{
-        margin-left: 1em;
-        font-size: 30px;
+        font-size: 28px;
+        width: 90%;
+    }
+    .spanTtl2{
+        font-size: 35px;
     }
     .blurBlue{
         display: none;
@@ -644,35 +639,18 @@
      .blurGreen{
         display: none;
      }
+     .cardSection{
+        height: auto;
+     }
      .parentCard {
-        display: block;
-    }
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        height: auto;
+      }
     
-    .divCard1{
-        display: none;
-    }
-    .divCard2{
-        display: none;
-    }
-    .divCard3{
-        display: none;
-    }
-    .divCard4{
-        display: none;
-    }
-    .divCard7{
-        display: none;
-    }
-
-
-    .divCard8{
-        width: 10vw;
-    }
-    .divCard6{
-        width: 10vw;
-    }
-    .divCard5{
-        width: 10vw;
-    }
+      .parentCard > div {
+        grid-column: span 2 !important;
+        grid-row: auto !important;
+      }
 }
 
