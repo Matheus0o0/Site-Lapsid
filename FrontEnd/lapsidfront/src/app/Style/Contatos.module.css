@@ -8,7 +8,7 @@
 .sectionCont{
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
 
 .divCont{
@@ -40,4 +40,21 @@
 
 .main{
     margin-top: 8em;
+}
+
+@media (max-width: 480px) {
+    .title{
+        margin: 2em;
+        text-align: center;
+    }
+    .sectionCont{
+        display: block;
+        margin: 1em;
+        height: 80%;
+    }
+    .text{
+        display: block;
+        justify-content: center;
+        align-items: center;   
+    }
 }

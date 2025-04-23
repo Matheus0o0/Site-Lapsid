@@ -67,9 +67,9 @@ export default function Home() {
         <h1 className={style.ttl2}>
           <div className={style.titleResearch}>
             <div className={style.spanTtl2}>Linhas de pesquisa do LAPSID:</div>
-            <div>Inovação em Tecnologia, Inteligência Artificial e</div>
-            <div>Empreendedorismo</div>
-          </div>
+            Inovação em Tecnologia, Inteligência Artificial e
+           Empreendedorismo
+           </div>
         </h1>
       </div>
       <section className={style.cardSection}>

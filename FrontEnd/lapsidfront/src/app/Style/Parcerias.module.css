@@ -37,3 +37,23 @@
     font-size: 2.5em;
 }
 
+@media (max-width: 480px) {
+    .main{
+        margin: 0;
+    }
+    .ttlH1{
+        text-align: center;
+    }
+    .parcContent{
+        display: block;
+        margin: 1em;
+    }
+    .pParce{
+        width: 90%;
+    }
+    .img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
