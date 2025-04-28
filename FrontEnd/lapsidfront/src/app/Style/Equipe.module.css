@@ -111,6 +111,13 @@
 	margin-bottom: 8em;
 }
 
+@media (max-width: 1300px) {
+
+}
+@media (max-width: 768px) {
+	
+}
+
 
 @media (max-width: 480px) {
   .containerIndent{
@@ -118,9 +125,13 @@
   }
   .frstTable{
 	margin-left: 0px;
+	display: block;
+
   }
   .table_data{
-	width: 100px;
+	width: 90px;
+	align-items: center;
+	justify-content: center;
   }
   .main{
 	align-items: center;
@@ -136,5 +147,4 @@
 	.ttlTable{
 		margin-left: 0.5em;
 	}
-
 }
