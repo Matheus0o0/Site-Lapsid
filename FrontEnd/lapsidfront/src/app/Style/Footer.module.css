@@ -18,6 +18,28 @@
     list-style: none;
     margin-right: 3em;
 }
+.phone{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+.insta{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+
+}
+.email{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+.liIten{
+    margin: 0.5em;
+}
+.Icon{
+    margin-right: 0.3em;
+}
 
 @media (max-width: 480px) {
     .footer{
