@@ -185,7 +185,7 @@ export default function Home() {
           <h2 className={style.gestH2}>Projetos:</h2>
           <li className={style.gestLi}>
             <ul className={style.gestUl}>
-              <h3 className={style.gestH3}>Inovar para pessoas negras</h3>
+              <h4 className={style.gestH3}>Inovar para pessoas negras</h4>
               <p className={style.gestP}>
                 O projeto visa mobilizar o desenvolvimento colaborativo de
                 pesquisas científicas em inovação no que diz respeito a dois
