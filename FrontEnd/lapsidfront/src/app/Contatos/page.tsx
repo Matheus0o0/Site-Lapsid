@@ -22,7 +22,7 @@ export default function Contatos() {
                     
                         <ul >
                         <h3><b>Email:</b></h3>
-                            <li className={style.liCont}>Null@gmail.com</li>
+                            <li className={style.liCont}>lapsid&#64;ifba.edu.br</li>
                         </ul>
                         </div>
 

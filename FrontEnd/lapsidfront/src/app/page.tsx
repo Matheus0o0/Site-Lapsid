@@ -163,9 +163,9 @@ export default function Home() {
 
 
       <section className={style.gest}>
-        <div className={style.gestContent}>
+        {/* <div className={style.gestContent}>
           <h1 className={style.gesth1}>Gestão do conhecimento</h1>
-        </div>
+        </div> */}
 
         <div className={style.gestDesc}>
           <h2 className={style.gestH2}>Parcerias:</h2>

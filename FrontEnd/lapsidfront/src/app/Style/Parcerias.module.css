@@ -36,6 +36,11 @@
 .ttlH1{
     font-size: 2.5em;
 }
+@media (max-width: 880px) {
+    .pParce{
+        width: 60vw;
+    }
+}
 
 @media (max-width: 480px) {
     .main{
