@@ -12,11 +12,11 @@ export default function Noticias() {
                             <Image className={style.ultNewImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={600} height={300}/>
                         </div>
                         <div className={style.ultNewsPrev}>
-                            <h2 className={style.ultNewH2}>Título da notícia</h2>
-                            <p className={style.ultNewText}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat cupiditate, blanditiis aspernatur accusamus quod consequatur hic beatae odit non id commodi dolore, sed facere expedita est consequuntur libero reprehenderit. Nihil cupiditate odit accusantium veritatis neque provident earum dignissimos est reiciendis. Voluptatibus ducimus minima sapiente consequatur animi, veniam vero, eaque delectus sint repellat possimus iusto laboriosam excepturi. Assumenda, accusantium? Illo, molestias.</p>
+                            <h2 className={style.ultNewH2}>Lançamento de Nova Plataforma de Educação Digital</h2>
+                            <p className={style.ultNewText}>Uma nova plataforma de educação digital foi lançada esta semana, prometendo revolucionar o ensino com recursos de inteligência artificial e gamificação. A ferramenta já está sendo utilizada em escolas piloto e tem recebido feedback positivo de professores e alunos.</p>
                             <div className={style.ultNewAuthor}>
-                                <Image className={style.icon} src={"CardImgs/Frame(2).svg"} alt="Noticias" width={150} height={150}/>
-                                <p> <b>Nome do autor</b>: Sem Nome</p>
+                                {/* <Image className={style.icon} src={"CardImgs/Frame(2).svg"} alt="Noticias" width={150} height={150}/> */}
+                                <p> <b>Por</b>: Jhon Doe</p>
                             </div>
                             <div>
                                 <p>Data de postagem: 12/02/2025</p>
@@ -37,7 +37,7 @@ export default function Noticias() {
                         <div className={style.allNewsCardContent}>
                             <Image className={style.allNewsImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={300} height={300}/>
                             <div className={style.allNewsResume}>
-                                <h3 className={style.allNewsH3}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia aperiam, quasi ipsum, consequuntur fugiat omnis cum enim corrupti repellat saepe eligendi, adipisci pariatur earum quas. Debitis hic voluptates nobis cupiditate facilis soluta non ipsam. Possimus hic incidunt neque rem quasi?</h3>
+                                <h3 className={style.allNewsH3}>Pesquisadores anunciaram uma nova tecnologia que promete tornar a energia renovável mais acessível e eficiente. O projeto está em fase de testes e pode ser um marco na luta contra as mudanças climáticas.</h3>
                                 <p><b>Data da potagem:</b> 12/04/2025</p>
                             </div>
                         </div>
@@ -49,7 +49,7 @@ export default function Noticias() {
                         <div className={style.allNewsCardContent}>
                             <Image className={style.allNewsImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={300} height={300}/>
                             <div className={style.allNewsResume}>
-                                <h3 className={style.allNewsH3}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia aperiam, quasi ipsum, consequuntur fugiat omnis cum enim corrupti repellat saepe eligendi, adipisci pariatur earum quas. Debitis hic voluptates nobis cupiditate facilis soluta non ipsam. Possimus hic incidunt neque rem quasi?</h3>
+                                <h3 className={style.allNewsH3}>Um evento de tecnologia realizado no último final de semana reuniu jovens inovadores de todo o país. O encontro contou com palestras, workshops e competições, destacando projetos promissores na área de tecnologia e sustentabilidade.</h3>
                                 <p><b>Data da potagem:</b> 12/04/2025</p>
                             </div>
                         </div>

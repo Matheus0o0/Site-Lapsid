@@ -12,8 +12,8 @@ export default function Parcerias() {
                     </div>
 
                     <div className={style.Parce}>
-                        <h2 className={style.h2Parce}>UFBA</h2>
-                        <p className={style.pParce}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus libero amet voluptatem, quae qui laborum omnis! Praesentium hic perferendis velit atque! Molestiae voluptas esse veniam optio velit vel placeat facere. Assumenda, eius molestias qui, vel magnam voluptatibus explicabo itaque repellendus nulla nemo aliquam, velit non ipsa amet quisquam necessitatibus? Doloremque natus aut voluptatem recusandae beatae velit voluptates quisquam laborum sint.</p>
+                        <h2 className={style.h2Parce}>Universidade Federal da Bahia (UFBA)</h2>
+                        <p className={style.pParce}>A UFBA é uma das principais instituições de ensino superior do Brasil, reconhecida por sua excelência acadêmica e pesquisa de ponta. A parceria com a UFBA visa promover o desenvolvimento de projetos inovadores, fomentar a pesquisa científica e contribuir para a formação de profissionais qualificados em diversas áreas do conhecimento.</p>
                         <br />
                         <b>Link:</b> <a href="#">link</a>
                     </div>
@@ -28,8 +28,8 @@ export default function Parcerias() {
                         <Image  src={"logos/logoufba.svg"} alt="Parcerias" width={200} height={200}/>
                     </div>
                     <div className={style.Parce}>
-                        <h2 className={style.h2Parce}>UFBA</h2>
-                        <p className={style.pParce}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus libero amet voluptatem, quae qui laborum omnis! Praesentium hic perferendis velit atque! Molestiae voluptas esse veniam optio velit vel placeat facere. Assumenda, eius molestias qui, vel magnam voluptatibus explicabo itaque repellendus nulla nemo aliquam, velit non ipsa amet quisquam necessitatibus? Doloremque natus aut voluptatem recusandae beatae velit voluptates quisquam laborum sint.</p>
+                        <h2 className={style.h2Parce}>Instituto Federal da Bahia (IFBA)</h2>
+                        <p className={style.pParce}>O IFBA é uma instituição de ensino técnico e tecnológico que desempenha um papel fundamental na formação de profissionais capacitados para o mercado de trabalho. A parceria com o IFBA busca integrar tecnologia e inovação em projetos educacionais e sociais, fortalecendo o impacto positivo na comunidade.</p>
                         <br />
                         <b>Link:</b> <a href="#">link</a>
                     </div>
