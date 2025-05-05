@@ -1,41 +1,91 @@
+"use client";
+
+import { useEffect, useState } from 'react';
 import style from '../Style/Parcerias.module.css';
-import Image from 'next/image';
+
+type Parceria = {
+    id: number;
+    nome_parceria: string;
+    descricao: string;
+    data_criacao: string | null;
+    data_atualizacao: string | null;
+    link?: string;
+};
 
 export default function Parcerias() {
+    const [parcerias, setParcerias] = useState<Parceria[]>([]);
+    const [erro, setErro] = useState<string | null>(null);
+    const [carregando, setCarregando] = useState(true);
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+    useEffect(() => {
+        if (!apiUrl) {
+            setErro('Variável de ambiente NEXT_PUBLIC_API_URL não definida');
+            setCarregando(false);
+            return;
+        }
+
+        fetch(`${apiUrl}/parcerias`)
+            .then(res => {
+                if (!res.ok) throw new Error('Erro ao buscar parcerias');
+                return res.json();
+            })
+            .then(data => {
+                setParcerias(data);
+                setErro(null);
+            })
+            .catch(err => setErro(err.message))
+            .finally(() => setCarregando(false));
+    }, [apiUrl]);
+
     return (
         <main className={style.main}>
             <div className={style.container}>
                 <h1 className={style.ttlH1}>Parcerias</h1>
-                <div className={style.parcContent}>
-                    <div className={style.img}>
-                        <Image  src={"logos/logoufba.svg"} alt="Parcerias" width={200} height={200}/>
-                    </div>
 
-                    <div className={style.Parce}>
-                        <h2 className={style.h2Parce}>Universidade Federal da Bahia (UFBA)</h2>
-                        <p className={style.pParce}>A UFBA é uma das principais instituições de ensino superior do Brasil, reconhecida por sua excelência acadêmica e pesquisa de ponta. A parceria com a UFBA visa promover o desenvolvimento de projetos inovadores, fomentar a pesquisa científica e contribuir para a formação de profissionais qualificados em diversas áreas do conhecimento.</p>
-                        <br />
-                        <b>Link:</b> <a href="#">link</a>
-                    </div>
-                </div>
+                {erro && <p style={{ color: 'red' }}>Erro: {erro}</p>}
+                {carregando && <p>Carregando parcerias...</p>}
 
-                <div className={style.divHr}>
-                    <hr className={style.Hr}/>
-                </div>
+                {!erro && !carregando && parcerias.length === 0 && (
+                    <p>Nenhuma parceria encontrada.</p>
+                )}
 
-                <div className={style.parcContent}>
-                    <div className={style.img}>
-                        <Image  src={"logos/logoufba.svg"} alt="Parcerias" width={200} height={200}/>
+                {parcerias.map((parceria, index) => (
+                    <div key={parceria.id}>
+                        <div className={style.parcContent}>
+                            <div className={style.Parce}>
+                                <h2 className={style.h2Parce}>{parceria.nome_parceria}</h2>
+                                <p className={style.pParce}>{parceria.descricao}</p>
+
+                                {parceria.data_criacao && (
+                                    <p className={style.pParce}>
+                                        <strong>Criado em:</strong>{' '}
+                                        {new Date(parceria.data_criacao).toLocaleDateString('pt-BR')}
+                                    </p>
+                                )}
+
+                                {parceria.link ? (
+                                    <p>
+                                        <strong>Link:</strong>{' '}
+                                        <a href={parceria.link} target="_blank" rel="noopener noreferrer">
+                                            {parceria.link}
+                                        </a>
+                                    </p>
+                                ) : (
+                                    <p><strong>Link:</strong> Não disponível</p>
+                                )}
+                            </div>
+                        </div>
+
+                        {index < parcerias.length - 1 && (
+                            <div className={style.divHr}>
+                                <hr className={style.Hr} />
+                            </div>
+                        )}
                     </div>
-                    <div className={style.Parce}>
-                        <h2 className={style.h2Parce}>Instituto Federal da Bahia (IFBA)</h2>
-                        <p className={style.pParce}>O IFBA é uma instituição de ensino técnico e tecnológico que desempenha um papel fundamental na formação de profissionais capacitados para o mercado de trabalho. A parceria com o IFBA busca integrar tecnologia e inovação em projetos educacionais e sociais, fortalecendo o impacto positivo na comunidade.</p>
-                        <br />
-                        <b>Link:</b> <a href="#">link</a>
-                    </div>
-                </div>
+                ))}
             </div>
-
         </main>
     );
 }

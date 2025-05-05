@@ -124,8 +124,12 @@
 	margin-left: 0px;
   }
   .frstTable{
-	margin-left: 0px;
-	display: block;
+	align-items: center;
+	justify-content: center;
+	margin-left: 15px;
+	display: flex;
+	flex-direction: column;
+	
 
   }
   .table_data{
