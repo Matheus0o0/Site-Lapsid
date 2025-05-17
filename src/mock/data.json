@@ -99,7 +99,7 @@
         "id": 1,
         "titulo": "Sistema de Monitoramento Ambiental",
         "conteudo": "Projeto voltado à coleta e análise de dados ambientais em tempo real...",
-        "imagem": "https://example.com/monitoramento-ambiental.jpg",
+        "imagem": "CardImgs/Frame(2).svg",
         "link": "https://example.com/sistema-monitoramento-ambiental",
         "data_criacao": "2025-03-15T14:00:00Z",
         "data_atualizacao": "2025-03-15T14:00:00Z"
