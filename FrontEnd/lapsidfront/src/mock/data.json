@@ -53,12 +53,23 @@
     "parcerias": [
       {
         "id": 1,
-        "nome_parceria": "Universidade XYZ",
+        "nome_parceria": "Universidade Ufba",
+        "imagem": "CardImgs/Frame(2).svg",
+        "descricao": "Parceria com a Universidade XYZ para pesquisa conjunta.",
+        "data_criacao": "2025-01-20T11:00:00Z",
+        "data_atualizacao": "2025-01-25T15:30:00Z",
+        "link": "https://example.com/universidade-xyz"
+      },
+      {
+        "id": 2,
+        "nome_parceria": "Universidade Ifba",
+        "imagem": "CardImgs/Frame(2).svg",
         "descricao": "Parceria com a Universidade XYZ para pesquisa conjunta.",
         "data_criacao": "2025-01-20T11:00:00Z",
         "data_atualizacao": "2025-01-25T15:30:00Z",
         "link": "https://example.com/universidade-xyz"
       }
+      
     ],
     "conteudo_paginas": [
       {
