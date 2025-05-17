@@ -1,6 +1,21 @@
 import style from '../Style/Noticias.module.css';
 import Image from 'next/image';
+import { getNoticias } from '@/services/noticiaService';
+
+type Noticia = {
+    id: number;
+    titulo: string;
+    imagem: string,
+    conteudo: string,
+    autor_id: number,
+    data_criacao: string,
+    data_atualizacao: string,
+    data_noticia: string
+}
 export default function Noticias() {
+    const noticia: Noticia[] = getNoticias();
+
+
     return (
         <main className={style.main}>
             <h1 className={style.ttlH1}>Notícias</h1>
@@ -9,7 +24,7 @@ export default function Noticias() {
                     <h2 className={style.ultNewTitle} >Ultimas notícias</h2>
                     <div className={style.ultNewCard}>
                         <div className={style.ultNewImgContent}>
-                            <Image className={style.ultNewImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={600} height={300}/>
+                            <Image className={style.ultNewImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={600} height={300} />
                         </div>
                         <div className={style.ultNewsPrev}>
                             <h2 className={style.ultNewH2}>Lançamento de Nova Plataforma de Educação Digital</h2>
@@ -26,34 +41,23 @@ export default function Noticias() {
                     </div>
                 </div>
             </section>
-
             <div className={style.divHr}>
-                    <hr className={style.Hr}/>
-                </div>
+                <hr className={style.Hr} />
+            </div>
             <section>
                 <div>
                     <h2 className={style.ultLastTitle} >Notícias da Semana</h2>
-                    <div className={style.allNewsCard}>
-                        <div className={style.allNewsCardContent}>
-                            <Image className={style.allNewsImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={300} height={300}/>
-                            <div className={style.allNewsResume}>
-                                <h3 className={style.allNewsH3}>Pesquisadores anunciaram uma nova tecnologia que promete tornar a energia renovável mais acessível e eficiente. O projeto está em fase de testes e pode ser um marco na luta contra as mudanças climáticas.</h3>
-                                <p><b>Data da potagem:</b> 12/04/2025</p>
+                    {noticia.map((noticia) => (
+                        <div className={style.allNewsCard}>
+                            <div key={noticia.id} className={style.allNewsCardContent}>
+                                <Image className={style.allNewsImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={300} height={300} />
+                                <div className={style.allNewsResume}>
+                                    <h3 className={style.allNewsH3}>{noticia.conteudo}</h3>
+                                    <p><b>Data da potagem:</b> 12/04/2025</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div className={style.allNewsCard}>
-                        <div className={style.allNewsCardContent}>
-                            <Image className={style.allNewsImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={300} height={300}/>
-                            <div className={style.allNewsResume}>
-                                <h3 className={style.allNewsH3}>Um evento de tecnologia realizado no último final de semana reuniu jovens inovadores de todo o país. O encontro contou com palestras, workshops e competições, destacando projetos promissores na área de tecnologia e sustentabilidade.</h3>
-                                <p><b>Data da potagem:</b> 12/04/2025</p>
-                            </div>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </section>
         </main>
