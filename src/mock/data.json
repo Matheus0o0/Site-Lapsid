@@ -1,0 +1,109 @@
+{
+  "status": "success",
+  "data": {
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "Ana Silva",
+        "email": "ana.silva@example.com",
+        "senha": "hashed_password_1",
+        "data_criacao": "2024-11-10T14:23:00Z"
+      },
+      {
+        "id": 2,
+        "nome": "Carlos Oliveira",
+        "email": "carlos.oliveira@example.com",
+        "senha": "hashed_password_2",
+        "data_criacao": "2024-12-01T09:45:00Z"
+      }
+    ],
+    "publicacoes": [
+      {
+        "id": 1,
+        "titulo": "Inteligência Artificial Aplicada à Educação",
+        "conteudo": "Este artigo aborda o uso de IA em ambientes educacionais...",
+        "autor_id": 1,
+        "data_criacao": "2025-01-05T10:00:00Z",
+        "data_atualizacao": "2025-01-06T12:15:00Z",
+        "link": "https://example.com/ia-educacao",
+        "ano": "2025"
+      },
+      {
+        "id": 2,
+        "titulo": "Desenvolvimento Web Acessível",
+        "conteudo": "A acessibilidade na web é um tema cada vez mais importante...",
+        "autor_id": 2,
+        "data_criacao": "2025-02-10T16:30:00Z",
+        "data_atualizacao": "2025-02-10T16:30:00Z",
+        "link": "https://example.com/web-acessivel",
+        "ano": "2025"
+      }
+    ],
+    "noticias": [
+      {
+        "id": 1,
+        "titulo": "Novo Projeto é Aprovado",
+        "conteudo": "O projeto sobre sustentabilidade urbana foi aprovado...",
+        "autor_id": 1,
+        "data_criacao": "2025-03-01T13:00:00Z",
+        "data_atualizacao": "2025-03-01T13:00:00Z",
+        "data_noticia": "2025-02-28T00:00:00Z"
+      }
+    ],
+    "parcerias": [
+      {
+        "id": 1,
+        "nome_parceria": "Universidade XYZ",
+        "descricao": "Parceria com a Universidade XYZ para pesquisa conjunta.",
+        "data_criacao": "2025-01-20T11:00:00Z",
+        "data_atualizacao": "2025-01-25T15:30:00Z",
+        "link": "https://example.com/universidade-xyz"
+      }
+    ],
+    "conteudo_paginas": [
+      {
+        "id": 1,
+        "titulo": "Sobre o Projeto",
+        "conteudo": "Somos um grupo de pesquisa dedicado à inovação tecnológica...",
+        "data_criacao": "2025-01-01T08:00:00Z",
+        "data_atualizacao": "2025-01-01T08:00:00Z"
+      }
+    ],
+    "relatorio": [
+      {
+        "id": 1,
+        "tabela_afetada": "publicacoes",
+        "id_registro_afetado": 1,
+        "tipo_acao": "Insercao",
+        "data_ocorrencia": "2025-01-05T10:01:00Z"
+      }
+    ],
+    "equipe": [
+      {
+        "id": 1,
+        "nome": "João Mendes",
+        "tipo_integrante": "Pesquisador",
+        "curso": "Engenharia da Computação",
+        "linha_pesquisa": "Internet das Coisas"
+      },
+      {
+        "id": 2,
+        "nome": "Laura Castro",
+        "tipo_integrante": "Bolsista",
+        "curso": "Sistemas de Informação",
+        "linha_pesquisa": "Inteligência Artificial"
+      }
+    ],
+    "projetos": [
+      {
+        "id": 1,
+        "titulo": "Sistema de Monitoramento Ambiental",
+        "conteudo": "Projeto voltado à coleta e análise de dados ambientais em tempo real...",
+        "imagem": "https://example.com/monitoramento-ambiental.jpg",
+        "link": "https://example.com/sistema-monitoramento-ambiental",
+        "data_criacao": "2025-03-15T14:00:00Z",
+        "data_atualizacao": "2025-03-15T14:00:00Z"
+      }
+    ]
+  }
+}

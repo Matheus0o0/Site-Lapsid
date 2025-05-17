@@ -1,0 +1,75 @@
+
+.title{
+    font-size: 2.5em;
+    margin-left: 3em;
+    margin-bottom: 2em;
+}
+
+.prj{
+    margin-left: 12em;
+}
+
+.imgPrj{
+    margin-right: 1em;
+    width: 30em;
+    height: 40%;
+}
+
+.divPrj{
+    margin-left: 5em;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6em;
+}
+
+.pPrj{
+    width: 30vw;
+}
+
+.hr{
+    width: 60%;
+    height: 0.1em;
+    background-color: #000000;
+    border: none;
+    margin: 2em ;
+}
+
+.divHr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main{
+    margin-top: 8em;
+}
+
+.h2Prj{
+    text-align: center;
+
+}
+
+@media (max-width: 1050px) {
+    .main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .title{
+        display: flex;
+        margin-left: 0px;
+
+        text-align: center;
+    }
+    .divPrj{
+        display: block;
+        margin: 0px;
+    }
+    .prj{
+        margin: 0px;
+    }
+    .pPrj{
+        width: 50vw;
+    }
+}
