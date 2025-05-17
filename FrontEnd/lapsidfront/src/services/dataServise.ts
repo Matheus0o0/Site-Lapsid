@@ -8,4 +8,3 @@ export async function getDadosMock(): Promise<DataMock> {
     }, 300);
   });
 }
-
