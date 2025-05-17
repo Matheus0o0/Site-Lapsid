@@ -2,54 +2,27 @@
 
 import { useEffect, useState } from 'react';
 import style from '../Style/Parcerias.module.css';
+import { get } from 'http';
+import { getParcerias } from '@/services/parceriaService';
 
-type Parceria = {
+
+type Parceria ={
     id: number;
     nome_parceria: string;
+    imagem: string;
     descricao: string;
-    data_criacao: string | null;
-    data_atualizacao: string | null;
-    link?: string;
+    data_criacao: string;
+    data_atualizacao: string;
+    link: string;
 };
 
 export default function Parcerias() {
-    const [parcerias, setParcerias] = useState<Parceria[]>([]);
-    const [erro, setErro] = useState<string | null>(null);
-    const [carregando, setCarregando] = useState(true);
-
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    useEffect(() => {
-        if (!apiUrl) {
-            setErro('Variável de ambiente NEXT_PUBLIC_API_URL não definida');
-            setCarregando(false);
-            return;
-        }
-
-        fetch(`${apiUrl}/parcerias`)
-            .then(res => {
-                if (!res.ok) throw new Error('Erro ao buscar parcerias');
-                return res.json();
-            })
-            .then(data => {
-                setParcerias(data);
-                setErro(null);
-            })
-            .catch(err => setErro(err.message))
-            .finally(() => setCarregando(false));
-    }, [apiUrl]);
+    const parcerias:Parceria[] = getParcerias();
 
     return (
         <main className={style.main}>
             <div className={style.container}>
                 <h1 className={style.ttlH1}>Parcerias</h1>
-
-                {erro && <p style={{ color: 'red' }}>Erro: {erro}</p>}
-                {carregando && <p>Carregando parcerias...</p>}
-
-                {!erro && !carregando && parcerias.length === 0 && (
-                    <p>Nenhuma parceria encontrada.</p>
-                )}
 
                 {parcerias.map((parceria, index) => (
                     <div key={parceria.id}>
