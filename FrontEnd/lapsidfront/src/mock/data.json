@@ -89,22 +89,143 @@
         "data_ocorrencia": "2025-01-05T10:01:00Z"
       }
     ],
-    "equipe": [
-      {
-        "id": 1,
-        "nome": "João Mendes",
-        "tipo_integrante": "Pesquisador",
-        "curso": "Engenharia da Computação",
-        "linha_pesquisa": "Internet das Coisas"
-      },
-      {
-        "id": 2,
-        "nome": "Laura Castro",
-        "tipo_integrante": "Bolsista",
-        "curso": "Sistemas de Informação",
-        "linha_pesquisa": "Inteligência Artificial"
-      }
-    ],
+"equipe": [
+    {
+      "id": 1,
+      "nome": "João Mendes",
+      "tipo_integrante": "Pesquisador",
+      "titulação_maxima": "Doutorado",
+      "data_inclusao": "21/03/2024",
+      "curso": "Engenharia da Computação",
+      "linha_pesquisa": "Internet das Coisas"
+    },
+    {
+      "id": 2,
+      "nome": "Laura Castro",
+      "tipo_integrante": "Bolsista",
+      "titulação_maxima": "Graduação",
+      "data_inclusao": "24/05/2024",
+      "curso": "Sistemas de Informação",
+      "linha_pesquisa": "Inteligência Artificial"
+    },
+    {
+      "id": 3,
+      "nome": "Ana Carolina Sokolonski Anton",
+      "tipo_integrante": "Pesquisador",
+      "titulação_maxima": "Mestrado",
+      "data_inclusao": "21/03/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Engenharia de Software"
+    },
+    {
+      "id": 4,
+      "nome": "Cleber Jorge Lira de Santana",
+      "tipo_integrante": "Pesquisador",
+      "titulação_maxima": "Doutorado",
+      "data_inclusao": "20/03/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Arquitetura orientada a serviços"
+    },
+    {
+      "id": 5,
+      "nome": "Danilo Santana Souza",
+      "tipo_integrante": "Pesquisador",
+      "titulação_maxima": "Doutorado",
+      "data_inclusao": "21/03/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Cidades Inteligentes e internet das coisas (IoT)"
+    },
+    {
+      "id": 6,
+      "nome": "Fernanda Castelo Branco de Santana",
+      "tipo_integrante": "Pesquisador",
+      "titulação_maxima": "Mestrado",
+      "data_inclusao": "21/03/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Empreendedorismo Inovador"
+    },
+    {
+      "id": 7,
+      "nome": "João Paulo Just Peixoto",
+      "tipo_integrante": "Pesquisador",
+      "titulação_maxima": "Doutorado",
+      "data_inclusao": "21/03/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Sistemas de Análise a decisão"
+    },
+    {
+      "id": 8,
+      "nome": "Leandro José Silva Andrade",
+      "tipo_integrante": "Pesquisador",
+      "titulação_maxima": "Doutorado",
+      "data_inclusao": "21/03/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Sistemas de Análise a decisão"
+    },
+    {
+      "id": 9,
+      "nome": "Luan Diego De Lima Pereira",
+      "tipo_integrante": "Pesquisador",
+      "titulação_maxima": "Mestrado",
+      "data_inclusao": "24/05/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Arquitetura orientada a serviços"
+    },
+    {
+      "id": 10,
+      "nome": "Raimundo Carvalho Rabelo Filho",
+      "tipo_integrante": "Pesquisador",
+      "titulação_maxima": "Mestrado Profissional",
+      "data_inclusao": "21/03/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Cidades Inteligentes e internet das coisas (IoT)"
+    },
+    {
+      "id": 11,
+      "nome": "Thiago Souto Mendes",
+      "tipo_integrante": "Pesquisador",
+      "titulação_maxima": "Doutorado",
+      "data_inclusao": "21/03/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Sistemas de Análise a decisão"
+    },
+    {
+      "id": 12,
+      "nome": "Anderson Silva Brito",
+      "tipo_integrante": "Bolsista",
+      "titulação_maxima": "Graduação",
+      "data_inclusao": "21/03/2024",
+      "curso": "Sistemas de Informação",
+      "linha_pesquisa": "Inteligência Artificial"
+    },
+    {
+      "id": 13,
+      "nome": "Marcelo Vitor Ribeiro Santos",
+      "tipo_integrante": "Bolsista",
+      "titulação_maxima": "Mestrado Profissional",
+      "data_inclusao": "21/03/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Engenharia de Software"
+    },
+    {
+      "id": 14,
+      "nome": "Ricardo Ramos Passos",
+      "tipo_integrante": "Bolsista",
+      "titulação_maxima": "Mestrado Profissional",
+      "data_inclusao": "21/03/2024",
+      "curso": "Ciências da Computação",
+      "linha_pesquisa": "Arquitetura orientada a serviços"
+    },
+    {
+      "id": 15,
+      "nome": "Murilo Santos",
+      "tipo_integrante": "Bolsista",
+      "titulação_maxima": "Mestrado Profissional",
+      "data_inclusao": "21/03/2024",
+      "curso": "Sistemas de Informação",
+      "linha_pesquisa": "Internet das Coisas"
+    }
+  ],
     "projetos": [
       {
         "id": 1,

@@ -1,6 +1,19 @@
 import style from '../Style/Equipe.module.css';
+import {getEquipe} from '../../services/equipeService'
+
+type Equipe = {
+        id: number;
+        nome: string;
+        tipo_integrante: string;
+        titulação_maxima: string;
+        data_inclusao: string;
+        curso: string;
+        linha_pesquisa: string;
+};
 
 export default function Equipe() {
+    const equipe: Equipe[] = getEquipe();
+
     return(
         <main className={style.main}>
             <div className={style.containerTtl}>
