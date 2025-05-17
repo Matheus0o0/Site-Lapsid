@@ -1,0 +1,783 @@
+.logoLapsid{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 15em;
+    height: 6em;
+    overflow: visible;
+    background-color: #fff;
+    border-radius: 0 0 1em; 
+}
+
+.logoLapsidImage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
+.ttlH1{
+    font-size: 2.5em;
+}
+
+  .logoLapsid::after{
+    content: "";
+    position: absolute;
+    width: 2.125em;
+    height: 2.125em;
+  }
+  .logoLapsid::after{
+    background-color: transparent;
+    top: 0;  
+    right: -2.125em;
+    border-top-left-radius: 1em;
+    box-shadow: -0.4em -0.4em #fff;
+  }
+
+  .curve_two{
+    content: "";
+    position: absolute;
+    width: 2.125em;
+    height: 2.125em;
+ }
+ .curve_two{
+    background-color: transparent;
+    left: 0;
+    top: 6em;
+    border-top-left-radius: 1em;
+    box-shadow: -0.4em -0.4em #fff;
+ }
+.logoIFBA {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 15em;
+    height: 7em;
+    overflow: visible;
+    background-color: #fff;
+    border-radius: 1em 0 0; 
+  }
+  
+  .logoIFBAImage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+  }
+
+  .logoIFBA::after{
+    content: "";
+    position: absolute;
+    width: 2.125em;
+    height: 2.125em;
+  }
+  .logoIFBA::after{
+    background-color: transparent;
+    top: -2.125em;  
+    right: 0;
+    border-bottom-right-radius: 1em;
+    box-shadow: 0.4em 0.4em #fff;
+  }
+ .curve_one{
+    content: "";
+    position: absolute;
+    width: 2.125em;
+    height: 2.125em;
+ }
+ .curve_one{
+    background-color: transparent;
+    right: 14.97em;
+    bottom: 0;
+    border-bottom-right-radius: 1em;
+    box-shadow: 0.4em 0.4em #fff;
+ }
+.container{
+    position: relative;
+    background: linear-gradient(0.25turn, #0056B3,#2A9EBE, #359830);
+    width: 70vw;
+    height: 40vh;
+    border-radius: 2em 1em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.allConent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text{
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    line-height: 35px;
+    margin: 0em 0em 5em 5em;
+    width: 45vw;
+}
+
+
+.titleArt{
+    margin-top: 2em;
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+    margin-left: 6em;
+}
+
+.ttlBtn{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 25px;
+}
+.spanTtl, .spanTtl2{
+    color: #007bff;
+}
+
+
+.secondContainer{
+    margin: 0 auto;
+    margin-top: 0.5em;
+    max-width: 40em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ttl2{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    font-size: 45px;
+    max-width: 100vw;
+    height: 30vh;
+    overflow: hidden;
+}
+
+.titleResearch{
+    width: 100vw;
+    justify-content: center;
+    margin: 0;
+}
+
+.cardSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    margin-bottom: 5em;
+}
+
+
+.parentCard {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 1em;
+    width: 60vw;
+    height: 50em;
+    grid-row: auto;
+}
+    
+.divCard1 {
+    border-radius: 1em;
+    background-color: #fff;
+    grid-column: span 3 / span 3;
+    grid-row: span 3 / span 3;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.divCard2 {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    border-radius: 1em;
+    grid-column: span 3 / span 3;
+    grid-row: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row-start: 4;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.divCard3 {
+    border-radius: 1em;
+    background-color: #1E293B;
+    grid-column: span 4 / span 4;
+    grid-row: span 5 / span 5;
+    grid-column-start: 8;
+    grid-row-start: 1;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.divCard4 {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    border-radius: 1em;
+    background-color: #1E293B;
+    grid-column: span 4 / span 4;
+    grid-row: span 4 / span 4;
+    grid-column-start: 8;
+    grid-row-start: 6;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.divCard5 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1em;
+    background-color: #ffffff;
+    grid-column: span 4 / span 4;
+    grid-row: span 3 / span 3;
+    grid-column-start: 4;
+    grid-row-start: 4;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.divCard6 {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    border-radius: 1em;
+    margin-bottom: 1em;
+    grid-column: span 4 / span 4;
+    grid-row: span 3 / span 3;
+    grid-column-start: 4;
+    grid-row-start: 1;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.divCard7 {
+    border-radius: 1em;
+    background-color: #359830;
+    grid-column: span 3 / span 3;
+    grid-row: span 3 / span 3;
+    grid-column-start: 5;
+    grid-row-start: 7;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.divCard8 {
+    border-radius: 1em;
+    background-color: #c8c8c8;
+    grid-column: span 4 / span 4;
+    grid-row: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row-start: 7;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+}
+.cardImg1{
+    border-radius: 1em;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+.cardImg2{
+    border-radius: 1em;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+.cardImg3{
+    
+    border-radius: 1em;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+.cardImg4{
+    border-radius: 1em;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+
+.gestContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gesth1{
+    font-size: 30px;
+}
+
+.gestDesc{
+    width: 80vw;
+    margin-bottom: 6em;
+}
+
+.gestP{
+    width: 60vw;
+}
+.gestHr{
+
+    width: 60%;
+    height: 0.1em;
+    background-color: #000000;
+    border: none;
+    margin: 2em ;
+}
+
+.divHr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gestLi{
+    list-style: none;
+}
+
+.gestH3{
+    font-size: 20px;
+    color: #007bff;
+}
+
+.spanCard1{
+    color: #0056B3;
+    font-size: 20px;
+}
+
+.divCard1Content{
+    margin: 2em;
+
+
+}
+
+.divCard7Content{
+    margin: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divCard7Title{
+    color: #ffffff;
+    font-size: 30px;
+    text-align: center;
+}
+
+.divCard6Content{
+    background-image:url('../../app/../../public/CardImgs/Frame3.svg') ;
+    background-size: cover;
+    justify-content: center;
+    height: 100%;
+}
+.divCard6Title{
+    color: #ffffff;
+    margin-left: 1em;
+}
+
+.divCard6P{
+    color: #ffffff;
+    margin-left: 1em;
+}
+
+.divCard2Content{
+    background-image:url('../../app/../../public/CardImgs/Frame(2).svg') ;
+    background-size: cover;
+    justify-content: center;
+    height: 100%;
+    border-radius: 1em;
+}
+
+.divCard2Title{
+    color: #ffffff;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.divCard2P{
+    color: #ffffff;
+    margin-left: 2em;
+}
+.divCard3P{
+    color: #ffffff;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.divCard3Title{
+    color: #ffffff;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.divCard3Content{
+    padding: 1em;
+    align-items: center;
+    justify-content: center;
+}
+
+.divCard4Content{
+    background-image:url('../../app/../../public/CardImgs/Frame(1).svg') ;
+    background-size: cover;
+    justify-content: center;
+    height: 350px;
+    border-radius: 1em;
+}
+
+.divCard4P{
+    color: #ffffff;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.divCard4Title{
+    color: #ffffff;
+    margin-left: 1em;
+    margin-right: 1em;
+
+}
+
+.main{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+}
+
+@keyframes slideFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0; /* Começa invisível */
+    }
+    100% {
+      opacity: 1; /* Fica totalmente visível */
+    }
+  }
+  /* Estilos padrão pra deixar invisível antes da animação */
+  .divCard1,
+  .divCard2,
+  .divCard3,
+  .divCard4,
+  .divCard5,
+  .divCard6,
+  .divCard7,
+  .divCard8 {
+    opacity: 0;
+    transition: all 0.8s ease;
+  }
+  
+  /* Animações específicas quando ganham a classe animate */
+  .divCard1.animate {
+    animation: slideFromLeft 1s ease forwards;
+  }
+  .divCard2.animate {
+    animation: slideFromLeft 1s ease forwards;
+    animation-delay: 0.2s;
+  }
+  .divCard3.animate {
+    animation: slideFromTop 1s ease forwards;
+    animation-delay: 0.4s;
+  }
+  .divCard4.animate {
+    animation: slideFromBottom 1s ease forwards;
+    animation-delay: 0.6s;
+  }
+  .divCard5.animate {
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.8s;
+  }
+  .divCard6.animate {
+    animation: slideFromTop 1s ease forwards;
+    animation-delay: 1s;
+  }
+  .divCard7.animate {
+    animation: slideFromBottom 1s ease forwards;
+    animation-delay: 1.2s;
+  }
+  .divCard8.animate {
+    animation: slideFromBottom 1s ease forwards;
+    animation-delay: 1.4s;
+  }
+  
+
+@media (max-width: 1300px) {
+  .cardSection{
+    margin: 0;
+}
+
+.main{
+    margin: 1em;
+}
+.ttlH1{
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 2em;
+}
+.logoLapsid, .logoIFBA{
+    width: 10em;
+}
+
+.text{
+    text-align: center;
+    margin: 0px;
+    line-height: 25px;
+    width: 90%;
+}
+.container{
+    width: 50em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30em;
+}
+.titleArt{
+    margin: 0.5em 0em 0.5em 0em;
+    text-align: center;
+}
+
+.curve_two{
+    display: none;
+}
+.curve_one{
+    display: none;
+}
+.main{
+    align-items: center;
+}
+.gestDesc{
+    margin: 0px;
+}
+.ttl2{
+    font-size: 28px;
+    width: 50%;
+}
+.spanTtl2{
+    font-size: 35px;
+}
+.blurBlue{
+    display: none;
+
+ }
+ .blurGreen{
+    display: none;
+ }
+ .cardSection{
+    height: auto;
+ }
+ .parentCard {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    height: auto;
+  }
+
+  .parentCard > div {
+    grid-column: span 2 !important;
+    grid-row: auto !important;
+  }
+   
+}
+
+@media (max-width: 768px) {
+    .cardSection{
+      margin: 0;
+  }
+
+  .main{
+      margin: 1em;
+  }
+  .ttlH1{
+      text-align: center;
+      font-size: 40px;
+      margin-bottom: 2em;
+  }
+  .logoLapsid, .logoIFBA{
+      width: 10em;
+  }
+
+  .text{
+      text-align: center;
+      margin: 0px;
+      line-height: 25px;
+      width: 90%;
+  }
+  .container{
+      width: 40em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 45em;
+  }
+  .titleArt{
+      margin: 0.5em 0em 0.5em 0em;
+      text-align: center;
+  }
+
+  .curve_two{
+      display: none;
+  }
+  .curve_one{
+      display: none;
+  }
+  .main{
+      align-items: center;
+  }
+  .gestDesc{
+      margin: 0px;
+  }
+  .ttl2{
+      font-size: 28px;
+      width: 90%;
+  }
+  .spanTtl2{
+      font-size: 35px;
+  }
+  .blurBlue{
+      display: none;
+
+  }
+  .blurGreen{
+      display: none;
+  }
+  .cardSection{
+      height: auto;
+  }
+  .parentCard {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+      height: auto;
+    }
+
+    .parentCard > div {
+      grid-column: span 2 !important;
+      grid-row: auto !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardSection{
+        margin: 0;
+    }
+
+    .main{
+        margin: 1em;
+    }
+    .ttlH1{
+        text-align: center;
+        font-size: 40px;
+        margin-bottom: 2em;
+    }
+    .logoLapsid, .logoIFBA{
+        width: 10em;
+    }
+
+    .text{
+        text-align: center;
+        margin: 0px;
+        line-height: 25px;
+        width: 90%;
+    }
+    .container{
+        width: 20em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 45em;
+    }
+    .titleArt{
+        margin: 0.5em 0em 0.5em 0em;
+        text-align: center;
+    }
+
+    .curve_two{
+        display: none;
+    }
+    .curve_one{
+        display: none;
+    }
+    .main{
+        align-items: center;
+    }
+    .gestDesc{
+        margin: 0px;
+    }
+    .ttl2{
+        font-size: 28px;
+        width: 90%;
+    }
+    .spanTtl2{
+        text-align: center;
+        font-size: 35px;
+    }
+    .blurBlue{
+        display: none;
+
+     }
+     .blurGreen{
+        display: none;
+     }
+     .cardSection{
+        height: auto;
+     }
+     .parentCard {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        height: auto;
+      }
+    
+      .parentCard > div {
+        grid-column: span 2 !important;
+        grid-row: auto !important;
+      }
+}
+
