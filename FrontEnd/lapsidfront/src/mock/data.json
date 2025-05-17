@@ -43,8 +43,19 @@
       {
         "id": 1,
         "titulo": "Novo Projeto é Aprovado",
-        "conteudo": "O projeto sobre sustentabilidade urbana foi aprovado...",
+        "imagem": "CardImgs/Frame(2).svg",
+        "conteudo": "Pesquisadores anunciaram uma nova tecnologia que promete tornar a energia renovável mais acessível e eficiente. O projeto está em fase de testes e pode ser um marco na luta contra as mudanças climáticas.",
         "autor_id": 1,
+        "data_criacao": "2025-03-01T13:00:00Z",
+        "data_atualizacao": "2025-03-01T13:00:00Z",
+        "data_noticia": "2025-02-28T00:00:00Z"
+      },
+            {
+        "id": 2,
+        "titulo": "Novo Projeto é Aprovado",
+        "imagem": "CardImgs/Frame(2).svg",
+        "conteudo": "Pesquisadores anunciaram uma nova tecnologia que promete tornar a energia renovável mais acessível e eficiente. O projeto está em fase de testes e pode ser um marco na luta contra as mudanças climáticas.",
+        "autor_id": 2,
         "data_criacao": "2025-03-01T13:00:00Z",
         "data_atualizacao": "2025-03-01T13:00:00Z",
         "data_noticia": "2025-02-28T00:00:00Z"
