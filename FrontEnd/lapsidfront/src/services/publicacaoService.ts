@@ -1,4 +1,11 @@
-import { Publicacao } from "@/types/Publicacao";
-import dados from "../mock/data.json";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const getPublicaoes =(): Publicacao[] => dados.data.publicacoes
+export async function getPublicaoes() {
+    const response = await fetch(`${API_URL}publicacoes/`);
+
+    if (!response.ok) {
+        throw new Error('Erro ao buscar publicações');
+    }
+
+    return response.json();
+}

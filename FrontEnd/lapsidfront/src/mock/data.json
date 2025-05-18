@@ -7,14 +7,16 @@
         "nome": "Ana Silva",
         "email": "ana.silva@example.com",
         "senha": "hashed_password_1",
-        "data_criacao": "2024-11-10T14:23:00Z"
+        "data_criacao": "2024-11-10T14:23:00Z",
+        "role": "admin"
       },
       {
         "id": 2,
         "nome": "Carlos Oliveira",
         "email": "carlos.oliveira@example.com",
         "senha": "hashed_password_2",
-        "data_criacao": "2024-12-01T09:45:00Z"
+        "data_criacao": "2024-12-01T09:45:00Z",
+        "role": "user"
       }
     ],
     "publicacoes": [
@@ -43,8 +45,9 @@
       {
         "id": 1,
         "titulo": "Novo Projeto é Aprovado",
-        "imagem": "CardImgs/Frame(2).svg",
+        "imagems": ["CardImgs/Frame(2).svg", "CardImgs/Frame(2).svg"],
         "conteudo": "Pesquisadores anunciaram uma nova tecnologia que promete tornar a energia renovável mais acessível e eficiente. O projeto está em fase de testes e pode ser um marco na luta contra as mudanças climáticas.",
+        "link": "https://example.com/novo-projeto-aprovado",
         "autor_id": 1,
         "data_criacao": "2025-03-01T13:00:00Z",
         "data_atualizacao": "2025-03-01T13:00:00Z",
