@@ -1,4 +1,11 @@
-import { Projeto } from "@/types/Projeto";
-import dados from "../mock/data.json";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const getProjetos = (): Projeto[] => dados.data.projetos;
+export async function getProjetos() {
+    const response = await fetch(`${API_URL}projetos/`);
+
+    if (!response.ok) {
+        throw new Error('Erro ao buscar Projetos');
+    }
+
+    return response.json();
+}
