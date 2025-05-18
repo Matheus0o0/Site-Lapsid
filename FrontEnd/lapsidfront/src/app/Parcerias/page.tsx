@@ -17,7 +17,34 @@ type Parceria ={
 };
 
 export default function Parcerias() {
-    const parcerias:Parceria[] = getParcerias();
+    const [parcerias, setParcerias] = useState<Parceria[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);   
+
+    useEffect(() => {
+        async function fetchParcerias() {
+            try {
+                setIsLoading(true);
+                const data = await getParcerias();
+                setParcerias(data);
+            } catch (err) {
+                setError('Erro ao carregar Parcerias');
+                console.error('Erro:', err);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        fetchParcerias();
+    }, []);
+
+    if (isLoading) {
+        return <div className={style.loading}>Carregando Parcerias...</div>;
+    }
+
+    if (error) {
+        return <div className={style.error}>{error}</div>;
+    }
 
     return (
         <main className={style.main}>
