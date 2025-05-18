@@ -16,7 +16,34 @@ type projeto ={
 }
 
 export default function Projetos() {
-    const projetos = getProjetos();
+    const [projetos, setProjetos] = useState<Projeto[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function fetchProjetos() {
+            try {
+                setIsLoading(true);
+                const data = await getProjetos();
+                setProjetos(data);
+            } catch (err) {
+                setError('Erro ao carregar Projetos');
+                console.error('Erro:', err);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        fetchProjetos();
+    }, []);
+
+    if (isLoading) {
+        return <div className={style.loading}>Carregando projetos...</div>;
+    }
+
+    if (error) {
+        return <div className={style.error}>{error}</div>;
+    }
 
     return (
         <main className={style.main}>

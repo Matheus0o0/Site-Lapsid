@@ -1,6 +1,9 @@
+"use client";
+
 import style from '../Style/Noticias.module.css';
 import Image from 'next/image';
 import { getNoticias } from '@/services/noticiaService';
+import { useEffect, useState } from 'react';
 
 type Noticia = {
     id: number;
@@ -13,7 +16,34 @@ type Noticia = {
     data_noticia: string
 }
 export default function Noticias() {
-    const noticia: Noticia[] = getNoticias();
+    const [noticia, setNoticia] = useState<Noticia[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function fetchNoticias() {
+            try {
+                setIsLoading(true);
+                const data = await getNoticias();
+                setNoticia(data);
+            } catch (err) {
+                setError('Erro ao carregar Noticias');
+                console.error('Erro:', err);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        fetchNoticias();
+    }, []);
+
+    if (isLoading) {
+        return <div className={style.loading}>Carregando projetos...</div>;
+    }
+
+    if (error) {
+        return <div className={style.error}>{error}</div>;
+    }
 
 
     return (
@@ -48,9 +78,9 @@ export default function Noticias() {
                 <div>
                     <h2 className={style.ultLastTitle} >Notícias da Semana</h2>
                     {noticia.map((noticia) => (
-                        <div className={style.allNewsCard}>
+                        <div key={noticia.id} className={style.allNewsCard}>
                             <div key={noticia.id} className={style.allNewsCardContent}>
-                                <Image className={style.allNewsImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={300} height={300} />
+                                <Image className={style.allNewsImg} src={noticia.imagem} alt="Noticias" width={300} height={300} />
                                 <div className={style.allNewsResume}>
                                     <h3 className={style.allNewsH3}>{noticia.conteudo}</h3>
                                     <p><b>Data da potagem:</b> 12/04/2025</p>
