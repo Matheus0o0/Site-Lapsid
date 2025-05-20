@@ -1,20 +1,20 @@
 services:
   db:
-    image: mysql:8.4
-    container_name: db
+    image: postgres:15
+    container_name: postgres_db
     restart: always
-    env_file: .env
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: django
-      MYSQL_PASSWORD: django123
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - db_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     networks:
       - app-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -24,26 +24,24 @@ services:
     container_name: web
     command: python manage.py runserver 0.0.0.0:8001
     volumes:
-      - .:/app
-      - ./media:/app/media
       - .:/code
+      - ./media:/code/media
     ports:
       - "8001:8001"
     depends_on:
       db:
         condition: service_healthy
     environment:
-      DEBUG: "1"
-      DB_NAME: bancolapsid
-      DB_USER: django
-      DB_PASSWORD: django123
-      DB_HOST: db
-      DB_PORT: 3306
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=db
+      - DB_PORT=${DB_PORT}
     networks:
       - app-network
 
 volumes:
-  db_data:
+  postgres_data:
 
 networks:
   app-network:
