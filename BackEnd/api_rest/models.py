@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class ConteudoPaginas(models.Model):
     titulo = models.CharField(max_length=255)
@@ -79,14 +80,42 @@ class Relatorio(models.Model):
 
     class Meta:
         db_table = 'relatorio'
+        
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, nome, senha=None, role='user', **extra_fields):
+        if not email:
+            raise ValueError('O usuário deve ter um e-mail')
+        email = self.normalize_email(email)
+        user = self.model(email=email, nome=nome, role=role, **extra_fields)
+        user.set_password(senha)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, nome, senha=None):
+        user = self.create_user(email, nome, senha, role='admin')
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
 
 
-class Usuarios(models.Model):
+class Usuarios(AbstractBaseUser):
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('user', 'User'),
+    )
+
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100)
-    email = models.CharField(unique=True, max_length=100)
-    senha = models.CharField(max_length=255)
-    role = models.CharField(max_length=5, choices=[('admin', 'admin'), ('user', 'user')], default='user')
-    data_criacao = models.DateTimeField(blank=True, null=True)
+    email = models.EmailField(unique=True)
+    senha = models.CharField(max_length=128, default='1234')  # Corrigido aqui
+    role = models.CharField(max_length=5, choices=ROLE_CHOICES, default='user')
+    data_criacao = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        db_table = 'usuarios'
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['nome']
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email

@@ -89,12 +89,12 @@ WSGI_APPLICATION = 'api_root.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),  # <- precisa ser 'db'
-        'PORT': os.getenv('DB_PORT', '3306'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'postgres'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'KpZ6@2Xmf5qq4-Q'),
+        'HOST': os.getenv('DB_HOST', 'db.mthtwkcmrvmvshvgxmbc.supabase.co'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -142,11 +142,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOW_ORIGINS = {
-    'http://localhost:3000',
-}
-
+CORS_ALLOW_ORIGINS = [
+    'http://localhost:3000',  # Frontend (caso esteja usando React ou algo similar)
+    'http://localhost:8001',  # Backend (caso a aplicação frontend e backend estejam em domínios diferentes)
+]
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',  # Adicione esta linha
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',  # Adicione esta linha
+    ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 

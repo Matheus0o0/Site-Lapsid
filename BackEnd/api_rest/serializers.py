@@ -42,4 +42,27 @@ class RelatorioSerializer(serializers.ModelSerializer):
 class UsuariosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuarios
-        fields = '__all__'
+        fields = ['id', 'nome', 'email', 'role', 'data_criacao']
+
+    def create(self, validated_data):
+        user = Usuarios.objects.create_user(
+            email=validated_data['email'],
+            nome=validated_data['nome'],
+            senha=validated_data['senha']
+        )
+        return user
+    
+    
+class CreateUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuarios
+        fields = ['nome', 'email', 'senha', 'role']
+        extra_kwargs = {'senha': {'write_only': True}}
+
+    def create(self, validated_data):
+        senha = validated_data.pop('senha')
+        user = Usuarios.objects.create_user(
+            senha=senha,
+            **validated_data
+        )
+        return user
