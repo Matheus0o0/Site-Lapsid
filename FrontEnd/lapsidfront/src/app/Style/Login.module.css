@@ -1,0 +1,54 @@
+.divLogin {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.contentLogin {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 2em;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.button{
+    margin: 0%;
+    padding: 1em;
+    border: 0 solid #000;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+    background-color: #0057b3;
+    border-radius: 1em;
+    color: #fff;
+    margin: 1em;
+}
+
+.input{
+    margin: 1em;
+    padding: 1em;
+    border: 0 solid #000;
+    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 1em;
+}
+
+.text{
+    text-align: center;
+    margin: 0px;
+    line-height: 25px;
+    width: 70%;
+}
