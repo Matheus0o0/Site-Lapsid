@@ -1,29 +1,55 @@
 "use client";
 
-import React, { useState } from 'react';
-import style from "../Style/Header.module.css"
+import { useAuth } from '../hooks/useAuth';
+import Link from 'next/link';
+import style from '../Style/Header.module.css';
 
 export default function Header() {
-  const [menuAberto, setMenuAberto] = useState<boolean>(false);
+  const { isAuthenticated, isAdmin, logout } = useAuth();
 
   return (
-    <header className={style.allHeader}>
-      <button
-        className={style.hamburger}
-        onClick={() => setMenuAberto(!menuAberto)}
-      >
-        ☰
-      </button>
-
-      <ul className={`${style.ulHeader} ${menuAberto ? style.menuAberto : ''}`}>
-        <li className={style.liHeader}><a className={style.aHeader} href="/">Início</a></li>
-        <li className={style.liHeader}><a className={style.aHeader} href="../Equipe">Equipe</a></li>
-        <li className={style.liHeader}><a className={style.aHeader} href="../Projetos">Projetos</a></li>
-        <li className={style.liHeader}><a className={style.aHeader} href="../Publicacoes">Publicações</a></li>
-        <li className={style.liHeader}><a className={style.aHeader} href="../Noticias">Notícias</a></li>
-        <li className={style.liHeader}><a className={style.aHeader} href="../Parcerias">Parcerias</a></li>
-        <li className={style.liHeader}><a className={style.aHeader} href="../Contatos">Contatos</a></li>
-      </ul>
+    <header className={style.header}>
+      <nav className={style.nav}>
+        <Link href="/" className={style.logo}>
+          LAPSID
+        </Link>
+        <div className={style.links}>
+          <Link href="../Noticias" className={style.link}>
+            Notícias
+          </Link>
+          <Link href="../Projetos" className={style.link}>
+            Projetos
+          </Link>
+          <Link href="../Publicacoes" className={style.link}>
+            Publicações
+          </Link>
+          <Link href="../Equipe" className={style.link}>
+            Equipe
+          </Link>
+          <Link href="../Parcerias" className={style.link}>
+            Parcerias
+          </Link>
+          <Link href="../Contatos" className={style.link}>
+            Contatos
+          </Link>
+          {isAuthenticated ? (
+            <>
+              {isAdmin && (
+                <Link href="../testeAdmin" className={style.link}>
+                  Admin
+                </Link>
+              )}
+              <button onClick={logout} className={style.link}>
+                Sair
+              </button>
+            </>
+          ) : (
+            <Link href="/Login" className={style.link}>
+              Login
+            </Link>
+          )}
+        </div>
+      </nav>
     </header>
   );
 }
