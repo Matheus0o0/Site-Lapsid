@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
 
 from .permissions import ReadOnlyOrAuthenticated
 from .models import (
@@ -82,23 +84,53 @@ class UsuariosViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             return CreateUserSerializer
         return UsuariosSerializer
-# Login
+
+@api_view(['GET'])
+@ensure_csrf_cookie
+def get_csrf_token(request):
+    csrf_token = get_token(request)
+    response = JsonResponse({'detail': 'CSRF cookie set', 'csrfToken': csrf_token})
+    response['X-CSRFToken'] = csrf_token
+    return response
+
 @api_view(['POST'])
-@permission_classes([])  # Sem permissão obrigatória para login
-@authentication_classes([])  # Sem autenticação obrigatória para login
+@permission_classes([])
+@authentication_classes([])
 def login_view(request):
     email = request.data.get('email')
     senha = request.data.get('senha')
+
+    if not email or not senha:
+        return Response(
+            {'error': 'Email e senha são obrigatórios'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     try:
         usuario = Usuarios.objects.get(email=email)
         if usuario.check_password(senha):
             login(request, usuario)
-            return Response({'message': 'Login realizado com sucesso'})
-        return Response({'error': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({
+                'id': usuario.id,
+                'nome': usuario.nome,
+                'email': usuario.email,
+                'role': usuario.role,
+            })
+        return Response(
+            {'error': 'Email ou senha inválidos'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
     except Usuarios.DoesNotExist:
-        return Response({'error': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
-
+        return Response(
+            {'error': 'Email ou senha inválidos'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
+    except Exception as e:
+        print(f"Erro no login: {str(e)}")  # Log the error
+        return Response(
+            {'error': 'Erro interno do servidor'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 # Logout
 @api_view(['POST'])
