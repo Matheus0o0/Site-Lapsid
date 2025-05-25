@@ -39,7 +39,6 @@ router.register(r'publicacoes', PublicacoesViewSet)
 router.register(r'relatorio', RelatorioViewSet)
 router.register(r'usuarios', UsuariosViewSet)
 
-# Auth URLs should be before the router URLs to avoid conflicts
 auth_urlpatterns = [
     path('csrf', get_csrf_token, name='csrf'),
     path('login', login_view, name='login'),
@@ -50,9 +49,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    # Auth endpoints - no trailing slashes
+
     path('api/', include(auth_urlpatterns)),
-    # Router endpoints
+
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

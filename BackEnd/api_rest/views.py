@@ -23,7 +23,7 @@ from .serializers import (
 )
 
 class BaseView(APIView):
-    permission_classes = [permissions.AllowAny]  # Permite acesso a todos (não requer login)
+    permission_classes = [permissions.AllowAny] 
     
     def get(self, request):
         # Sua lógica para retornar dados aqui
@@ -31,14 +31,11 @@ class BaseView(APIView):
     
 class IsAuthenticatedOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
-        # Permite GET, HEAD ou OPTIONS para qualquer um
         if request.method in permissions.SAFE_METHODS:
             return True
-        # Requer autenticação para outros métodos
         return request.user and request.user.is_authenticated
 
 
-# ViewSets com leitura pública e escrita autenticada
 class ConteudoPaginasViewSet(viewsets.ModelViewSet):
     queryset = ConteudoPaginas.objects.all()
     serializer_class = ConteudoPaginasSerializer
@@ -74,7 +71,6 @@ class RelatorioViewSet(viewsets.ModelViewSet):
     serializer_class = RelatorioSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-# ViewSet de usuários - restrito apenas a administradores
 class UsuariosViewSet(viewsets.ModelViewSet):
     queryset = Usuarios.objects.all()
     serializer_class = UsuariosSerializer
@@ -126,7 +122,7 @@ def login_view(request):
             status=status.HTTP_401_UNAUTHORIZED
         )
     except Exception as e:
-        print(f"Erro no login: {str(e)}")  # Log the error
+        print(f"Erro no login: {str(e)}") 
         return Response(
             {'error': 'Erro interno do servidor'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -140,7 +136,6 @@ def logout_view(request):
     logout(request)
     return Response({'message': 'Logout realizado com sucesso'})
 
-# Criar usuário (somente admin)
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuarios
@@ -165,7 +160,7 @@ class CreateUserView(APIView):
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuarios  #
+        model = Usuarios  
         fields = ['nome', 'email', 'senha', 'role']  
         extra_kwargs = {'senha': {'write_only': True}}
 
