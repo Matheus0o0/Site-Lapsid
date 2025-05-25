@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
 
 from .permissions import ReadOnlyOrAuthenticated
 from .models import (
@@ -21,7 +23,7 @@ from .serializers import (
 )
 
 class BaseView(APIView):
-    permission_classes = [permissions.AllowAny]  # Permite acesso a todos (não requer login)
+    permission_classes = [permissions.AllowAny] 
     
     def get(self, request):
         # Sua lógica para retornar dados aqui
@@ -29,14 +31,11 @@ class BaseView(APIView):
     
 class IsAuthenticatedOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
-        # Permite GET, HEAD ou OPTIONS para qualquer um
         if request.method in permissions.SAFE_METHODS:
             return True
-        # Requer autenticação para outros métodos
         return request.user and request.user.is_authenticated
 
 
-# ViewSets com leitura pública e escrita autenticada
 class ConteudoPaginasViewSet(viewsets.ModelViewSet):
     queryset = ConteudoPaginas.objects.all()
     serializer_class = ConteudoPaginasSerializer
@@ -72,7 +71,6 @@ class RelatorioViewSet(viewsets.ModelViewSet):
     serializer_class = RelatorioSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-# ViewSet de usuários - restrito apenas a administradores
 class UsuariosViewSet(viewsets.ModelViewSet):
     queryset = Usuarios.objects.all()
     serializer_class = UsuariosSerializer
@@ -82,23 +80,53 @@ class UsuariosViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             return CreateUserSerializer
         return UsuariosSerializer
-# Login
+
+@api_view(['GET'])
+@ensure_csrf_cookie
+def get_csrf_token(request):
+    csrf_token = get_token(request)
+    response = JsonResponse({'detail': 'CSRF cookie set', 'csrfToken': csrf_token})
+    response['X-CSRFToken'] = csrf_token
+    return response
+
 @api_view(['POST'])
-@permission_classes([])  # Sem permissão obrigatória para login
-@authentication_classes([])  # Sem autenticação obrigatória para login
+@permission_classes([])
+@authentication_classes([])
 def login_view(request):
     email = request.data.get('email')
     senha = request.data.get('senha')
+
+    if not email or not senha:
+        return Response(
+            {'error': 'Email e senha são obrigatórios'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     try:
         usuario = Usuarios.objects.get(email=email)
         if usuario.check_password(senha):
             login(request, usuario)
-            return Response({'message': 'Login realizado com sucesso'})
-        return Response({'error': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({
+                'id': usuario.id,
+                'nome': usuario.nome,
+                'email': usuario.email,
+                'role': usuario.role,
+            })
+        return Response(
+            {'error': 'Email ou senha inválidos'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
     except Usuarios.DoesNotExist:
-        return Response({'error': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
-
+        return Response(
+            {'error': 'Email ou senha inválidos'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
+    except Exception as e:
+        print(f"Erro no login: {str(e)}") 
+        return Response(
+            {'error': 'Erro interno do servidor'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 # Logout
 @api_view(['POST'])
@@ -108,7 +136,6 @@ def logout_view(request):
     logout(request)
     return Response({'message': 'Logout realizado com sucesso'})
 
-# Criar usuário (somente admin)
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuarios
@@ -133,7 +160,7 @@ class CreateUserView(APIView):
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuarios  #
+        model = Usuarios  
         fields = ['nome', 'email', 'senha', 'role']  
         extra_kwargs = {'senha': {'write_only': True}}
 

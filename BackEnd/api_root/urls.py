@@ -20,8 +20,9 @@ from rest_framework.routers import DefaultRouter
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.conf import settings
 from django.conf.urls.static import static
-from api_rest.views import login_view, logout_view, CreateUserView
-
+from api_rest.views import login_view, logout_view, CreateUserView, get_csrf_token
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.generic import TemplateView
 
 from api_rest.views import (
     ConteudoPaginasViewSet, EquipeViewSet, NoticiasViewSet, ParceriasViewSet,
@@ -38,13 +39,19 @@ router.register(r'publicacoes', PublicacoesViewSet)
 router.register(r'relatorio', RelatorioViewSet)
 router.register(r'usuarios', UsuariosViewSet)
 
+auth_urlpatterns = [
+    path('csrf', get_csrf_token, name='csrf'),
+    path('login', login_view, name='login'),
+    path('logout', logout_view, name='logout'),
+]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+
+    path('api/', include(auth_urlpatterns)),
+
     path('api/', include(router.urls)),
-    # Login e Logout
-    path('api/login/', login_view, name='login'),
-    path('api/logout/', logout_view, name='logout'),
     path('api-auth/', include('rest_framework.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
