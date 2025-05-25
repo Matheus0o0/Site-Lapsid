@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "../app/globals.css";
+import { AuthProvider } from './context/Auth';
+import { RouteGuard } from './middleware/RouteGuard';
 
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -17,9 +19,13 @@ export default function RootLayout({
   return (
     <html lang="pt-BR"  style={{ margin: "0 auto", padding: "0 auto", height: "100%"}}>
       <body style={{ margin: "0 auto", padding: "0 auto", height: "100%"}}>
-        <Header/>
-          {children}
-        <Footer/>
+        <AuthProvider>
+          <RouteGuard>
+            <Header/>
+              {children}
+            <Footer/>
+          </RouteGuard>
+        </AuthProvider>
       </body>
     </html>
   );
