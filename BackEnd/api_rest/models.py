@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class ConteudoPaginas(models.Model):
     titulo = models.CharField(max_length=255)
@@ -82,24 +82,24 @@ class Relatorio(models.Model):
         db_table = 'relatorio'
         
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, nome, senha=None, role='user', **extra_fields):
+    def create_user(self, email, nome, password=None, role='user', **extra_fields):
         if not email:
             raise ValueError('O usuário deve ter um e-mail')
         email = self.normalize_email(email)
         user = self.model(email=email, nome=nome, role=role, **extra_fields)
-        user.set_password(senha)
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, nome, senha=None):
-        user = self.create_user(email, nome, senha, role='admin')
+    def create_superuser(self, email, nome, password=None):
+        user = self.create_user(email, nome, password=password, role='admin')
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
         return user
 
 
-class Usuarios(AbstractBaseUser):
+class Usuarios(AbstractBaseUser, PermissionsMixin):
     ROLE_CHOICES = (
         ('admin', 'Admin'),
         ('user', 'User'),
@@ -108,9 +108,12 @@ class Usuarios(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    senha = models.CharField(max_length=128, default='1234')  # Corrigido aqui
+    password = models.CharField(max_length=128, verbose_name='password')
     role = models.CharField(max_length=5, choices=ROLE_CHOICES, default='user')
     data_criacao = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nome']
@@ -119,3 +122,9 @@ class Usuarios(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+
+    def has_perm(self, perm, obj=None):
+        return True if self.role == 'admin' else super().has_perm(perm, obj)
+
+    def has_module_perms(self, app_label):
+        return True if self.role == 'admin' else super().has_module_perms(app_label)
