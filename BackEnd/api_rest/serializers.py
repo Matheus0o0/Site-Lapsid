@@ -48,7 +48,7 @@ class UsuariosSerializer(serializers.ModelSerializer):
         user = Usuarios.objects.create_user(
             email=validated_data['email'],
             nome=validated_data['nome'],
-            senha=validated_data['senha']
+            password=validated_data['password']
         )
         return user
     
@@ -56,13 +56,13 @@ class UsuariosSerializer(serializers.ModelSerializer):
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuarios
-        fields = ['nome', 'email', 'senha', 'role']
-        extra_kwargs = {'senha': {'write_only': True}}
+        fields = ['nome', 'email', 'password', 'role']
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        senha = validated_data.pop('senha')
+        password = validated_data.pop('password')
         user = Usuarios.objects.create_user(
-            senha=senha,
+            password=password,
             **validated_data
         )
         return user
