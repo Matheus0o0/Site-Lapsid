@@ -7,7 +7,7 @@ import style from '../Style/Login.module.css'
 export default function Login() {
     const { login } = useAuth();
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -17,7 +17,7 @@ export default function Login() {
         setLoading(true);
 
         try {
-            await login(email, senha);
+            await login(email, password);
         } catch (err: any) {
             setError(err.message || 'Ocorreu um erro ao tentar fazer login. Por favor, tente novamente.');
         } finally {
@@ -26,9 +26,9 @@ export default function Login() {
     };
 
     return (
-        <div className={style.divLogin}>
-            <div className={style.contentLogin}>
-                <h1>Login</h1>
+            <div className={style.divLogin}>
+                <div className={style.contentLogin}>
+                    <h1>Login</h1>
                 {error && (
                     <div className={`${style.error} ${style.errorMessage}`}>
                         <p>{error}</p>
@@ -48,8 +48,8 @@ export default function Login() {
                         className={style.input}
                         type="password"
                         placeholder="Senha"
-                        value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                         disabled={loading}
                     />
@@ -60,11 +60,11 @@ export default function Login() {
                     >
                         {loading ? 'Entrando...' : 'Entrar'}
                     </button>
-                </form>
-                <div className={style.text}>
-                    <p>Ainda não possui uma conta? <br /> entre em contato com o Lapsid <br /> <a href="/Cadastro">Aqui</a></p>
+                    </form>
+                    <div className={style.text}>
+                        <p>Ainda não possui uma conta? <br /> entre em contato com o Lapsid <br /> <a href="/Cadastro">Aqui</a></p>
+                    </div>
                 </div>
             </div>
-        </div>
     )
 }
