@@ -1,24 +1,24 @@
 .header {
   background-color: #0057b3;
-  padding: 1rem;
+    padding: 1rem;
   position: sticky;
   top: 0;
   z-index: 1000;
-}
-
+  }
+  
 .nav {
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
+    display: flex;
   justify-content: space-between;
-  align-items: center;
+    align-items: center;
 }
 
 .logo {
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .links {
@@ -32,9 +32,9 @@
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;
-  background: none;
-  border: none;
-  cursor: pointer;
+background: none;
+border: none;
+cursor: pointer;
   padding: 0;
 }
 
@@ -42,7 +42,6 @@
   color: #cce5ff;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .nav {
     flex-direction: column;
@@ -53,11 +52,11 @@
     flex-direction: column;
     width: 100%;
     gap: 1rem;
-  }
+}
 
   .link {
     width: 100%;
     text-align: center;
     padding: 0.5rem 0;
-  }
+}
 }
