@@ -27,7 +27,7 @@ class BaseView(APIView):
     permission_classes = [permissions.AllowAny] 
     
     def get(self, request):
-        # Sua lógica para retornar dados aqui
+
         return Response({'message': 'Esta é a página inicial pública'})
     
 class IsAuthenticatedOrReadOnly(permissions.BasePermission):
@@ -97,10 +97,8 @@ class UsuariosViewSet(viewsets.ModelViewSet):
         return UsuariosSerializer
 
     def check_object_permissions(self, request, obj):
-        # Chama a verificação padrão de permissões
         super().check_object_permissions(request, obj)
         
-        # Verifica se o usuário está tentando excluir a si mesmo
         if request.method == 'DELETE' and obj.id == request.user.id:
             self.permission_denied(
                 request,
@@ -115,7 +113,6 @@ class UsuariosViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         
-        # Verifica se o usuário está tentando excluir a si mesmo
         if instance.id == request.user.id:
             return Response(
                 {'error': 'Você não pode excluir sua própria conta.'},
@@ -150,7 +147,7 @@ def login_view(request):
         usuario = Usuarios.objects.get(email=email)
         if usuario.check_password(password):
             login(request, usuario)
-            request.session.save()  # Força o salvamento da sessão
+            request.session.save()
             
             return Response({
                 'id': usuario.id,
@@ -176,7 +173,6 @@ def login_view(request):
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
-# Logout
 @api_view(['POST'])
 @authentication_classes([SessionAuthentication])
 @permission_classes([IsAuthenticated])
