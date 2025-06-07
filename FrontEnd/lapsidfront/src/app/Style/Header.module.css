@@ -1,24 +1,24 @@
 .header {
   background-color: #0057b3;
-    padding: 1rem;
+  padding: 1rem;
   position: sticky;
   top: 0;
   z-index: 1000;
-  }
-  
+}
+
 .nav {
   max-width: 1200px;
   margin: 0 auto;
-    display: flex;
+  display: flex;
   justify-content: space-between;
-    align-items: center;
+  align-items: center;
 }
 
 .logo {
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .links {
@@ -32,13 +32,65 @@
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;
-background: none;
-border: none;
-cursor: pointer;
+  background: none;
+  border: none;
+  cursor: pointer;
   padding: 0;
 }
 
 .link:hover {
+  color: #cce5ff;
+}
+
+/* Estilos do Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.dropdownToggle {
+  color: white;
+  font-size: 0.8rem;
+  transition: color 0.3s ease;
+}
+
+.dropdownContent {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #0057b3;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  padding: 0.5rem 0;
+  z-index: 1001;
+  margin-top: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.dropdownContent.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdownLink {
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  display: block;
+  transition: color 0.3s ease;
+}
+
+.dropdownLink:hover {
   color: #cce5ff;
 }
 

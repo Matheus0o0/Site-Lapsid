@@ -1,27 +1,99 @@
 .pageContainer {
-  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem;
 }
 
 .header {
   margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #0057b3;
 }
 
 .header h1 {
-  color: #0057b3;
+  font-size: 2rem;
+  color: #333;
   margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: #666;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.error {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: #c00;
+}
+
+.content {
+  display: grid;
+  gap: 2rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.currentUser {
+  background-color: #e3f2fd;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
 }
 
 .createButton {
   background-color: #28a745;
   color: white;
+  padding: 0.75rem 1.5rem;
   border: none;
-  padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 1rem;
   margin-bottom: 1rem;
   transition: background-color 0.2s;
 }
@@ -30,52 +102,13 @@
   background-color: #218838;
 }
 
-.content {
-  background-color: white;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table th,
-.table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.table th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-}
-
-.actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.editButton,
-.deleteButton,
-.viewButton {
-  padding: 0.25rem 0.75rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
 .editButton {
-  background-color: #ffc107;
-  color: #000;
+  background-color: #007bff;
+  color: white;
 }
 
 .editButton:hover {
-  background-color: #e0a800;
+  background-color: #0056b3;
 }
 
 .deleteButton {
@@ -88,46 +121,123 @@
 }
 
 .viewButton {
-  background-color: #0057b3;
+  background-color: #6c757d;
   color: white;
 }
 
 .viewButton:hover {
-  background-color: #003d7a;
+  background-color: #5a6268;
 }
 
-.infoMessage {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #cce5ff;
-  border: 1px solid #b8daff;
-  border-radius: 4px;
-  color: #004085;
+.backButton {
+  background-color: #6c757d;
+  color: white;
 }
 
-/* Loading state */
-.loading {
-  text-align: center;
+.backButton:hover {
+  background-color: #5a6268;
+}
+
+.cancelButton {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cancelButton:hover {
+  background-color: #5a6268;
+}
+
+.submitButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: #218838;
+}
+
+.form {
+  background: white;
   padding: 2rem;
-  font-size: 1.2rem;
-  color: #0057b3;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Error state */
-.error {
-  text-align: center;
-  padding: 1rem;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  color: #721c24;
+  font-size: 1rem;
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  color: #333;
   margin-bottom: 1rem;
 }
 
-.editButton:disabled,
-.deleteButton:disabled,
-.viewButton:disabled,
-.createButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.infoGroup {
+  margin-bottom: 1rem;
+}
+
+.infoGroup label {
+  display: block;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.infoGroup p {
+  color: #333;
+  font-size: 1rem;
+}
+
+.infoMessage {
+  background-color: #e3f2fd;
+  border: 1px solid #bbdefb;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-top: 2rem;
+  color: #0d47a1;
+}
+
+.infoMessage p {
+  margin: 0;
+}
+
+.infoMessage strong {
+  font-weight: 600;
 } 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../context/Auth';
 import { useRouter } from 'next/navigation';
 import style from '../../Style/AdminPages.module.css';
 import { userService, User } from '../../../services/users/users';

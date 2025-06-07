@@ -1,10 +1,11 @@
 export interface Noticia {
     id: number;
     titulo: string;
-    imagem: string,
-    conteudo: string,
-    autor_id: number,
-    data_criacao: string,
-    data_atualizacao: string,
-    data_noticia: string
+    imagem: string | null;
+    conteudo: string;
+    autor: number | null;
+    data_criacao: string | null;
+    data_atualizacao: string | null;
+    data_noticia: string | null;
+    link: string | null;
 }

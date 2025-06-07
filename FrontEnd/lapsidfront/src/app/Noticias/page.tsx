@@ -4,47 +4,32 @@ import style from '../Style/Noticias.module.css';
 import Image from 'next/image';
 import { getNoticias } from '@/services/noticiaService';
 import { useEffect, useState } from 'react';
+import { Noticia } from '@/types/Noticia';
 
-type Noticia = {
-    id: number;
-    titulo: string;
-    imagem: string,
-    conteudo: string,
-    autor_id: number,
-    data_criacao: string,
-    data_atualizacao: string,
-    data_noticia: string
-}
 export default function Noticias() {
-    const [noticia, setNoticia] = useState<Noticia[]>([]);
+    const [noticias, setNoticias] = useState<Noticia[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        async function fetchNoticias() {
-            try {
-                setIsLoading(true);
-                const data = await getNoticias();
-                setNoticia(data);
-            } catch (err) {
-                setError('Erro ao carregar Noticias');
-                console.error('Erro:', err);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
         fetchNoticias();
     }, []);
 
-    if (isLoading) {
-        return <div className={style.loading}>Carregando projetos...</div>;
+    async function fetchNoticias() {
+        try {
+            setIsLoading(true);
+            const data = await getNoticias();
+            setNoticias(data);
+            setError(null);
+        } catch (error) {
+            setError('Erro ao carregar notícias');
+        } finally {
+            setIsLoading(false);
+        }
     }
 
-    if (error) {
-        return <div className={style.error}>{error}</div>;
-    }
-
+    if (isLoading) return <div>Carregando notícias...</div>;
+    if (error) return <div>{error}</div>;
 
     return (
         <main className={style.main}>
@@ -77,17 +62,28 @@ export default function Noticias() {
             <section>
                 <div>
                     <h2 className={style.ultLastTitle} >Notícias da Semana</h2>
-                    {noticia.map((noticia) => (
-                        <div key={noticia.id} className={style.allNewsCard}>
-                            <div key={noticia.id} className={style.allNewsCardContent}>
-                                <Image className={style.allNewsImg} src={noticia.imagem} alt="Noticias" width={300} height={300} />
-                                <div className={style.allNewsResume}>
-                                    <h3 className={style.allNewsH3}>{noticia.conteudo}</h3>
-                                    <p><b>Data da potagem:</b> 12/04/2025</p>
+                    <div className={style.allNewsContainer}>
+                        {noticias.map(noticia => (
+                            <div key={noticia.id} className={style.allNewsCard}>
+                                <div key={noticia.id} className={style.allNewsCardContent}>
+                                    {noticia.imagem && (
+                                        <Image 
+                                            className={style.allNewsImg} 
+                                            src={noticia.imagem} 
+                                            alt={noticia.titulo} 
+                                            width={300} 
+                                            height={300} 
+                                        />
+                                    )}
+                                    <div className={style.allNewsResume}>
+                                        <h3 className={style.allNewsH3}>{noticia.titulo}</h3>
+                                        <p>{noticia.conteudo}</p>
+                                        <p><b>Data da postagem:</b> {new Date(noticia.data_noticia || '').toLocaleDateString()}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </section>
         </main>

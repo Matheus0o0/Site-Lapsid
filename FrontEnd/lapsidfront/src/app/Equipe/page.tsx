@@ -1,5 +1,8 @@
+"use client";
+
 import style from '../Style/Equipe.module.css';
-import {getEquipe} from '../../services/equipeService'
+import { getEquipes } from '../../services/equipeService'
+import { useState, useEffect } from 'react';
 
 type Equipe = {
         id: number;
@@ -12,7 +15,19 @@ type Equipe = {
 };
 
 export default function Equipe() {
-    const equipe: Equipe[] = getEquipe();
+    const [equipe, setEquipe] = useState<Equipe[]>([]);
+
+    useEffect(() => {
+        async function fetchEquipe() {
+            try {
+                const data = await getEquipes();
+                setEquipe(data);
+            } catch (error) {
+                console.error('Erro ao carregar equipe:', error);
+            }
+        }
+        fetchEquipe();
+    }, []);
 
     return(
         <main className={style.main}>

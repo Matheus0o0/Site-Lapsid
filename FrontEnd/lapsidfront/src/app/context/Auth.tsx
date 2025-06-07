@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 interface User {
   id: number;
@@ -14,129 +15,130 @@ interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isAdmin: boolean;
+  isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
-export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const API_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api').replace(/\/$/, '');
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+function getCookie(name: string): string | null {
+  const cookies = document.cookie ? document.cookie.split('; ') : [];
+  for (let i = 0; i < cookies.length; i++) {
+    const [cookieName, cookieValue] = cookies[i].split('=');
+    if (cookieName === name) return decodeURIComponent(cookieValue);
+  }
+  return null;
+}
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const checkAuth = async () => {
       try {
-        setUser(JSON.parse(storedUser));
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          try {
+            const userData = JSON.parse(storedUser);
+            setUser(userData);
+          } catch (error) {
+            console.error('Erro ao parsear usuário armazenado:', error);
+            localStorage.removeItem('user');
+          }
+        }
+
+        // Tenta verificar a autenticação com o backend
+        const response = await axios.get(`${API_URL}/usuarios/me/`, {
+          withCredentials: true,
+          headers: {
+            'X-CSRFToken': getCookie('csrftoken') || '',
+          },
+        });
+
+        if (response.data) {
+          setUser(response.data);
+          localStorage.setItem('user', JSON.stringify(response.data));
+        }
       } catch (error) {
-        localStorage.removeItem('user');
+        console.error('Erro ao verificar autenticação:', error);
+        // Não limpa o usuário em caso de erro de rede
+        if (axios.isAxiosError(error) && error.code !== 'ERR_NETWORK') {
+          setUser(null);
+          localStorage.removeItem('user');
+        }
+      } finally {
+        setIsLoading(false);
       }
-    }
+    };
+
+    checkAuth();
   }, []);
-
-  const getCSRFToken = async () => {
-    try {
-      const csrfUrl = `${API_URL}/csrf`;
-      console.log('Fetching CSRF token from:', csrfUrl);
-
-      const response = await fetch(csrfUrl, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Falha ao obter token CSRF: ${response.status}`);
-      }
-
-      const csrfToken = response.headers.get('X-CSRFToken');
-      if (!csrfToken) {
-        throw new Error('Token CSRF não encontrado na resposta do servidor');
-      }
-
-      return csrfToken;
-    } catch (error) {
-      console.error('Erro ao obter CSRF token:', error);
-      throw error;
-    }
-  };
 
   const login = async (email: string, password: string) => {
     try {
-      const csrfToken = await getCSRFToken();
-      
-      const loginUrl = `${API_URL}/login`;
-      console.log('Attempting login at:', loginUrl);
+      const csrfToken = getCookie('csrftoken');
+      if (!csrfToken) {
+        throw new Error('Token CSRF não encontrado');
+      }
 
-      const response = await fetch(loginUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'X-CSRFToken': csrfToken,
-        },
-        credentials: 'include',
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await axios.post(
+        `${API_URL}/login/`,
+        { email, password },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+          },
+        }
+      );
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        if (response.status === 401) {
+      if (response.data) {
+        setUser(response.data);
+        localStorage.setItem('user', JSON.stringify(response.data));
+        router.push(response.data.role === 'admin' ? '/Admin' : '/dashboard');
+      }
+    } catch (error) {
+      console.error('Erro no login:', error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 401) {
           throw new Error('Email ou senha inválidos');
         }
-        throw new Error(errorData.error || 'Erro ao fazer login');
+        throw new Error(error.response?.data?.error || 'Erro ao fazer login');
       }
-
-      const userData = await response.json();
-      
-      if (!userData || !userData.id || !userData.role) {
-        throw new Error('Resposta inválida do servidor: dados do usuário incompletos');
-      }
-
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-
-      if (userData.role === 'admin') {
-        router.push('/Admin');
-      } else {
-        router.push('/dashboard');
-      }
-    } catch (error: any) {
-      console.error('Erro no login:', error);
       throw error;
     }
   };
 
   const logout = async () => {
     try {
-      const csrfToken = await getCSRFToken();
-      
-      const logoutUrl = `${API_URL}/logout`;
-      console.log('Attempting logout at:', logoutUrl);
-
-      const response = await fetch(logoutUrl, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'X-CSRFToken': csrfToken,
-        },
-        credentials: 'include',
-      });
-
-      if (!response.ok) {
-        throw new Error('Erro ao fazer logout');
+      const csrfToken = getCookie('csrftoken');
+      if (!csrfToken) {
+        throw new Error('Token CSRF não encontrado');
       }
+
+      await axios.post(
+        `${API_URL}/logout/`,
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            'X-CSRFToken': csrfToken,
+          },
+        }
+      );
 
       setUser(null);
       localStorage.removeItem('user');
       router.push('/Login');
     } catch (error) {
       console.error('Erro no logout:', error);
+      // Mesmo com erro, limpa o estado local
       setUser(null);
       localStorage.removeItem('user');
       router.push('/Login');
@@ -144,16 +146,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider 
-      value={{ 
-        user, 
+    <AuthContext.Provider
+      value={{
+        user,
         isAuthenticated: !!user,
         isAdmin: user?.role === 'admin',
-        login, 
-        logout 
+        isLoading,
+        login,
+        logout,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
-}; 
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth deve ser usado dentro de um AuthProvider');
+  }
+  return context;
+} 

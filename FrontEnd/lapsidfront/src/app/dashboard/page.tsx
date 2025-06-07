@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../context/Auth';
 import { useRouter } from 'next/navigation';
 import styles from '../Style/Dashboard.module.css';
 import { api } from '../../services/api';

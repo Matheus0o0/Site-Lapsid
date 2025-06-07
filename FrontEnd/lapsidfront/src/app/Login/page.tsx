@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../context/Auth';
 import style from '../Style/Login.module.css'
 
 export default function Login() {

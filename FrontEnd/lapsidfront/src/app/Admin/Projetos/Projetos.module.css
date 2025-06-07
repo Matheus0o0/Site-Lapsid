@@ -1,0 +1,211 @@
+.title{
+    font-size: 2.5em;
+    margin-left: 3em;
+    margin-bottom: 2em;
+}
+
+.prj{
+    margin-left: 12em;
+}
+
+.imgPrj{
+    margin-right: 1em;
+    width: 30em;
+    height: 40%;
+}
+
+.divPrj{
+    margin-left: 5em;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6em;
+}
+
+.pPrj{
+    width: 30vw;
+}
+
+.hr{
+    width: 60%;
+    height: 0.1em;
+    background-color: #000000;
+    border: none;
+    margin: 2em ;
+}
+
+.divHr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main{
+    margin-top: 8em;
+}
+
+.h2Prj{
+    text-align: center;
+
+}
+
+@media (max-width: 1050px) {
+    .main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .title{
+        display: flex;
+        margin-left: 0px;
+
+        text-align: center;
+    }
+    .divPrj{
+        display: block;
+        margin: 0px;
+    }
+    .prj{
+        margin: 0px;
+    }
+    .pPrj{
+        width: 50vw;
+    }
+}
+
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container h1 {
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.formContainer {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.formContainer h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.error {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.button {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #1d4ed8;
+}
+
+.listContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.dates {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dates p {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
+}
+
+.deleteButton {
+  background-color: #dc2626;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+  transition: background-color 0.2s;
+}
+
+.deleteButton:hover {
+  background-color: #b91c1c;
+}
+
+/* Estilos para o editor TinyMCE */
+.formContainer :global(.tox-tinymce) {
+  border-radius: 4px !important;
+  border-color: #d1d5db !important;
+}
+
+.formContainer :global(.tox .tox-toolbar__group) {
+  border-color: #e5e7eb !important;
+}
+
+.formContainer :global(.tox .tox-tbtn) {
+  color: #4b5563 !important;
+}
+
+.formContainer :global(.tox .tox-tbtn:hover) {
+  background-color: #f3f4f6 !important;
+}
+
+.formContainer :global(.tox .tox-tbtn--enabled) {
+  background-color: #e5e7eb !important;
+}
+
+.formContainer :global(.tox .tox-tbtn--enabled:hover) {
+  background-color: #d1d5db !important;
+}

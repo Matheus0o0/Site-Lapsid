@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../context/Auth';
 import style from '../Style/Admin.module.css';
 import Link from 'next/link';
 
@@ -35,7 +35,7 @@ export default function AdminPage() {
         <div className={style.adminCard}>
           <h2>Gerenciar Projetos</h2>
           <p>Atualizar informações dos projetos</p>
-          <Link href="/Admin/projetos" className={style.adminLink}>
+          <Link href="/Admin/Projetos" className={style.adminLink}>
             Acessar
           </Link>
         </div>
@@ -43,7 +43,7 @@ export default function AdminPage() {
         <div className={style.adminCard}>
           <h2>Gerenciar Publicações</h2>
           <p>Adicionar ou atualizar publicações</p>
-          <Link href="/Admin/publicacoes" className={style.adminLink}>
+          <Link href="/Admin/Publicacoes" className={style.adminLink}>
             Acessar
           </Link>
         </div>
@@ -51,7 +51,7 @@ export default function AdminPage() {
         <div className={style.adminCard}>
           <h2>Gerenciar Equipe</h2>
           <p>Atualizar membros da equipe</p>
-          <Link href="/Admin/equipe" className={style.adminLink}>
+          <Link href="/Admin/equipes" className={style.adminLink}>
             Acessar
           </Link>
         </div>
@@ -59,7 +59,7 @@ export default function AdminPage() {
         <div className={style.adminCard}>
           <h2>Gerenciar Parcerias</h2>
           <p>Atualizar informações de parcerias</p>
-          <Link href="/Admin/parcerias" className={style.adminLink}>
+          <Link href="/Admin/Parcerias" className={style.adminLink}>
             Acessar
           </Link>
         </div>

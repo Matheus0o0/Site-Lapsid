@@ -1,28 +1,30 @@
 'use client';
 
-import "../app/globals.css";
-import { AuthProvider } from './hooks/useAuth';
-import { RouteGuard } from './middleware/RouteGuard';
+import { Inter } from 'next/font/google'
+import './globals.css'
+import Header from './Components/Header'
+import { AuthProvider } from './context/Auth'
+import { RouteGuard } from './middleware/RouteGuard'
 
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
+const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="pt-BR" style={{ margin: "0 auto", padding: "0 auto", height: "100%"}}>
-      <body style={{ margin: "0 auto", padding: "0 auto", height: "100%"}}>
+      <body suppressHydrationWarning style={{ margin: "0 auto", padding: "0 auto", height: "100%"}}>
         <AuthProvider>
-          <RouteGuard>
-            <Header/>
-            {children}
-            <Footer/>
-          </RouteGuard>
+          <div className={inter.className}>
+            <RouteGuard>
+              <Header/>
+              {children}
+            </RouteGuard>
+          </div>
         </AuthProvider>
       </body>
     </html>
-  );
+  )
 }

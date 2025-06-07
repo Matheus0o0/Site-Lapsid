@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import style from '../Style/Publicacoes.module.css';
-import { getPublicaoes } from '../../services/publicacaoService';
+import { getPublicacoes } from '../../services/publicacaoService';
 
 type Publicacao = {
     id: number;
@@ -24,7 +24,7 @@ export default function Publicacoes() {
         async function fetchPublicacoes() {
             try {
                 setIsLoading(true);
-                const data = await getPublicaoes();
+                const data = await getPublicacoes();
                 setPublicacoes(data);
             } catch (err) {
                 setError('Erro ao carregar publicações');
