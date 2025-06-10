@@ -2,18 +2,7 @@
 import { getProjetos } from '../../services/projetoService';
 import { useEffect, useState } from 'react';
 import style from '../Style/Projetos.module.css';
-import Image from 'next/image';
-import { Projeto } from '@/types/Projeto';
-
-type projeto ={
-    id: number;
-    titulo: string;
-    conteudo: string;
-    imagem: string;
-    link: string;
-    data_criacao?: string;
-    data_atualizacao?: string;
-}
+import { Projeto } from '../../services/projetoService';
 
 export default function Projetos() {
     const [projetos, setProjetos] = useState<Projeto[]>([]);
@@ -54,25 +43,23 @@ export default function Projetos() {
                         <div className={style.prj}>
                             <h2 className={style.h2Prj}>{projeto.titulo}</h2>
                             <div className={style.divPrj}>
-                                <Image
-                                    className={style.imgPrj}
-                                    src={projeto.imagem }
-                                    alt={projeto.titulo}
-                                    width={100}
-                                    height={100}
-                                />
                                 <div className={style.contentDivPrj}>
-                                    <p className={style.pPrj}>{projeto.conteudo}</p>
+                                    <div 
+                                        className={style.pPrj}
+                                        dangerouslySetInnerHTML={{ __html: projeto.conteudo }}
+                                    />
                                     <p><b>Data de criação:</b> {projeto.data_criacao ? new Date(projeto.data_criacao).toLocaleDateString('pt-BR') : 'Indefinida'}</p>
-                                    <p><b>Nome do autor:</b> Null</p>
+                                    {projeto.autor && (
+                                        <p><b>Autor:</b> {projeto.autor}</p>
+                                    )}
                                 </div>
                             </div>
                         </div>
                         {index < projetos.length - 1 && (
-                                <div className={style.divHr}>
-                                    <hr className={style.hr} />
-                                </div>
-                            )}
+                            <div className={style.divHr}>
+                                <hr className={style.hr} />
+                            </div>
+                        )}
                     </div>
                 ))}
             </section>

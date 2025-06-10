@@ -12,6 +12,7 @@ export default function Projetos() {
   const [error, setError] = useState<string | null>(null);
   const [novoTitulo, setNovoTitulo] = useState('');
   const [novoConteudo, setNovoConteudo] = useState('');
+  const [novoAutor, setNovoAutor] = useState('');
   const [criarError, setCriarError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -52,12 +53,14 @@ export default function Projetos() {
       const novoProjeto = {
         titulo: novoTitulo.trim(),
         conteudo: novoConteudo.trim(),
+        autor: novoAutor.trim(),
         data_criacao: new Date().toISOString(),
         data_atualizacao: new Date().toISOString()
       };
       await createProjeto(novoProjeto);
       setNovoTitulo('');
       setNovoConteudo('');
+      setNovoAutor('');
       fetchProjetos();
     } catch (error) {
       console.error('Erro ao criar projeto:', error);
@@ -105,6 +108,12 @@ export default function Projetos() {
           value={novoTitulo} 
           onChange={e => setNovoTitulo(e.target.value)} 
         />
+        <input 
+          className={styles.input}
+          placeholder="Autor" 
+          value={novoAutor} 
+          onChange={e => setNovoAutor(e.target.value)} 
+        />
         <Editor
           apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
           value={novoConteudo}
@@ -149,7 +158,13 @@ export default function Projetos() {
         {projetos.map(projeto => (
           <div key={projeto.id} className={styles.card}>
             <h3>{projeto.titulo}</h3>
-            <div dangerouslySetInnerHTML={{ __html: projeto.conteudo }} />
+            {projeto.autor && (
+              <p className={styles.autor}>Autor: {projeto.autor}</p>
+            )}
+            <div 
+              className={styles.content}
+              dangerouslySetInnerHTML={{ __html: projeto.conteudo }}
+            />
             <div className={styles.dates}>
               <p>
                 <strong>Data de Criação:</strong> {formatarData(projeto.data_criacao)}

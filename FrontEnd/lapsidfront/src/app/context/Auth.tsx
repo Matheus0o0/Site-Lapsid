@@ -53,16 +53,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         // Tenta verificar a autenticação com o backend
-        const response = await axios.get(`${API_URL}/usuarios/me/`, {
-          withCredentials: true,
-          headers: {
-            'X-CSRFToken': getCookie('csrftoken') || '',
-          },
-        });
+        try {
+          const response = await axios.get(`${API_URL}/usuarios/me/`, {
+            withCredentials: true,
+            headers: {
+              'X-CSRFToken': getCookie('csrftoken') || '',
+            },
+          });
 
-        if (response.data) {
-          setUser(response.data);
-          localStorage.setItem('user', JSON.stringify(response.data));
+          if (response.data) {
+            setUser(response.data);
+            localStorage.setItem('user', JSON.stringify(response.data));
+          }
+        } catch (error) {
+          // Se for erro 403, apenas limpa o usuário local
+          if (axios.isAxiosError(error) && error.response?.status === 403) {
+            setUser(null);
+            localStorage.removeItem('user');
+          }
+          // Para outros erros, mantém o usuário local se existir
         }
       } catch (error) {
         console.error('Erro ao verificar autenticação:', error);
@@ -87,7 +96,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       const response = await axios.post(
-        `${API_URL}/login/`,
+        `${API_URL}/login`,
         { email, password },
         {
           withCredentials: true,
@@ -122,8 +131,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         throw new Error('Token CSRF não encontrado');
       }
 
-      await axios.post(
-        `${API_URL}/logout/`,
+      const response = await axios.post(
+        `${API_URL}/logout`,
         {},
         {
           withCredentials: true,
@@ -133,15 +142,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       );
 
-      setUser(null);
-      localStorage.removeItem('user');
-      router.push('/Login');
+      if (response.status === 200) {
+        setUser(null);
+        localStorage.removeItem('user');
+        window.location.href = '/';
+      }
     } catch (error) {
       console.error('Erro no logout:', error);
-      // Mesmo com erro, limpa o estado local
+      // Mesmo com erro, limpa o estado local e redireciona
       setUser(null);
       localStorage.removeItem('user');
-      router.push('/Login');
+      window.location.href = '/';
     }
   };
 

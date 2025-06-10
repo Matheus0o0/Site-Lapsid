@@ -4,16 +4,15 @@ import { useEffect, useState } from 'react';
 import style from '../Style/Parcerias.module.css';
 import { get } from 'http';
 import { getParcerias } from '@/services/parceriaService';
+import Image from 'next/image';
 
-
-type Parceria ={
+type Parceria = {
     id: number;
     nome_parceria: string;
-    imagem: string;
+    imagem_url: string;
     descricao: string;
     data_criacao: string;
     data_atualizacao: string;
-    link: string;
 };
 
 export default function Parcerias() {
@@ -55,6 +54,17 @@ export default function Parcerias() {
                     <div key={parceria.id}>
                         <div className={style.parcContent}>
                             <div className={style.Parce}>
+                                {parceria.imagem_url && (
+                                    <div className={style.imageContainer}>
+                                        <Image
+                                            src={parceria.imagem_url}
+                                            alt={parceria.nome_parceria}
+                                            width={300}
+                                            height={200}
+                                            className={style.parceriaImage}
+                                        />
+                                    </div>
+                                )}
                                 <h2 className={style.h2Parce}>{parceria.nome_parceria}</h2>
                                 <p className={style.pParce}>{parceria.descricao}</p>
 
@@ -63,17 +73,6 @@ export default function Parcerias() {
                                         <strong>Criado em:</strong>{' '}
                                         {new Date(parceria.data_criacao).toLocaleDateString('pt-BR')}
                                     </p>
-                                )}
-
-                                {parceria.link ? (
-                                    <p>
-                                        <strong>Link:</strong>{' '}
-                                        <a href={parceria.link} target="_blank" rel="noopener noreferrer">
-                                            {parceria.link}
-                                        </a>
-                                    </p>
-                                ) : (
-                                    <p><strong>Link:</strong> Não disponível</p>
                                 )}
                             </div>
                         </div>

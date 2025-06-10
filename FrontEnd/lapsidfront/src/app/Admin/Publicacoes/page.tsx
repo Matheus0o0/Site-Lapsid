@@ -13,6 +13,7 @@ export default function PublicacoesPage() {
   const [novoConteudo, setNovoConteudo] = useState('');
   const [novoLink, setNovoLink] = useState('');
   const [novoAno, setNovoAno] = useState(new Date().getFullYear().toString());
+  const [novoAutor, setNovoAutor] = useState('');
 
   const fetchPublicacoes = async () => {
     try {
@@ -34,17 +35,24 @@ export default function PublicacoesPage() {
 
   const handleCreate = async () => {
     try {
+      let formattedLink = novoLink.trim();
+      if (formattedLink && !formattedLink.startsWith('http://') && !formattedLink.startsWith('https://')) {
+        formattedLink = `https://${formattedLink}`;
+      }
+
       const novaPublicacao = {
         titulo: novoTitulo,
         conteudo: novoConteudo,
-        link: novoLink,
-        ano: novoAno
+        link: formattedLink,
+        ano: novoAno,
+        autor: novoAutor
       };
       await createPublicacao(novaPublicacao);
       setNovoTitulo('');
       setNovoConteudo('');
       setNovoLink('');
       setNovoAno(new Date().getFullYear().toString());
+      setNovoAutor('');
       fetchPublicacoes();
     } catch (err) {
       alert('Erro ao criar publicação');
@@ -101,6 +109,13 @@ export default function PublicacoesPage() {
             onChange={(e) => setNovoAno(e.target.value)}
             className={styles.input}
           />
+          <input
+            type="text"
+            placeholder="Nome do Autor"
+            value={novoAutor}
+            onChange={(e) => setNovoAutor(e.target.value)}
+            className={styles.input}
+          />
           <button onClick={handleCreate} className={styles.button}>
             Adicionar Publicação
           </button>
@@ -118,10 +133,15 @@ export default function PublicacoesPage() {
               <p className={styles.cardContent}>{publicacao.conteudo}</p>
               {publicacao.link && (
                 <a 
-                  href={publicacao.link} 
+                  href={publicacao.link.startsWith('http') ? publicacao.link : `https://${publicacao.link}`}
                   target="_blank" 
                   rel="noopener noreferrer"
                   className={styles.cardLink}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const url = publicacao.link.startsWith('http') ? publicacao.link : `https://${publicacao.link}`;
+                    window.open(url, '_blank');
+                  }}
                 >
                   Acessar publicação
                 </a>

@@ -71,3 +71,4 @@ export async function deleteIntegrante(id: number): Promise<void> {
     throw new Error('Erro ao deletar integrante');
   }
 }
+

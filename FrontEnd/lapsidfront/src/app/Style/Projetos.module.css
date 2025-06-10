@@ -1,4 +1,3 @@
-
 .title{
     font-size: 2.5em;
     margin-left: 3em;
@@ -24,6 +23,74 @@
 
 .pPrj{
     width: 30vw;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.pPrj p {
+    margin-bottom: 1rem;
+}
+
+.pPrj ul, .pPrj ol {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.pPrj h1, .pPrj h2, .pPrj h3, .pPrj h4, .pPrj h5, .pPrj h6 {
+    margin: 1.5rem 0 1rem;
+}
+
+.pPrj a {
+    color: #0070f3;
+    text-decoration: none;
+}
+
+.pPrj a:hover {
+    text-decoration: underline;
+}
+
+.pPrj img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+}
+
+.pPrj blockquote {
+    border-left: 4px solid #0070f3;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: #666;
+}
+
+.pPrj code {
+    background-color: #f0f0f0;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+.pPrj pre {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.pPrj table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.pPrj th, .pPrj td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.pPrj th {
+    background-color: #f0f0f0;
 }
 
 .hr{
@@ -47,6 +114,20 @@
 .h2Prj{
     text-align: center;
 
+}
+
+.imgPlaceholder {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    color: #666;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 0.5rem;
 }
 
 @media (max-width: 1050px) {

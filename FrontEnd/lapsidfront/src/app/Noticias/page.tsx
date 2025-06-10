@@ -77,7 +77,7 @@ export default function Noticias() {
                                     )}
                                     <div className={style.allNewsResume}>
                                         <h3 className={style.allNewsH3}>{noticia.titulo}</h3>
-                                        <p>{noticia.conteudo}</p>
+                                        <div dangerouslySetInnerHTML={{ __html: noticia.conteudo }} />
                                         <p><b>Data da postagem:</b> {new Date(noticia.data_noticia || '').toLocaleDateString()}</p>
                                     </div>
                                 </div>

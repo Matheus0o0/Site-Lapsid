@@ -12,12 +12,10 @@ export default function CriarUsuario() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
-    username: '',
+    nome: '',
     email: '',
-    first_name: '',
-    last_name: '',
     password: '',
-    role: 'user'
+    role: 'user' as const
   });
 
   if (!isAdmin || !user) {
@@ -25,22 +23,47 @@ export default function CriarUsuario() {
     return null;
   }
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
+    // Validação do email
+    if (!validateEmail(formData.email)) {
+      setError('Por favor, insira um email válido');
+      setLoading(false);
+      return;
+    }
+
+    // Validação da senha
+    if (formData.password.length < 6) {
+      setError('A senha deve ter pelo menos 6 caracteres');
+      setLoading(false);
+      return;
+    }
+
     try {
-      await userService.createUser({
-        ...formData,
-        nome: `${formData.first_name} ${formData.last_name}`,
-        is_active: true,
-        is_staff: formData.role === 'admin',
-        is_superuser: formData.role === 'admin'
-      });
+      const userData = {
+        nome: formData.nome.trim(),
+        email: formData.email.trim().toLowerCase(),
+        password: formData.password,
+        role: formData.role
+      };
+
+      await userService.createUser(userData);
       router.push('/Admin/usuarios');
     } catch (err: any) {
-      setError(err.message || 'Erro ao criar usuário');
+      console.error('Erro ao criar usuário:', err);
+      if (err.message.includes('email')) {
+        setError('Este email já está em uso');
+      } else {
+        setError(err.message || 'Erro ao criar usuário');
+      }
     } finally {
       setLoading(false);
     }
@@ -69,12 +92,12 @@ export default function CriarUsuario() {
 
       <form onSubmit={handleSubmit} className={style.form}>
         <div className={style.formGroup}>
-          <label htmlFor="username">Nome de Usuário:</label>
+          <label htmlFor="nome">Nome:</label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
+            id="nome"
+            name="nome"
+            value={formData.nome}
             onChange={handleChange}
             required
             className={style.input}
@@ -88,32 +111,6 @@ export default function CriarUsuario() {
             id="email"
             name="email"
             value={formData.email}
-            onChange={handleChange}
-            required
-            className={style.input}
-          />
-        </div>
-
-        <div className={style.formGroup}>
-          <label htmlFor="first_name">Nome:</label>
-          <input
-            type="text"
-            id="first_name"
-            name="first_name"
-            value={formData.first_name}
-            onChange={handleChange}
-            required
-            className={style.input}
-          />
-        </div>
-
-        <div className={style.formGroup}>
-          <label htmlFor="last_name">Sobrenome:</label>
-          <input
-            type="text"
-            id="last_name"
-            name="last_name"
-            value={formData.last_name}
             onChange={handleChange}
             required
             className={style.input}
@@ -140,7 +137,8 @@ export default function CriarUsuario() {
             name="role"
             value={formData.role}
             onChange={handleChange}
-            className={style.select}
+            required
+            className={style.input}
           >
             <option value="user">Usuário</option>
             <option value="admin">Administrador</option>
@@ -149,18 +147,18 @@ export default function CriarUsuario() {
 
         <div className={style.formActions}>
           <button
-            type="button"
-            onClick={() => router.push('/Admin/usuarios')}
-            className={style.cancelButton}
-          >
-            Cancelar
-          </button>
-          <button
             type="submit"
+            className={`${style.submitButton} ${loading ? style.buttonLoading : ''}`}
             disabled={loading}
-            className={style.submitButton}
           >
             {loading ? 'Criando...' : 'Criar Usuário'}
+          </button>
+          <button
+            type="button"
+            className={style.cancelButton}
+            onClick={() => router.push('/Admin/usuarios')}
+          >
+            Cancelar
           </button>
         </div>
       </form>

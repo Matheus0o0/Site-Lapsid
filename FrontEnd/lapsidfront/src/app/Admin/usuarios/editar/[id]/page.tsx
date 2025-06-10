@@ -1,22 +1,21 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '../../../../../context/Auth';
-import { userService, User } from '../../../../../services/users/users';
-import style from '../../../../../Style/AdminPages.module.css';
+import { useRouter, useParams } from 'next/navigation';
+import { useAuth } from '@/app/context/Auth';
+import { userService, User } from '@/services/users/users';
+import style from '@/app/Style/AdminPages.module.css';
 
-export default function EditarUsuario({ params }: { params: { id: string } }) {
+export default function EditarUsuario() {
   const router = useRouter();
+  const params = useParams();
   const { user, isAdmin } = useAuth();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<User>>({
-    username: '',
+    nome: '',
     email: '',
-    first_name: '',
-    last_name: '',
     role: 'user'
   });
 
@@ -28,14 +27,15 @@ export default function EditarUsuario({ params }: { params: { id: string } }) {
 
     const fetchUser = async () => {
       try {
-        const userId = parseInt(params.id);
+        const userId = parseInt(params.id as string);
+        if (isNaN(userId)) {
+          throw new Error('ID de usuário inválido');
+        }
         const userData = await userService.getUser(userId);
-        setFormData({
-          ...userData,
-          role: userData.is_staff ? 'admin' : 'user'
-        });
+        setFormData(userData);
         setError(null);
       } catch (err: any) {
+        console.error('Erro ao carregar usuário:', err);
         setError(err.message || 'Erro ao carregar usuário');
       } finally {
         setLoading(false);
@@ -51,15 +51,22 @@ export default function EditarUsuario({ params }: { params: { id: string } }) {
     setError(null);
 
     try {
-      const userId = parseInt(params.id);
-      await userService.updateUser(userId, {
-        ...formData,
-        nome: `${formData.first_name} ${formData.last_name}`,
-        is_staff: formData.role === 'admin',
-        is_superuser: formData.role === 'admin'
-      });
+      const userId = parseInt(params.id as string);
+      if (isNaN(userId)) {
+        throw new Error('ID de usuário inválido');
+      }
+
+      // Garantir que todos os campos obrigatórios estejam presentes
+      const userDataToUpdate = {
+        nome: formData.nome || '',
+        email: formData.email || '',
+        role: formData.role || 'user'
+      };
+
+      await userService.updateUser(userId, userDataToUpdate);
       router.push('/Admin/usuarios');
     } catch (err: any) {
+      console.error('Erro ao atualizar usuário:', err);
       setError(err.message || 'Erro ao atualizar usuário');
     } finally {
       setSaving(false);
@@ -97,12 +104,12 @@ export default function EditarUsuario({ params }: { params: { id: string } }) {
 
       <form onSubmit={handleSubmit} className={style.form}>
         <div className={style.formGroup}>
-          <label htmlFor="username">Nome de Usuário:</label>
+          <label htmlFor="nome">Nome:</label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
+            id="nome"
+            name="nome"
+            value={formData.nome}
             onChange={handleChange}
             required
             className={style.input}
@@ -123,39 +130,14 @@ export default function EditarUsuario({ params }: { params: { id: string } }) {
         </div>
 
         <div className={style.formGroup}>
-          <label htmlFor="first_name">Nome:</label>
-          <input
-            type="text"
-            id="first_name"
-            name="first_name"
-            value={formData.first_name}
-            onChange={handleChange}
-            required
-            className={style.input}
-          />
-        </div>
-
-        <div className={style.formGroup}>
-          <label htmlFor="last_name">Sobrenome:</label>
-          <input
-            type="text"
-            id="last_name"
-            name="last_name"
-            value={formData.last_name}
-            onChange={handleChange}
-            required
-            className={style.input}
-          />
-        </div>
-
-        <div className={style.formGroup}>
           <label htmlFor="role">Tipo de Usuário:</label>
           <select
             id="role"
             name="role"
             value={formData.role}
             onChange={handleChange}
-            className={style.select}
+            required
+            className={style.input}
           >
             <option value="user">Usuário</option>
             <option value="admin">Administrador</option>
@@ -164,18 +146,18 @@ export default function EditarUsuario({ params }: { params: { id: string } }) {
 
         <div className={style.formActions}>
           <button
-            type="button"
-            onClick={() => router.push('/Admin/usuarios')}
-            className={style.cancelButton}
-          >
-            Cancelar
-          </button>
-          <button
             type="submit"
-            disabled={saving}
             className={style.submitButton}
+            disabled={saving}
           >
             {saving ? 'Salvando...' : 'Salvar Alterações'}
+          </button>
+          <button
+            type="button"
+            className={style.cancelButton}
+            onClick={() => router.push('/Admin/usuarios')}
+          >
+            Cancelar
           </button>
         </div>
       </form>

@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.utils import timezone
+import os
+import time
 
 class ConteudoPaginas(models.Model):
     titulo = models.CharField(max_length=255)
@@ -40,10 +43,31 @@ class Noticias(models.Model):
 class Parcerias(models.Model):
     nome_parceria = models.CharField(max_length=255)
     descricao = models.TextField(blank=True, null=True)
-    imagem = models.ImageField(upload_to='noticias/', blank=True, null=True)
-    link = models.CharField(max_length=255, blank=True, null=True)
+    imagem = models.ImageField(upload_to='parcerias/', max_length=255, blank=True, null=True)
     data_criacao = models.DateTimeField(blank=True, null=True)
     data_atualizacao = models.DateTimeField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.data_criacao:
+            self.data_criacao = timezone.now()
+        self.data_atualizacao = timezone.now()
+        
+        # Renomear a imagem se existir
+        if self.imagem:
+            # Obter a extensão do arquivo
+            ext = os.path.splitext(self.imagem.name)[1]
+            # Gerar um nome único para o arquivo
+            filename = f'parceria_{self.id or "new"}_{int(time.time())}{ext}'
+            # Atualizar o nome do arquivo
+            self.imagem.name = f'parcerias/{filename}'
+            
+        super().save(*args, **kwargs)
+
+    @property
+    def imagem_url(self):
+        if self.imagem:
+            return f'http://localhost:8001{self.imagem.url}'
+        return None
 
     class Meta:
         db_table = 'parcerias'
@@ -52,6 +76,7 @@ class Parcerias(models.Model):
 class Projetos(models.Model):
     titulo = models.CharField(max_length=255)
     conteudo = models.TextField()
+    autor = models.CharField(max_length=255, blank=True, null=True)
     data_criacao = models.DateTimeField(blank=True, null=True)
     data_atualizacao = models.DateTimeField(blank=True, null=True)
 
@@ -62,7 +87,7 @@ class Projetos(models.Model):
 class Publicacoes(models.Model):
     titulo = models.CharField(max_length=255)
     conteudo = models.TextField()
-    autor = models.ForeignKey('Usuarios', models.DO_NOTHING, blank=True, null=True)
+    autor = models.CharField(max_length=255, blank=True, null=True)
     data_criacao = models.DateTimeField(blank=True, null=True)
     data_atualizacao = models.DateTimeField(blank=True, null=True)
     link = models.CharField(max_length=255)

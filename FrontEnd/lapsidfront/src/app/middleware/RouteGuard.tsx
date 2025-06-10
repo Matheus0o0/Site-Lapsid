@@ -6,7 +6,7 @@ import { useAuth } from '../context/Auth';
 
 const protectedRoutes = ['/Admin', '/dashboard'];
 const adminOnlyRoutes = ['/Admin/usuarios'];
-const publicOnlyRoutes = ['/login', '/cadastro'];
+const publicOnlyRoutes = ['/Login', '/cadastro'];
 
 export function RouteGuard({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isAdmin, isLoading } = useAuth();
@@ -30,7 +30,7 @@ export function RouteGuard({ children }: { children: React.ReactNode }) {
 
       if (protectedRoutes.some(route => pathname.startsWith(route)) && !isAuthenticated) {
         console.log('Usuário não autenticado tentando acessar rota protegida');
-        router.push('/login');
+        router.push('/Login');
         return;
       }
 

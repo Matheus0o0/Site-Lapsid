@@ -20,9 +20,16 @@ class NoticiasSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ParceriasSerializer(serializers.ModelSerializer):
+    imagem_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Parcerias
-        fields = '__all__'
+        fields = ['id', 'nome_parceria', 'descricao', 'imagem', 'imagem_url', 'data_criacao', 'data_atualizacao']
+
+    def get_imagem_url(self, obj):
+        if obj.imagem:
+            return f'http://localhost:8001{obj.imagem.url}'
+        return None
 
 class ProjetosSerializer(serializers.ModelSerializer):
     class Meta:

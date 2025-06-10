@@ -120,13 +120,6 @@ export default function GerenciarUsuarios() {
                       {deleteLoading === usuario.id ? 'Excluindo...' : 'Excluir'}
                     </button>
                   )}
-                  <button 
-                    className={style.viewButton}
-                    onClick={() => router.push(`/Admin/usuarios/${usuario.id}`)}
-                    title="Ver detalhes do usuário"
-                  >
-                    Detalhes
-                  </button>
                 </td>
               </tr>
             ))}

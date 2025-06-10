@@ -135,13 +135,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setUser(null);
       localStorage.removeItem('user');
-      router.push('/Login');
+      window.location.href = '/';
     } catch (error) {
       console.error('Erro no logout:', error);
       // Mesmo com erro, limpa o estado local
       setUser(null);
       localStorage.removeItem('user');
-      router.push('/Login');
+      window.location.href = '/';
     }
   };
 

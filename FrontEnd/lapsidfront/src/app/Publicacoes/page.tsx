@@ -8,7 +8,7 @@ type Publicacao = {
     id: number;
     titulo: string | null;
     conteudo: string | null;
-    autor_id: number | null;
+    autor: string;
     data_criacao: string | null;
     data_atualizacao: string | null;
     link: string | null;
@@ -56,9 +56,27 @@ export default function Publicacoes() {
                         <h2>{pb.ano}</h2>
                         <ul>
                             <li key={pb.id} className={style.liContent}>
-                                <a href={pb.link ?? undefined} target="_blank" rel="noopener noreferrer">
-                                    {pb.titulo}
-                                </a>
+                                <div className={style.publiBlock}>
+                                    <div className={style.publiHeader}>
+                                        <span className={style.titulo}>{pb.titulo}</span>
+                                        {pb.autor && (
+                                            <span className={style.autor}>Autor: {pb.autor}</span>
+                                        )}
+                                    </div>
+                                    {pb.conteudo && (
+                                        <div className={style.conteudo}>{pb.conteudo}</div>
+                                    )}
+                                    {pb.link && (
+                                        <a
+                                            href={pb.link.startsWith('http') ? pb.link : `https://${pb.link}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={style.linkButton}
+                                        >
+                                            Acessar publicação
+                                        </a>
+                                    )}
+                                </div>
                             </li>
                         </ul>
                     </div>

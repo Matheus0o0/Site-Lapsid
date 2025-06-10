@@ -112,6 +112,23 @@ export default function Noticias() {
           value={novoTitulo} 
           onChange={e => setNovoTitulo(e.target.value)} 
         />
+        <div className={styles.fileInputContainer}>
+          <label htmlFor="imagem" className={styles.uploadLabel}>
+            {imagemPreview ? 'Alterar Imagem' : 'Selecionar Imagem'}
+          </label>
+          <input 
+            id="imagem"
+            type="file"
+            accept="image/*"
+            onChange={handleImagemChange}
+            className={styles.fileInput}
+          />
+          {imagemPreview && (
+            <div className={styles.imagePreview}>
+              <img src={imagemPreview} alt="Preview" />
+            </div>
+          )}
+        </div>
         <Editor
           apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
           value={novoConteudo}
@@ -149,19 +166,6 @@ export default function Noticias() {
             }
           }}
         />
-        <div className={styles.fileInputContainer}>
-          <input 
-            type="file"
-            accept="image/*"
-            onChange={handleImagemChange}
-            className={styles.fileInput}
-          />
-          {imagemPreview && (
-            <div className={styles.imagePreview}>
-              <img src={imagemPreview} alt="Preview" />
-            </div>
-          )}
-        </div>
         <button className={styles.button} onClick={handleCreate}>Criar</button>
       </div>
 

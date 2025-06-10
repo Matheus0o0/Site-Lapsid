@@ -48,6 +48,8 @@
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  width: 100%;
+  margin-top: 1em;
 }
 
 .button:hover {
@@ -103,4 +105,35 @@
 
 .deleteButton:hover {
   background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0.6rem;
+  }
+
+  .formContainer {
+    padding: 1rem;
+    margin: 0;
+  }
+
+  .formContainer h2 {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+  .input, .textarea, .button {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .input::placeholder, .textarea::placeholder {
+    text-align: center;
+  }
+
+  .button {
+    display: block;
+    margin: 1rem auto;
+  }
 } 
