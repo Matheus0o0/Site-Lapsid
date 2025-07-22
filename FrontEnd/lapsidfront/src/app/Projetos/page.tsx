@@ -3,6 +3,7 @@ import { getProjetos } from '../../services/projetoService';
 import { useEffect, useState } from 'react';
 import style from '../Style/Projetos.module.css';
 import { Projeto } from '../../services/projetoService';
+import Image from 'next/image';
 
 export default function Projetos() {
     const [projetos, setProjetos] = useState<Projeto[]>([]);
@@ -44,6 +45,17 @@ export default function Projetos() {
                             <h2 className={style.h2Prj}>{projeto.titulo}</h2>
                             <div className={style.divPrj}>
                                 <div className={style.contentDivPrj}>
+                                    {projeto.imagem && (
+                                        <div className={style.imageContainer}>
+                                            <Image
+                                                src={projeto.imagem}
+                                                alt={projeto.titulo}
+                                                width={400}
+                                                height={250}
+                                                className={style.projetoImage}
+                                            />
+                                        </div>
+                                    )}
                                     <div 
                                         className={style.pPrj}
                                         dangerouslySetInnerHTML={{ __html: projeto.conteudo }}

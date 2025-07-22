@@ -113,7 +113,26 @@
 
 .h2Prj{
     text-align: center;
+}
 
+.imageContainer {
+    margin-bottom: 1.5em;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+}
+
+.projetoImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.projetoImage:hover {
+    transform: scale(1.02);
 }
 
 .imgPlaceholder {
@@ -140,7 +159,6 @@
     .title{
         display: flex;
         margin-left: 0px;
-
         text-align: center;
     }
     .divPrj{
@@ -152,5 +170,29 @@
     }
     .pPrj{
         width: 50vw;
+    }
+    .imageContainer {
+        margin: 0 1em 1.5em 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .pPrj{
+        width: 80vw;
+    }
+    .imageContainer {
+        margin: 0 0.5em 1em 0.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .pPrj{
+        width: 90vw;
+    }
+    .imageContainer {
+        margin: 0 0.5em 0.8em 0.5em;
+    }
+    .projetoImage {
+        max-width: 100%;
     }
 }

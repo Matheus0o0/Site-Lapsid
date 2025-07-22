@@ -13,6 +13,8 @@ export default function Projetos() {
   const [novoTitulo, setNovoTitulo] = useState('');
   const [novoConteudo, setNovoConteudo] = useState('');
   const [novoAutor, setNovoAutor] = useState('');
+  const [novaImagem, setNovaImagem] = useState<File | null>(null);
+  const [imagemPreview, setImagemPreview] = useState<string | null>(null);
   const [criarError, setCriarError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -50,17 +52,32 @@ export default function Projetos() {
 
     try {
       setCriarError(null);
-      const novoProjeto = {
-        titulo: novoTitulo.trim(),
-        conteudo: novoConteudo.trim(),
-        autor: novoAutor.trim(),
-        data_criacao: new Date().toISOString(),
-        data_atualizacao: new Date().toISOString()
-      };
-      await createProjeto(novoProjeto);
+      
+      if (novaImagem) {
+        const formData = new FormData();
+        formData.append('titulo', novoTitulo.trim());
+        formData.append('conteudo', novoConteudo.trim());
+        formData.append('autor', novoAutor.trim());
+        formData.append('data_criacao', new Date().toISOString());
+        formData.append('data_atualizacao', new Date().toISOString());
+        formData.append('imagem', novaImagem);
+        await createProjeto(formData);
+      } else {
+        const novoProjeto = {
+          titulo: novoTitulo.trim(),
+          conteudo: novoConteudo.trim(),
+          autor: novoAutor.trim(),
+          data_criacao: new Date().toISOString(),
+          data_atualizacao: new Date().toISOString()
+        };
+        await createProjeto(novoProjeto);
+      }
+      
       setNovoTitulo('');
       setNovoConteudo('');
       setNovoAutor('');
+      setNovaImagem(null);
+      setImagemPreview(null);
       fetchProjetos();
     } catch (error) {
       console.error('Erro ao criar projeto:', error);
@@ -114,6 +131,43 @@ export default function Projetos() {
           value={novoAutor} 
           onChange={e => setNovoAutor(e.target.value)} 
         />
+        <div className={styles.fileInputContainer}>
+          <label htmlFor="imagem" className={styles.fileLabel}>
+            {novaImagem ? novaImagem.name : 'Selecionar Imagem (opcional)'}
+          </label>
+          <input
+            id="imagem"
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files?.[0] || null;
+              setNovaImagem(file);
+              if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => setImagemPreview(e.target?.result as string);
+                reader.readAsDataURL(file);
+              } else {
+                setImagemPreview(null);
+              }
+            }}
+            className={styles.fileInput}
+          />
+          {imagemPreview && (
+            <div className={styles.previewContainer}>
+              <img src={imagemPreview} alt="Preview" className={styles.previewImage} />
+              <button 
+                type="button" 
+                onClick={() => {
+                  setNovaImagem(null);
+                  setImagemPreview(null);
+                }}
+                className={styles.removeImage}
+              >
+                Remover Imagem
+              </button>
+            </div>
+          )}
+        </div>
         <Editor
           apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
           value={novoConteudo}
@@ -160,6 +214,15 @@ export default function Projetos() {
             <h3>{projeto.titulo}</h3>
             {projeto.autor && (
               <p className={styles.autor}>Autor: {projeto.autor}</p>
+            )}
+            {projeto.imagem && (
+              <div className={styles.imageContainer}>
+                <img 
+                  src={projeto.imagem} 
+                  alt={projeto.titulo}
+                  className={styles.projetoImage}
+                />
+              </div>
             )}
             <div 
               className={styles.content}

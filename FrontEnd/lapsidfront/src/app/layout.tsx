@@ -5,6 +5,7 @@ import './globals.css'
 import Header from './Components/Header'
 import { AuthProvider } from './context/Auth'
 import { RouteGuard } from './middleware/RouteGuard'
+import Footer from './Components/Footer';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,6 +23,7 @@ export default function RootLayout({
               <Header/>
               {children}
             </RouteGuard>
+            <Footer/>
           </div>
         </AuthProvider>
       </body>

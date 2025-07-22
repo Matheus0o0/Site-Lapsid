@@ -19,6 +19,14 @@ export async function getNoticias(): Promise<Noticia[]> {
   return response.json();
 }
 
+export async function getNoticia(id: number): Promise<Noticia> {
+  const response = await fetch(`${API_URL}noticias/${id}/`);
+  if (!response.ok) {
+    throw new Error('Erro ao buscar notícia');
+  }
+  return response.json();
+}
+
 export async function createNoticia(noticia: Partial<Noticia>, imagem?: File): Promise<Noticia> {
   const csrfToken = getCookie('csrftoken');
 

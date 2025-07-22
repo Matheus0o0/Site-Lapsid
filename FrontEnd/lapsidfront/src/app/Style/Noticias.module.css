@@ -68,6 +68,18 @@
 .allNewsCardContent{
     align-items: center;
     display: flex;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 1em;
+    border-radius: 8px;
+}
+
+.allNewsCardContent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    color: inherit;
 }
 
 .allNewsCard{
@@ -92,6 +104,15 @@
     color: aliceblue;
     border: 1px solid #000;
     box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.ultNewBtn:hover {
+    background-color: #003d82;
+    text-decoration: none;
+    color: aliceblue;
 }
 
 @media (max-width: 880px) {
@@ -178,5 +199,188 @@
         width: 90%;
         margin: 0;
     }
+}
 
+/* Estilos para a página individual da notícia */
+.noticiaIndividual {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.noticiaHeader {
+    margin-bottom: 2.5em;
+    text-align: center;
+    padding-bottom: 1.5em;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.noticiaTitulo {
+    font-size: 2.2em;
+    margin-bottom: 1em;
+    color: #0056B3;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.noticiaMeta {
+    color: #666;
+    font-size: 0.95em;
+    background-color: #f8f9fa;
+    padding: 1em;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.noticiaMeta p {
+    margin: 0.3em 0;
+}
+
+.noticiaImagemContainer {
+    margin: 2.5em 0;
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 1.5em;
+    border-radius: 12px;
+}
+
+.noticiaImagem {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.noticiaImagem:hover {
+    transform: scale(1.02);
+}
+
+.noticiaConteudo {
+    line-height: 1.8;
+    font-size: 1.05em;
+    color: #333;
+    margin: 2.5em 0;
+    padding: 0 1em;
+}
+
+.noticiaConteudo h1,
+.noticiaConteudo h2,
+.noticiaConteudo h3,
+.noticiaConteudo h4,
+.noticiaConteudo h5,
+.noticiaConteudo h6 {
+    margin: 1.8em 0 0.8em 0;
+    color: #0056B3;
+    font-weight: 600;
+}
+
+.noticiaConteudo p {
+    margin: 1.2em 0;
+    text-align: justify;
+}
+
+.noticiaConteudo ul,
+.noticiaConteudo ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+.noticiaConteudo li {
+    margin: 0.5em 0;
+}
+
+.noticiaConteudo blockquote {
+    border-left: 4px solid #0056B3;
+    padding-left: 1em;
+    margin: 1em 0;
+    font-style: italic;
+    color: #666;
+}
+
+.noticiaFooter {
+    margin-top: 3.5em;
+    text-align: center;
+    padding-top: 2em;
+    border-top: 2px solid #f0f0f0;
+}
+
+.voltarBtn {
+    display: inline-block;
+    padding: 1.2em 2.5em;
+    background-color: #0056B3;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+    font-weight: 500;
+    font-size: 1.05em;
+}
+
+.voltarBtn:hover {
+    background-color: #003d82;
+    text-decoration: none;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 86, 179, 0.4);
+}
+
+/* Responsividade para a página individual */
+@media (max-width: 880px) {
+    .noticiaIndividual {
+        padding: 1.5em;
+        margin: 0 1em;
+        border-radius: 8px;
+    }
+    
+    .noticiaTitulo {
+        font-size: 1.8em;
+    }
+    
+    .noticiaImagemContainer {
+        padding: 1em;
+        margin: 2em 0;
+    }
+    
+    .noticiaConteudo {
+        padding: 0 0.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .noticiaIndividual {
+        padding: 1em;
+        margin: 0 0.5em;
+        border-radius: 6px;
+    }
+    
+    .noticiaTitulo {
+        font-size: 1.4em;
+        line-height: 1.3;
+    }
+    
+    .noticiaConteudo {
+        font-size: 0.95em;
+        padding: 0;
+        line-height: 1.6;
+    }
+    
+    .noticiaImagemContainer {
+        padding: 0.8em;
+        margin: 1.5em 0;
+    }
+    
+    .noticiaMeta {
+        padding: 0.8em;
+        font-size: 0.9em;
+    }
+    
+    .voltarBtn {
+        padding: 1em 2em;
+        font-size: 1em;
+    }
 }

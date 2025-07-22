@@ -34,28 +34,49 @@ export default function Noticias() {
     return (
         <main className={style.main}>
             <h1 className={style.ttlH1}>Notícias</h1>
-            <section>
-                <div className={style.ultNewContent}>
-                    <h2 className={style.ultNewTitle} >Ultimas notícias</h2>
-                    <div className={style.ultNewCard}>
-                        <div className={style.ultNewImgContent}>
-                            <Image className={style.ultNewImg} src={"CardImgs/Frame(5).svg"} alt="Noticias" width={600} height={300} />
-                        </div>
-                        <div className={style.ultNewsPrev}>
-                            <h2 className={style.ultNewH2}>Lançamento de Nova Plataforma de Educação Digital</h2>
-                            <p className={style.ultNewText}>Uma nova plataforma de educação digital foi lançada esta semana, prometendo revolucionar o ensino com recursos de inteligência artificial e gamificação. A ferramenta já está sendo utilizada em escolas piloto e tem recebido feedback positivo de professores e alunos.</p>
-                            <div className={style.ultNewAuthor}>
-                                {/* <Image className={style.icon} src={"CardImgs/Frame(2).svg"} alt="Noticias" width={150} height={150}/> */}
-                                <p> <b>Por</b>: Jhon Doe</p>
+            {noticias.length > 0 && (
+                <section>
+                    <div className={style.ultNewContent}>
+                        <h2 className={style.ultNewTitle}>Últimas notícias</h2>
+                        <div className={style.ultNewCard}>
+                            <div className={style.ultNewImgContent}>
+                                {noticias[0].imagem ? (
+                                    <Image 
+                                        className={style.ultNewImg} 
+                                        src={noticias[0].imagem} 
+                                        alt={noticias[0].titulo} 
+                                        width={600} 
+                                        height={300} 
+                                    />
+                                ) : (
+                                    <Image 
+                                        className={style.ultNewImg} 
+                                        src={"CardImgs/Frame(5).svg"} 
+                                        alt="Noticias" 
+                                        width={600} 
+                                        height={300} 
+                                    />
+                                )}
                             </div>
-                            <div>
-                                <p>Data de postagem: 12/02/2025</p>
+                            <div className={style.ultNewsPrev}>
+                                <h2 className={style.ultNewH2}>{noticias[0].titulo}</h2>
+                                <div 
+                                    className={style.ultNewText}
+                                    dangerouslySetInnerHTML={{ 
+                                        __html: noticias[0].conteudo.length > 200 
+                                            ? noticias[0].conteudo.substring(0, 200) + '...' 
+                                            : noticias[0].conteudo 
+                                    }} 
+                                />
+                                <div className={style.ultNewAuthor}>
+                                    <p><b>Data de postagem:</b> {new Date(noticias[0].data_noticia || '').toLocaleDateString()}</p>
+                                </div>
+                                <a href={`/Noticias/${noticias[0].id}`} className={style.ultNewBtn}>Leia mais</a>
                             </div>
-                            <button className={style.ultNewBtn}>Leia mais</button>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
             <div className={style.divHr}>
                 <hr className={style.Hr} />
             </div>
@@ -63,9 +84,9 @@ export default function Noticias() {
                 <div>
                     <h2 className={style.ultLastTitle} >Notícias da Semana</h2>
                     <div className={style.allNewsContainer}>
-                        {noticias.map(noticia => (
+                        {noticias.slice(1).map(noticia => (
                             <div key={noticia.id} className={style.allNewsCard}>
-                                <div key={noticia.id} className={style.allNewsCardContent}>
+                                <a href={`/Noticias/${noticia.id}`} className={style.allNewsCardContent}>
                                     {noticia.imagem && (
                                         <Image 
                                             className={style.allNewsImg} 
@@ -77,10 +98,16 @@ export default function Noticias() {
                                     )}
                                     <div className={style.allNewsResume}>
                                         <h3 className={style.allNewsH3}>{noticia.titulo}</h3>
-                                        <div dangerouslySetInnerHTML={{ __html: noticia.conteudo }} />
+                                        <div 
+                                            dangerouslySetInnerHTML={{ 
+                                                __html: noticia.conteudo.length > 150 
+                                                    ? noticia.conteudo.substring(0, 150) + '...' 
+                                                    : noticia.conteudo 
+                                            }} 
+                                        />
                                         <p><b>Data da postagem:</b> {new Date(noticia.data_noticia || '').toLocaleDateString()}</p>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         ))}
                     </div>

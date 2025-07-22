@@ -3,17 +3,8 @@
 import { useEffect, useState } from 'react';
 import style from '../Style/Parcerias.module.css';
 import { get } from 'http';
-import { getParcerias } from '@/services/parceriaService';
+import { getParcerias, Parceria } from '@/services/parceriaService';
 import Image from 'next/image';
-
-type Parceria = {
-    id: number;
-    nome_parceria: string;
-    imagem_url: string;
-    descricao: string;
-    data_criacao: string;
-    data_atualizacao: string;
-};
 
 export default function Parcerias() {
     const [parcerias, setParcerias] = useState<Parceria[]>([]);
@@ -65,15 +56,17 @@ export default function Parcerias() {
                                         />
                                     </div>
                                 )}
-                                <h2 className={style.h2Parce}>{parceria.nome_parceria}</h2>
-                                <p className={style.pParce}>{parceria.descricao}</p>
+                                <div className={style.parceriaInfo}>
+                                    <h2 className={style.h2Parce}>{parceria.nome_parceria}</h2>
+                                    <p className={style.pParce}>{parceria.descricao}</p>
 
-                                {parceria.data_criacao && (
-                                    <p className={style.pParce}>
-                                        <strong>Criado em:</strong>{' '}
-                                        {new Date(parceria.data_criacao).toLocaleDateString('pt-BR')}
-                                    </p>
-                                )}
+                                    {parceria.data_criacao && (
+                                        <p className={style.pParce}>
+                                            <strong>Criado em:</strong>{' '}
+                                            {new Date(parceria.data_criacao).toLocaleDateString('pt-BR')}
+                                        </p>
+                                    )}
+                                </div>
                             </div>
                         </div>
 

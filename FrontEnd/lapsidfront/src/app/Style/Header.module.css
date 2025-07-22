@@ -110,21 +110,138 @@
   color: #cce5ff;
 }
 
+/* Menu Hambúrguer */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+}
+
+.hamburger span {
+  width: 2rem;
+  height: 0.25rem;
+  background: white;
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+.hamburger.active span:first-child {
+  transform: rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* Estilos Mobile */
 @media (max-width: 768px) {
   .nav {
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hamburger {
+    display: flex;
   }
 
   .links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 250px;
+    background-color: #0057b3;
     flex-direction: column;
-    width: 100%;
-    gap: 1rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 5rem 2rem 2rem 2rem;
+    transition: right 0.3s ease-in-out;
+    z-index: 999;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .links.mobileOpen {
+    right: 0;
   }
 
   .link {
     width: 100%;
-    text-align: center;
+    text-align: left;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.1rem;
+  }
+
+  .link:last-child {
+    border-bottom: none;
+  }
+
+  .mobileUserSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .mobileUserName {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
     padding: 0.5rem 0;
+  }
+
+  .mobileLink {
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .mobileLink:hover {
+    color: #cce5ff;
+  }
+
+  .mobileLogoutBtn {
+    color: white;
+    background: none;
+    border: none;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.3s ease;
+  }
+
+  .mobileLogoutBtn:hover {
+    color: #cce5ff;
+  }
+
+  /* Overlay para fechar o menu */
+  .links.mobileOpen::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
   }
 }
