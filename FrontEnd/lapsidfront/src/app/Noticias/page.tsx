@@ -10,6 +10,10 @@ export default function Noticias() {
     const [noticias, setNoticias] = useState<Noticia[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [pagina, setPagina] = useState(1);
+    const noticiasPorPagina = 20;
+    const totalPaginas = Math.ceil((noticias.length - 1) / noticiasPorPagina);
+    const noticiasPaginadas = noticias.slice(1).slice((pagina - 1) * noticiasPorPagina, pagina * noticiasPorPagina);
 
     useEffect(() => {
         fetchNoticias();
@@ -84,7 +88,7 @@ export default function Noticias() {
                 <div>
                     <h2 className={style.ultLastTitle} >Notícias da Semana</h2>
                     <div className={style.allNewsContainer}>
-                        {noticias.slice(1).map(noticia => (
+                        {noticiasPaginadas.map(noticia => (
                             <div key={noticia.id} className={style.allNewsCard}>
                                 <a href={`/Noticias/${noticia.id}`} className={style.allNewsCardContent}>
                                     {noticia.imagem && (
@@ -113,6 +117,13 @@ export default function Noticias() {
                     </div>
                 </div>
             </section>
+            {totalPaginas > 1 && (
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}>
+                    <button onClick={() => setPagina(p => Math.max(1, p - 1))} disabled={pagina === 1} style={{marginRight:8}}>Anterior</button>
+                    <span>Página {pagina} de {totalPaginas}</span>
+                    <button onClick={() => setPagina(p => Math.min(totalPaginas, p + 1))} disabled={pagina === totalPaginas} style={{marginLeft:8}}>Próxima</button>
+                </div>
+            )}
         </main>
     );
 }

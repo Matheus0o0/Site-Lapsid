@@ -151,9 +151,7 @@ export default function Header() {
               </div>
             )
           ) : (
-            <Link href="/Login" className={styles.link} onClick={closeMobileMenu}>
-              Login
-            </Link>
+            null
           )}
         </div>
       </nav>
