@@ -94,6 +94,7 @@ export async function updateParceria(id: number, parceria: Partial<Parceria> | F
       withCredentials: true,
       headers,
     });
+    
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
