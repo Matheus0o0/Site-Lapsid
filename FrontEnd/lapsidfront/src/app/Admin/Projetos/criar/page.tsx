@@ -1,0 +1,207 @@
+"use client";
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Editor } from '@tinymce/tinymce-react';
+import style from '../../../Style/AdminPages.module.css';
+import { useAuth } from '@/app/context/Auth';
+import { createProjeto } from '@/services/projetoService';
+
+export default function CriarProjeto() {
+  const { user, isAdmin } = useAuth();
+  const router = useRouter();
+  const [titulo, setTitulo] = useState('');
+  const [conteudo, setConteudo] = useState('');
+  const [autor, setAutor] = useState('');
+  const [imagem, setImagem] = useState<File | null>(null);
+  const [imagemPreview, setImagemPreview] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!titulo.trim()) {
+      setError('O título é obrigatório');
+      return;
+    }
+
+    if (!conteudo.trim()) {
+      setError('O conteúdo é obrigatório');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+
+      if (imagem) {
+        console.log('Criando projeto com imagem:', imagem.name, imagem.size);
+        const formData = new FormData();
+        formData.append('titulo', titulo.trim());
+        formData.append('conteudo', conteudo.trim());
+        formData.append('autor', autor.trim());
+        formData.append('data_criacao', new Date().toISOString());
+        formData.append('data_atualizacao', new Date().toISOString());
+        formData.append('imagem', imagem);
+        
+        // Log do FormData para debug
+        for (let [key, value] of formData.entries()) {
+          console.log('FormData:', key, value);
+        }
+        
+        const resultado = await createProjeto(formData);
+        console.log('Projeto criado com sucesso:', resultado);
+      } else {
+        console.log('Criando projeto sem imagem');
+        const novoProjeto = {
+          titulo: titulo.trim(),
+          conteudo: conteudo.trim(),
+          autor: autor.trim(),
+          data_criacao: new Date().toISOString(),
+          data_atualizacao: new Date().toISOString()
+        };
+        const resultado = await createProjeto(novoProjeto);
+        console.log('Projeto criado com sucesso:', resultado);
+      }
+
+      router.push('/Admin/Projetos');
+    } catch (err: any) {
+      console.error('Erro ao criar projeto:', err);
+      setError(err.message || 'Erro ao criar projeto');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isAdmin || !user) {
+    router.push('/dashboard');
+    return null;
+  }
+
+  return (
+    <div className={style.pageContainer}>
+      <div className={style.header}>
+        <h1>Criar Novo Projeto</h1>
+        <p>Preencha os dados do projeto</p>
+      </div>
+
+      {error && (
+        <div className={style.error}>
+          <p>{error}</p>
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className={style.form}>
+        <div className={style.formGroup}>
+          <label htmlFor="titulo">Título *</label>
+          <input
+            id="titulo"
+            type="text"
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+            className={style.input}
+            required
+            disabled={loading}
+          />
+        </div>
+
+        <div className={style.formGroup}>
+          <label htmlFor="autor">Autor</label>
+          <input
+            id="autor"
+            type="text"
+            value={autor}
+            onChange={(e) => setAutor(e.target.value)}
+            className={style.input}
+            disabled={loading}
+          />
+        </div>
+
+        <div className={style.formGroup}>
+          <label htmlFor="imagem">Imagem (opcional)</label>
+          <input
+            id="imagem"
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files?.[0] || null;
+              setImagem(file);
+              if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => setImagemPreview(e.target?.result as string);
+                reader.readAsDataURL(file);
+              } else {
+                setImagemPreview(null);
+              }
+            }}
+            className={style.input}
+            disabled={loading}
+          />
+          {imagemPreview && (
+            <div style={{ marginTop: '1rem', textAlign: 'center' }}>
+              <img 
+                src={imagemPreview} 
+                alt="Preview" 
+                style={{ 
+                  maxWidth: '200px', 
+                  height: 'auto', 
+                  borderRadius: '8px',
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+                }} 
+              />
+            </div>
+          )}
+        </div>
+
+        <div className={style.formGroup}>
+          <label htmlFor="conteudo">Conteúdo *</label>
+          <Editor
+            apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+            value={conteudo}
+            onEditorChange={(content) => setConteudo(content)}
+            init={{
+              height: 400,
+              menubar: true,
+              language: 'pt_BR',
+              language_url: '/tinymce/langs/pt_BR.js',
+              plugins: [
+                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+              ],
+              toolbar: 'undo redo | styles | ' +
+                'bold italic underline strikethrough | forecolor backcolor | ' +
+                'alignleft aligncenter alignright alignjustify | ' +
+                'bullist numlist outdent indent | link image | ' +
+                'removeformat | help',
+              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+              branding: false,
+              promotion: false,
+              statusbar: false,
+              resize: false
+            }}
+          />
+        </div>
+
+        <div className={style.formActions}>
+          <button
+            type="button"
+            className={style.cancelButton}
+            onClick={() => router.push('/Admin/Projetos')}
+            disabled={loading}
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            className={`${style.submitButton} ${loading ? style.buttonLoading : ''}`}
+            disabled={loading}
+          >
+            {loading ? 'Criando...' : 'Criar Projeto'}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+} 

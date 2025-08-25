@@ -55,8 +55,8 @@ export default function NoticiaIndividual() {
                             className={style.noticiaImagem} 
                             src={noticia.imagem} 
                             alt={noticia.titulo} 
-                            width={600} 
-                            height={300}
+                            width={900} 
+                            height={500}
                             priority
                         />
                     </div>

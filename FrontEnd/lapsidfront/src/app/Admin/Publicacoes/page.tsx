@@ -1,160 +1,161 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getPublicacoes, createPublicacao, deletePublicacao } from '@/services/publicacaoService';
+import { getPublicacoes, deletePublicacao } from '@/services/publicacaoService';
 import { Publicacao } from '@/services/publicacaoService';
-import styles from './Publicacoes.module.css';
+import { useAuth } from '@/app/context/Auth';
+import { useRouter } from 'next/navigation';
+import style from '../../Style/AdminPages.module.css';
 
 export default function PublicacoesPage() {
+  const { user, isAdmin } = useAuth();
+  const router = useRouter();
   const [publicacoes, setPublicacoes] = useState<Publicacao[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [novoTitulo, setNovoTitulo] = useState('');
-  const [novoConteudo, setNovoConteudo] = useState('');
-  const [novoLink, setNovoLink] = useState('');
-  const [novoAno, setNovoAno] = useState(new Date().getFullYear().toString());
-  const [novoAutor, setNovoAutor] = useState('');
-
-  const fetchPublicacoes = async () => {
-    try {
-      setLoading(true);
-      const data = await getPublicacoes();
-      setPublicacoes(data);
-      setError(null);
-    } catch (err) {
-      setError('Erro ao buscar publicações');
-      alert('Erro ao buscar publicações');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [deleteLoading, setDeleteLoading] = useState<number | null>(null);
 
   useEffect(() => {
-    fetchPublicacoes();
-  }, []);
-
-  const handleCreate = async () => {
-    try {
-      let formattedLink = novoLink.trim();
-      if (formattedLink && !formattedLink.startsWith('http://') && !formattedLink.startsWith('https://')) {
-        formattedLink = `https://${formattedLink}`;
-      }
-
-      const novaPublicacao = {
-        titulo: novoTitulo,
-        conteudo: novoConteudo,
-        link: formattedLink,
-        ano: novoAno,
-        autor: novoAutor
-      };
-      await createPublicacao(novaPublicacao);
-      setNovoTitulo('');
-      setNovoConteudo('');
-      setNovoLink('');
-      setNovoAno(new Date().getFullYear().toString());
-      setNovoAutor('');
-      fetchPublicacoes();
-    } catch (err) {
-      alert('Erro ao criar publicação');
+    if (!isAdmin || !user) {
+      router.push('/dashboard');
+      return;
     }
-  };
+
+    const fetchPublicacoes = async () => {
+      try {
+        setLoading(true);
+        const data = await getPublicacoes();
+        setPublicacoes(data);
+        setError(null);
+      } catch (err: any) {
+        console.error('Erro ao carregar publicações:', err);
+        setError(err.message || 'Erro ao carregar publicações');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPublicacoes();
+  }, [isAdmin, user, router]);
 
   const handleDelete = async (id: number) => {
+    if (!user) return;
+
     if (!window.confirm('Tem certeza que deseja excluir esta publicação?')) {
       return;
     }
-    
+
     try {
+      setDeleteLoading(id);
       await deletePublicacao(id);
-      fetchPublicacoes();
-    } catch (err) {
-      alert('Erro ao excluir publicação');
+      setPublicacoes(publicacoes.filter(p => p.id !== id));
+      setError(null);
+    } catch (err: any) {
+      console.error('Erro ao excluir publicação:', err);
+      setError(err.message || 'Erro ao excluir publicação');
+    } finally {
+      setDeleteLoading(null);
     }
   };
 
-  if (loading) return <div className={styles.loading}>Carregando...</div>;
-  if (error) return <div className={styles.error}>{error}</div>;
+  function formatarData(data: string) {
+    const date = new Date(data);
+    return date.toLocaleString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  if (loading) {
+    return (
+      <div className={style.pageContainer}>
+        <div className={style.loading}>Carregando publicações...</div>
+      </div>
+    );
+  }
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Gerenciar Publicações</h1>
-      
-      <div className={styles.formContainer}>
-        <h2 className={styles.subtitle}>Nova Publicação</h2>
-        <div className={styles.form}>
-          <input
-            type="text"
-            placeholder="Título"
-            value={novoTitulo}
-            onChange={(e) => setNovoTitulo(e.target.value)}
-            className={styles.input}
-          />
-          <textarea
-            placeholder="Conteúdo"
-            value={novoConteudo}
-            onChange={(e) => setNovoConteudo(e.target.value)}
-            className={styles.textarea}
-          />
-          <input
-            type="text"
-            placeholder="Link"
-            value={novoLink}
-            onChange={(e) => setNovoLink(e.target.value)}
-            className={styles.input}
-          />
-          <input
-            type="number"
-            placeholder="Ano"
-            value={novoAno}
-            onChange={(e) => setNovoAno(e.target.value)}
-            className={styles.input}
-          />
-          <input
-            type="text"
-            placeholder="Nome do Autor"
-            value={novoAutor}
-            onChange={(e) => setNovoAutor(e.target.value)}
-            className={styles.input}
-          />
-          <button onClick={handleCreate} className={styles.button}>
-            Adicionar Publicação
-          </button>
-        </div>
+    <div className={style.pageContainer}>
+      <div className={style.header}>
+        <h1>Gerenciar Publicações</h1>
+        <p>Área exclusiva para administradores</p>
       </div>
 
-      <div className={styles.listContainer}>
-        {publicacoes.map((publicacao) => (
-          <div key={publicacao.id} className={styles.card}>
-            <div className={styles.cardContent}>
-              <h3 className={styles.cardTitle}>{publicacao.titulo}</h3>
-              <p className={styles.cardDate}>
-                {new Date(publicacao.data_criacao).toLocaleDateString()}
-              </p>
-              <p className={styles.cardContent}>{publicacao.conteudo}</p>
-              {publicacao.link && (
-                <a 
-                  href={publicacao.link.startsWith('http') ? publicacao.link : `https://${publicacao.link}`}
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.cardLink}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const url = publicacao.link.startsWith('http') ? publicacao.link : `https://${publicacao.link}`;
-                    window.open(url, '_blank');
-                  }}
-                >
-                  Acessar publicação
-                </a>
-              )}
-            </div>
-            <button
-              onClick={() => handleDelete(publicacao.id)}
-              className={styles.deleteButton}
-            >
-              Excluir
-            </button>
-          </div>
-        ))}
+      {error && (
+        <div className={style.error}>
+          <p>{error}</p>
+        </div>
+      )}
+
+      <button 
+        className={style.createButton}
+        onClick={() => router.push('/Admin/Publicacoes/criar')}
+      >
+        Adicionar Nova Publicação
+      </button>
+
+      <div className={style.content}>
+        <table className={style.table}>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Autor</th>
+              <th>Ano</th>
+              <th>Link</th>
+              <th>Data de Criação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {publicacoes.map(publicacao => (
+              <tr key={publicacao.id}>
+                <td>{publicacao.titulo}</td>
+                <td>{publicacao.autor || 'Não informado'}</td>
+                <td>{publicacao.ano || 'Não informado'}</td>
+                <td>
+                  {publicacao.link ? (
+                    <a 
+                      href={publicacao.link.startsWith('http') ? publicacao.link : `https://${publicacao.link}`}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      style={{ color: '#0070f3', textDecoration: 'none' }}
+                    >
+                      Acessar
+                    </a>
+                  ) : (
+                    <span style={{ color: '#999', fontSize: '0.9rem' }}>Sem link</span>
+                  )}
+                </td>
+                <td>{formatarData(publicacao.data_criacao)}</td>
+                <td className={style.actions}>
+                  <button 
+                    className={style.editButton}
+                    onClick={() => router.push(`/Admin/Publicacoes/editar/${publicacao.id}`)}
+                  >
+                    Editar
+                  </button>
+                  <button 
+                    className={`${style.deleteButton} ${deleteLoading === publicacao.id ? style.buttonLoading : ''}`}
+                    onClick={() => handleDelete(publicacao.id)}
+                    disabled={deleteLoading === publicacao.id}
+                  >
+                    {deleteLoading === publicacao.id ? 'Excluindo...' : 'Excluir'}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className={style.infoMessage}>
+        <p>
+          <strong>Atenção:</strong> Esta é uma área restrita. 
+          Apenas administradores podem gerenciar publicações do sistema.
+        </p>
       </div>
     </div>
   );

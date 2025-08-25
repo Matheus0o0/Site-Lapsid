@@ -45,16 +45,16 @@ export default function Noticias() {
                                         className={style.ultNewImg} 
                                         src={noticias[0].imagem} 
                                         alt={noticias[0].titulo} 
-                                        width={600} 
-                                        height={300} 
+                                        width={800} 
+                                        height={400} 
                                     />
                                 ) : (
                                     <Image 
                                         className={style.ultNewImg} 
                                         src={"CardImgs/Frame(5).svg"} 
                                         alt="Noticias" 
-                                        width={600} 
-                                        height={300} 
+                                        width={800} 
+                                        height={400} 
                                     />
                                 )}
                             </div>
@@ -92,8 +92,8 @@ export default function Noticias() {
                                             className={style.allNewsImg} 
                                             src={noticia.imagem} 
                                             alt={noticia.titulo} 
-                                            width={300} 
-                                            height={300} 
+                                            width={250} 
+                                            height={180} 
                                         />
                                     )}
                                     <div className={style.allNewsResume}>

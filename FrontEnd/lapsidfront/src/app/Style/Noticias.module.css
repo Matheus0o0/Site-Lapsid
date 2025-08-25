@@ -42,6 +42,11 @@
 
 .ultNewImg{
     margin-top: 2em;
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .ultLastTitle{
@@ -73,6 +78,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     padding: 1em;
     border-radius: 8px;
+    gap: 1.5em;
 }
 
 .allNewsCardContent:hover {
@@ -94,6 +100,12 @@
 
 .allNewsImg{
     margin-right: 2em;
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
 .ultNewBtn{
@@ -129,7 +141,8 @@
     }
     .ultNewImg{
         width: 80%;
-
+        max-height: 250px;
+        object-fit: cover;
     }
     .ultNewImgContent{
         width: 90%;
@@ -172,7 +185,8 @@
     }
     .ultNewImg{
         width: 280px;
-
+        max-height: 200px;
+        object-fit: cover;
     }
     .ultNewImgContent{
         width: 90%;
@@ -250,9 +264,11 @@
 .noticiaImagem {
     max-width: 100%;
     height: auto;
+    max-height: 500px;
     border-radius: 10px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
+    object-fit: cover;
 }
 
 .noticiaImagem:hover {

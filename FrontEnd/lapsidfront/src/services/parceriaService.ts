@@ -98,7 +98,10 @@ export async function updateParceria(id: number, parceria: Partial<Parceria> | F
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       console.error('Erro ao atualizar parceria:', error.response.data);
-      throw new Error(error.response.data.message || 'Erro ao atualizar parceria');
+      const msg = error.response.data?.message || 
+                  typeof error.response.data === 'string' ? error.response.data :
+                  'Erro ao atualizar parceria';
+      throw new Error(msg);
     }
     throw new Error('Erro ao atualizar parceria');
   }
