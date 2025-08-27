@@ -1,130 +1,149 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { getEquipes, createEquipe, updateEquipe, deleteEquipe } from '@/services/equipeService';
+import { getEquipes, deleteEquipe } from '@/services/equipeService';
 import { Equipe } from '@/types/Equipe';
-import styles from './Equipes.module.css';
+import { useAuth } from '@/app/context/Auth';
+import { useRouter } from 'next/navigation';
+import style from '../../Style/AdminPages.module.css';
 
 export default function Equipes() {
+  const { user, isAdmin } = useAuth();
+  const router = useRouter();
   const [equipes, setEquipes] = useState<Equipe[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [novoNome, setNovoNome] = useState('');
-  const [novoTipoIntegrante, setNovoTipoIntegrante] = useState('');
-  const [novoCurso, setNovoCurso] = useState('');
-  const [novaLinhaPesquisa, setNovaLinhaPesquisa] = useState('');
-  const [novaTitulacaoMaxima, setNovaTitulacaoMaxima] = useState('');
+  const [deleteLoading, setDeleteLoading] = useState<number | null>(null);
 
   useEffect(() => {
+    if (!isAdmin || !user) {
+      router.push('/dashboard');
+      return;
+    }
+
+    const fetchEquipes = async () => {
+      try {
+        setLoading(true);
+        const data = await getEquipes();
+        setEquipes(data);
+        setError(null);
+      } catch (err: any) {
+        console.error('Erro ao carregar equipes:', err);
+        setError(err.message || 'Erro ao carregar equipes');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchEquipes();
-  }, []);
+  }, [isAdmin, user, router]);
 
-  async function fetchEquipes() {
-    try {
-      setIsLoading(true);
-      const data = await getEquipes();
-      setEquipes(data);
-      setError(null);
-    } catch {
-      setError('Erro ao carregar equipes');
-    } finally {
-      setIsLoading(false);
+  const handleDelete = async (id: number) => {
+    if (!user) return;
+
+    if (!window.confirm('Tem certeza que deseja excluir esta equipe?')) {
+      return;
     }
-  }
 
-  async function handleCreate() {
     try {
-      const novaEquipe = { 
-        nome: novoNome,
-        tipo_integrante: novoTipoIntegrante,
-        curso: novoCurso,
-        linha_pesquisa: novaLinhaPesquisa,
-        titulacao_maxima: novaTitulacaoMaxima
-      };
-      await createEquipe(novaEquipe);
-      setNovoNome('');
-      setNovoTipoIntegrante('');
-      setNovoCurso('');
-      setNovaLinhaPesquisa('');
-      setNovaTitulacaoMaxima('');
-      fetchEquipes();
-    } catch {
-      alert('Erro ao criar equipe');
-    }
-  }
-
-  async function handleDelete(id: number) {
-    if (!confirm('Confirma exclusão da equipe?')) return;
-    try {
+      setDeleteLoading(id);
       await deleteEquipe(id);
-      fetchEquipes();
-    } catch {
-      alert('Erro ao deletar equipe');
+      setEquipes(equipes.filter(e => e.id !== id));
+      setError(null);
+    } catch (err: any) {
+      console.error('Erro ao excluir equipe:', err);
+      setError(err.message || 'Erro ao excluir equipe');
+    } finally {
+      setDeleteLoading(null);
     }
+  };
+
+  function formatarData(data: string) {
+    const date = new Date(data);
+    return date.toLocaleString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   }
 
-  if (isLoading) return <div>Carregando equipes...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) {
+    return (
+      <div className={style.pageContainer}>
+        <div className={style.loading}>Carregando equipes...</div>
+      </div>
+    );
+  }
 
   return (
-    <div className={styles.container}>
-      <h1>Equipes</h1>
-
-      <div className={styles.formContainer}>
-        <h2>Nova Equipe</h2>
-        <input 
-          className={styles.input}
-          placeholder="Nome" 
-          value={novoNome} 
-          onChange={e => setNovoNome(e.target.value)} 
-        />
-        <input 
-          className={styles.input}
-          placeholder="Tipo de Integrante" 
-          value={novoTipoIntegrante} 
-          onChange={e => setNovoTipoIntegrante(e.target.value)} 
-        />
-        <input 
-          className={styles.input}
-          placeholder="Curso" 
-          value={novoCurso} 
-          onChange={e => setNovoCurso(e.target.value)} 
-        />
-        <input 
-          className={styles.input}
-          placeholder="Linha de Pesquisa" 
-          value={novaLinhaPesquisa} 
-          onChange={e => setNovaLinhaPesquisa(e.target.value)} 
-        />
-        <input 
-          className={styles.input}
-          placeholder="Titulação Máxima" 
-          value={novaTitulacaoMaxima} 
-          onChange={e => setNovaTitulacaoMaxima(e.target.value)} 
-        />
-        <button className={styles.button} onClick={handleCreate}>Criar</button>
+    <div className={style.pageContainer}>
+      <div className={style.header}>
+        <h1>Gerenciar Equipes</h1>
+        <p>Área exclusiva para administradores</p>
       </div>
 
-      <div className={styles.listContainer}>
-        {equipes.map(equipe => (
-          <div key={equipe.id} className={styles.card}>
-            <h3>{equipe.nome}</h3>
-            <p><strong>Tipo:</strong> {equipe.tipo_integrante}</p>
-            <p><strong>Curso:</strong> {equipe.curso}</p>
-            <p><strong>Linha de Pesquisa:</strong> {equipe.linha_pesquisa}</p>
-            {equipe.titulacao_maxima && (
-              <p><strong>Titulação Máxima:</strong> {equipe.titulacao_maxima}</p>
-            )}
-            {equipe.data_inclusao && (
-              <p><strong>Data de Inclusão:</strong> {new Date(equipe.data_inclusao).toLocaleDateString()}</p>
-            )}
-            <button 
-              className={styles.deleteButton}
-              onClick={() => handleDelete(equipe.id)}
-            >
-              Deletar
-            </button>
-          </div>
-        ))}
+      {error && (
+        <div className={style.error}>
+          <p>{error}</p>
+        </div>
+      )}
+
+      <button 
+        className={style.createButton}
+        onClick={() => router.push('/Admin/equipes/criar')}
+      >
+        Adicionar Nova Equipe
+      </button>
+
+      <div className={style.content}>
+        <table className={style.table}>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Tipo de Integrante</th>
+              <th>Curso</th>
+              <th>Linha de Pesquisa</th>
+              <th>Titulação Máxima</th>
+              <th>Data de Inclusão</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {equipes.map(equipe => (
+              <tr key={equipe.id}>
+                <td>{equipe.nome}</td>
+                <td>{equipe.tipo_integrante || 'Não informado'}</td>
+                <td>{equipe.curso || 'Não informado'}</td>
+                <td>{equipe.linha_pesquisa || 'Não informado'}</td>
+                <td>{equipe.titulacao_maxima || 'Não informado'}</td>
+                <td>{equipe.data_inclusao ? formatarData(equipe.data_inclusao) : 'Não informado'}</td>
+                <td className={style.actions}>
+                  <button 
+                    className={style.editButton}
+                    onClick={() => router.push(`/Admin/equipes/editar/${equipe.id}`)}
+                  >
+                    Editar
+                  </button>
+                  <button 
+                    className={`${style.deleteButton} ${deleteLoading === equipe.id ? style.buttonLoading : ''}`}
+                    onClick={() => handleDelete(equipe.id)}
+                    disabled={deleteLoading === equipe.id}
+                  >
+                    {deleteLoading === equipe.id ? 'Excluindo...' : 'Excluir'}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className={style.infoMessage}>
+        <p>
+          <strong>Atenção:</strong> Esta é uma área restrita. 
+          Apenas administradores podem gerenciar equipes do sistema.
+        </p>
       </div>
     </div>
   );

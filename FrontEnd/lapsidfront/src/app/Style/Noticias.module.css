@@ -1,386 +1,290 @@
+/* ====== LAYOUT GERAL ====== */
 .main{
     margin-bottom: 20em;
     margin-left: 6em;
     margin-top: 8em;
 }
+.ultNewTitle{ text-align: center; margin-bottom: 3em; }
+.ultNewsPrev{ margin-left: 3em; display: block; }
+.ttlH1{ font-size: 2.5em; }
 
-.ultNewTitle{
-    text-align: center;
-    margin-bottom: 3em;
-}
-
-.ultNewsPrev{
-    margin-left: 3em;
-    display: block;
-}
-
-.ttlH1{
-    font-size: 2.5em;
-}
-
-.ultNewCard{
-    display: flex;
-    justify-content: center;
-}
-
-.ultNewText{
-    width: 40em;
-}
-
-.icon{
-    width: 3em;
-    height: 3em;
-    border-radius: 50%;
-    margin-right: 1em;
-}
-.ultNewAuthor{
-    margin-top: 2em;
-    margin-bottom: 1em;
-    display: flex;
-    align-items: center;
-}
+/* ====== CARD DA ÚLTIMA NOTÍCIA ====== */
+.ultNewCard{ display: flex; justify-content: center; }
+.ultNewText{ width: 40em; }
+.icon{ width: 3em; height: 3em; border-radius: 50%; margin-right: 1em; }
+.ultNewAuthor{ margin: 2em 0 1em; display: flex; align-items: center; }
 
 .ultNewImg{
     margin-top: 2em;
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.ultLastTitle{
-    margin-top: 3em;
-    text-align: center;
-    margin-bottom: 3em;
-}
+/* ====== SEÇÃO "TODAS AS NOTÍCIAS" ====== */
+.ultLastTitle{ margin-top: 3em; text-align: center; margin-bottom: 3em; }
+.Hr{ width: 60%; height: 0.1em; background-color: #000; border: none; margin: 2em; }
+.divHr{ margin-top: 5em; display: flex; align-items: center; justify-content: center; }
 
-.Hr{
-    width: 60%;
-    height: 0.1em;
-    background-color: #000000;
-    border: none;
-    margin: 2em ;
-}
+.allNewsCard{ display: flex; justify-content: center; margin-bottom: 3em; }
 
-.divHr{
-    margin-top: 5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+/* Conteúdo do card: imagem + textos, tudo com o MESMO TAMANHO */
 .allNewsCardContent{
-    align-items: center;
     display: flex;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    align-items: stretch;              /* mesmas alturas */
+    gap: 1.5em;
     padding: 1em;
     border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .2s ease, box-shadow .2s ease;
+    width: min(1100px, 92%);           /* mesma largura */
+    min-height: 200px;                 /* ALTURA PADRÃO */
+    max-height: 200px;                 /* trava para igualar */
+    overflow: hidden;                  /* impede vazamento de conteúdo */
+    box-sizing: border-box;
 }
-
-.allNewsCardContent:hover {
+.allNewsCardContent:hover{
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
     text-decoration: none;
     color: inherit;
 }
 
-.allNewsCard{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 3em;
-}
-
-.allNewsH3{
-    width: 40em;
-}
-
+/* Imagem com tamanho fixo e corte correto */
 .allNewsImg{
-    margin-right: 2em;
+    width: 240px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    flex-shrink: 0;
+    align-self: center;                /* centraliza verticalmente */
 }
 
+/* Wrapper de texto ocupa o resto do espaço e NÃO estoura */
+.allNewsTextWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    flex: 1 1 auto;
+    min-width: 0;                      /* necessário p/ ellipsis funcionar */
+}
+
+/* Título – duas linhas no máximo */
+.allNewsH3{
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    font-weight: 700;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Resumo – até 3 linhas; adapte o seletor ao seu HTML
+   (se tiver uma classe para o resumo, troque abaixo pelo nome dela) */
+.allNewsCardContent p{
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #333;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Meta (data) fixa no rodapé do bloco de texto */
+.allNewsMeta{
+    margin-top: auto;                  /* “cola” no fim do card */
+    font-size: .95rem;
+    color: #444;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Remove largura fixa antiga que fazia o texto “sair” do card */
+.allNewsH3, .ultNewText { width: auto; }
+
+/* ====== BOTÃO ====== */
 .ultNewBtn{
-    border: 0px;
-    padding: 1em 2em 1em 2em;
+    border: 0;
+    padding: 1em 2em;
     border-radius: 1em;
     background-color: #0056B3;
-    color: aliceblue;
+    color: #fff;
     border: 1px solid #000;
-    box-shadow: 2px 3px 4px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 3px 4px 2px rgba(0,0,0,.25);
     text-decoration: none;
     display: inline-block;
-    transition: background-color 0.3s ease;
+    transition: background-color .3s ease;
 }
+.ultNewBtn:hover{ background-color: #003d82; color: #fff; text-decoration: none; }
 
-.ultNewBtn:hover {
-    background-color: #003d82;
-    text-decoration: none;
-    color: aliceblue;
-}
+/* ====== RESPONSIVO ====== */
+@media (max-width: 880px){
+    .main{ margin: 0; }
+    .ttlH1{ text-align: center; }
+    .ultNewCard{ display: block; }
+    .ultNewImg{ width: 80%; max-height: 250px; object-fit: cover; }
+    .ultNewImgContent{ width: 90%; display: flex; justify-content: center; align-items: center; }
+    .ultNewText{ width: 90%; }
 
-@media (max-width: 880px) {
-    .main{
-        margin: 0px;
-    }
-    .ttlH1{
-        text-align: center;
-    }
-    .ultNewCard{
-        display: block;
-        justify-content: center;
-        align-items: center;
-    }
-    .ultNewImg{
-        width: 80%;
-
-    }
-    .ultNewImgContent{
-        width: 90%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .ultNewText{
-        width: 90%;
-    }
+    .allNewsCard{ display: block; width: 100%; }
     .allNewsCardContent{
-        display: block;
-        justify-content: center;
-        align-items: center;
-        margin: 2em;
+        width: 92%;
+        max-width: 92%;
+        min-height: 180px;
+        max-height: 180px;             /* mantém igual no mobile */
+        margin: 2em auto;
     }
-    .allNewsCard{
-        display: block;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-    .allNewsH3{
-        width: 90%;
-        margin: 0;
+    .allNewsImg{
+        width: 220px;
+        height: 150px;
     }
 }
 
-@media (max-width: 480px) {
-    .main{
-        margin: 0px;
-    }
-    .ttlH1{
-        text-align: center;
-    }
-    .ultNewCard{
-        display: block;
-        justify-content: center;
-        align-items: center;
-    }
-    .ultNewImg{
-        width: 280px;
+@media (max-width: 480px){
+    .main{ margin: 0; }
+    .ttlH1{ text-align: center; }
+    .ultNewCard{ display: block; }
+    .ultNewImg{ width: 280px; max-height: 200px; object-fit: cover; }
+    .ultNewImgContent{ width: 90%; display: flex; justify-content: center; align-items: center; }
+    .ultNewText{ width: 90%; }
 
-    }
-    .ultNewImgContent{
-        width: 90%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .ultNewText{
-        width: 90%;
-    }
+    .allNewsCard{ display: block; width: 100%; }
     .allNewsCardContent{
-        display: block;
-        justify-content: center;
-        align-items: center;
-        margin: 2em;
+        display: grid;                  /* empilha melhor em telas pequenas */
+        grid-template-columns: 1fr;
+        gap: 1em;
+        min-height: auto;
+        max-height: none;               /* libera altura quando empilhar */
+        margin: 2em auto;
     }
-    .allNewsCard{
-        display: block;
-        justify-content: center;
-        align-items: center;
+    .allNewsImg{
         width: 100%;
-    }
-    .allNewsH3{
-        width: 90%;
-        margin: 0;
+        height: 190px;
     }
 }
 
-/* Estilos para a página individual da notícia */
-.noticiaIndividual {
+/* ====== PÁGINA INDIVIDUAL ====== */
+.noticiaIndividual{
     max-width: 900px;
     margin: 0 auto;
     padding: 2em;
-    background-color: #fff;
+    background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,.1);
 }
-
-.noticiaHeader {
+.noticiaHeader{
     margin-bottom: 2.5em;
     text-align: center;
     padding-bottom: 1.5em;
     border-bottom: 2px solid #f0f0f0;
 }
-
-.noticiaTitulo {
+.noticiaTitulo{
     font-size: 2.2em;
     margin-bottom: 1em;
     color: #0056B3;
     line-height: 1.2;
     font-weight: 600;
 }
-
-.noticiaMeta {
+.noticiaMeta{
     color: #666;
-    font-size: 0.95em;
-    background-color: #f8f9fa;
+    font-size: .95em;
+    background: #f8f9fa;
     padding: 1em;
     border-radius: 8px;
     display: inline-block;
 }
-
-.noticiaMeta p {
-    margin: 0.3em 0;
-}
-
-.noticiaImagemContainer {
+.noticiaMeta p{ margin: .3em 0; }
+.noticiaImagemContainer{
     margin: 2.5em 0;
     text-align: center;
-    background-color: #f8f9fa;
+    background: #f8f9fa;
     padding: 1.5em;
     border-radius: 12px;
 }
-
-.noticiaImagem {
+.noticiaImagem{
     max-width: 100%;
     height: auto;
+    max-height: 500px;
     border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,.15);
+    transition: transform .3s ease;
+    object-fit: cover;
 }
-
-.noticiaImagem:hover {
-    transform: scale(1.02);
-}
-
-.noticiaConteudo {
+.noticiaImagem:hover{ transform: scale(1.02); }
+.noticiaConteudo{
     line-height: 1.8;
     font-size: 1.05em;
     color: #333;
     margin: 2.5em 0;
     padding: 0 1em;
 }
-
 .noticiaConteudo h1,
 .noticiaConteudo h2,
 .noticiaConteudo h3,
 .noticiaConteudo h4,
 .noticiaConteudo h5,
-.noticiaConteudo h6 {
-    margin: 1.8em 0 0.8em 0;
+.noticiaConteudo h6{
+    margin: 1.8em 0 .8em;
     color: #0056B3;
     font-weight: 600;
 }
-
-.noticiaConteudo p {
-    margin: 1.2em 0;
-    text-align: justify;
-}
-
+.noticiaConteudo p{ margin: 1.2em 0; text-align: justify; }
 .noticiaConteudo ul,
-.noticiaConteudo ol {
-    margin: 1em 0;
-    padding-left: 2em;
-}
-
-.noticiaConteudo li {
-    margin: 0.5em 0;
-}
-
-.noticiaConteudo blockquote {
+.noticiaConteudo ol{ margin: 1em 0; padding-left: 2em; }
+.noticiaConteudo li{ margin: .5em 0; }
+.noticiaConteudo blockquote{
     border-left: 4px solid #0056B3;
     padding-left: 1em;
     margin: 1em 0;
     font-style: italic;
     color: #666;
 }
-
-.noticiaFooter {
+.noticiaFooter{
     margin-top: 3.5em;
     text-align: center;
     padding-top: 2em;
     border-top: 2px solid #f0f0f0;
 }
-
-.voltarBtn {
+.voltarBtn{
     display: inline-block;
     padding: 1.2em 2.5em;
-    background-color: #0056B3;
-    color: white;
+    background: #0056B3;
+    color: #fff;
     text-decoration: none;
     border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+    transition: all .3s ease;
+    box-shadow: 0 4px 12px rgba(0,86,179,.3);
     font-weight: 500;
     font-size: 1.05em;
 }
-
-.voltarBtn:hover {
-    background-color: #003d82;
-    text-decoration: none;
-    color: white;
+.voltarBtn:hover{
+    background: #003d82;
+    color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 86, 179, 0.4);
+    box-shadow: 0 6px 16px rgba(0,86,179,.4);
 }
 
-/* Responsividade para a página individual */
-@media (max-width: 880px) {
-    .noticiaIndividual {
-        padding: 1.5em;
-        margin: 0 1em;
-        border-radius: 8px;
-    }
-    
-    .noticiaTitulo {
-        font-size: 1.8em;
-    }
-    
-    .noticiaImagemContainer {
-        padding: 1em;
-        margin: 2em 0;
-    }
-    
-    .noticiaConteudo {
-        padding: 0 0.5em;
-    }
+/* ====== RESPONSIVO – PÁGINA INDIVIDUAL ====== */
+@media (max-width: 880px){
+    .noticiaIndividual{ padding: 1.5em; margin: 0 1em; border-radius: 8px; }
+    .noticiaTitulo{ font-size: 1.8em; }
+    .noticiaImagemContainer{ padding: 1em; margin: 2em 0; }
+    .noticiaConteudo{ padding: 0 .5em; }
 }
-
-@media (max-width: 480px) {
-    .noticiaIndividual {
-        padding: 1em;
-        margin: 0 0.5em;
-        border-radius: 6px;
-    }
-    
-    .noticiaTitulo {
-        font-size: 1.4em;
-        line-height: 1.3;
-    }
-    
-    .noticiaConteudo {
-        font-size: 0.95em;
-        padding: 0;
-        line-height: 1.6;
-    }
-    
-    .noticiaImagemContainer {
-        padding: 0.8em;
-        margin: 1.5em 0;
-    }
-    
-    .noticiaMeta {
-        padding: 0.8em;
-        font-size: 0.9em;
-    }
-    
-    .voltarBtn {
-        padding: 1em 2em;
-        font-size: 1em;
-    }
+@media (max-width: 480px){
+    .noticiaIndividual{ padding: 1em; margin: 0 .5em; border-radius: 6px; }
+    .noticiaTitulo{ font-size: 1.4em; line-height: 1.3; }
+    .noticiaConteudo{ font-size: .95em; padding: 0; line-height: 1.6; }
+    .noticiaImagemContainer{ padding: .8em; margin: 1.5em 0; }
+    .noticiaMeta{ padding: .8em; font-size: .9em; }
+    .voltarBtn{ padding: 1em 2em; font-size: 1em; }
 }

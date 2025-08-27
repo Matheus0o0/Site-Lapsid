@@ -1,100 +1,60 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
-import styles from './Projetos.module.css';
 import { useAuth } from '@/app/context/Auth';
-import { getProjetos, createProjeto, deleteProjeto, Projeto } from '@/services/projetoService';
+import { useRouter } from 'next/navigation';
+import style from '../../Style/AdminPages.module.css';
+import { getProjetos, deleteProjeto, Projeto } from '@/services/projetoService';
 
 export default function Projetos() {
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
+  const router = useRouter();
   const [projetos, setProjetos] = useState<Projeto[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [novoTitulo, setNovoTitulo] = useState('');
-  const [novoConteudo, setNovoConteudo] = useState('');
-  const [novoAutor, setNovoAutor] = useState('');
-  const [novaImagem, setNovaImagem] = useState<File | null>(null);
-  const [imagemPreview, setImagemPreview] = useState<string | null>(null);
-  const [criarError, setCriarError] = useState<string | null>(null);
+  const [deleteLoading, setDeleteLoading] = useState<number | null>(null);
 
   useEffect(() => {
-    fetchProjetos();
-  }, []);
-
-  async function fetchProjetos() {
-    try {
-      setIsLoading(true);
-      const data = await getProjetos();
-      setProjetos(data);
-      setError(null);
-    } catch (error) {
-      setError('Erro ao carregar projetos');
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function handleCreate() {
-    if (!user) {
-      setCriarError('Usuário não autenticado');
+    if (!isAdmin || !user) {
+      router.push('/dashboard');
       return;
     }
 
-    if (!novoTitulo.trim()) {
-      setCriarError('O título é obrigatório');
-      return;
-    }
-
-    if (!novoConteudo.trim()) {
-      setCriarError('O conteúdo é obrigatório');
-      return;
-    }
-
-    try {
-      setCriarError(null);
-      
-      if (novaImagem) {
-        const formData = new FormData();
-        formData.append('titulo', novoTitulo.trim());
-        formData.append('conteudo', novoConteudo.trim());
-        formData.append('autor', novoAutor.trim());
-        formData.append('data_criacao', new Date().toISOString());
-        formData.append('data_atualizacao', new Date().toISOString());
-        formData.append('imagem', novaImagem);
-        await createProjeto(formData);
-      } else {
-        const novoProjeto = {
-          titulo: novoTitulo.trim(),
-          conteudo: novoConteudo.trim(),
-          autor: novoAutor.trim(),
-          data_criacao: new Date().toISOString(),
-          data_atualizacao: new Date().toISOString()
-        };
-        await createProjeto(novoProjeto);
+    const fetchProjetos = async () => {
+      try {
+        setLoading(true);
+        const data = await getProjetos();
+        setProjetos(data);
+        setError(null);
+      } catch (err: any) {
+        console.error('Erro ao carregar projetos:', err);
+        setError(err.message || 'Erro ao carregar projetos');
+      } finally {
+        setLoading(false);
       }
-      
-      setNovoTitulo('');
-      setNovoConteudo('');
-      setNovoAutor('');
-      setNovaImagem(null);
-      setImagemPreview(null);
-      fetchProjetos();
-    } catch (error) {
-      console.error('Erro ao criar projeto:', error);
-      setCriarError(error instanceof Error ? error.message : 'Erro ao criar projeto');
-    }
-  }
+    };
 
-  async function handleDelete(id: number) {
-    if (!confirm('Confirma exclusão do projeto?')) return;
-    try {
-      await deleteProjeto(id);
-      fetchProjetos();
-    } catch (error) {
-      console.error('Erro ao deletar projeto:', error);
-      alert(error instanceof Error ? error.message : 'Erro ao deletar projeto');
+    fetchProjetos();
+  }, [isAdmin, user, router]);
+
+  const handleDelete = async (id: number) => {
+    if (!user) return;
+
+    if (!window.confirm('Tem certeza que deseja excluir este projeto?')) {
+      return;
     }
-  }
+
+    try {
+      setDeleteLoading(id);
+      await deleteProjeto(id);
+      setProjetos(projetos.filter(p => p.id !== id));
+      setError(null);
+    } catch (err: any) {
+      console.error('Erro ao excluir projeto:', err);
+      setError(err.message || 'Erro ao excluir projeto');
+    } finally {
+      setDeleteLoading(null);
+    }
+  };
 
   function formatarData(data: string) {
     const date = new Date(data);
@@ -107,143 +67,90 @@ export default function Projetos() {
     });
   }
 
-  if (isLoading) return <div>Carregando projetos...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) {
+    return (
+      <div className={style.pageContainer}>
+        <div className={style.loading}>Carregando projetos...</div>
+      </div>
+    );
+  }
 
   return (
-    <div className={styles.container}>
-      <h1>Projetos</h1>
-
-      <div className={styles.formContainer}>
-        <h2>Novo Projeto</h2>
-        {criarError && (
-          <div className={styles.error}>{criarError}</div>
-        )}
-        <input 
-          className={styles.input}
-          placeholder="Título" 
-          value={novoTitulo} 
-          onChange={e => setNovoTitulo(e.target.value)} 
-        />
-        <input 
-          className={styles.input}
-          placeholder="Autor" 
-          value={novoAutor} 
-          onChange={e => setNovoAutor(e.target.value)} 
-        />
-        <div className={styles.fileInputContainer}>
-          <label htmlFor="imagem" className={styles.fileLabel}>
-            {novaImagem ? novaImagem.name : 'Selecionar Imagem (opcional)'}
-          </label>
-          <input
-            id="imagem"
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files?.[0] || null;
-              setNovaImagem(file);
-              if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => setImagemPreview(e.target?.result as string);
-                reader.readAsDataURL(file);
-              } else {
-                setImagemPreview(null);
-              }
-            }}
-            className={styles.fileInput}
-          />
-          {imagemPreview && (
-            <div className={styles.previewContainer}>
-              <img src={imagemPreview} alt="Preview" className={styles.previewImage} />
-              <button 
-                type="button" 
-                onClick={() => {
-                  setNovaImagem(null);
-                  setImagemPreview(null);
-                }}
-                className={styles.removeImage}
-              >
-                Remover Imagem
-              </button>
-            </div>
-          )}
-        </div>
-        <Editor
-          apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-          value={novoConteudo}
-          onEditorChange={(content) => setNovoConteudo(content)}
-          init={{
-            height: 500,
-            menubar: true,
-            language: 'pt_BR',
-            language_url: '/tinymce/langs/pt_BR.js',
-            plugins: [
-              'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-              'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-              'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-            ],
-            toolbar: 'undo redo | styles | ' +
-              'bold italic underline strikethrough | forecolor backcolor | ' +
-              'alignleft aligncenter alignright alignjustify | ' +
-              'bullist numlist outdent indent | link image | ' +
-              'removeformat | help',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-            branding: false,
-            promotion: false,
-            statusbar: false,
-            resize: false,
-            menubar: 'file edit view insert format tools table help',
-            menu: {
-              file: { title: 'Arquivo', items: 'newdocument restoredraft | preview | print ' },
-              edit: { title: 'Editar', items: 'undo redo | cut copy paste pastetext | selectall | searchreplace' },
-              view: { title: 'Visualizar', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen' },
-              insert: { title: 'Inserir', items: 'image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime' },
-              format: { title: 'Formato', items: 'bold italic underline strikethrough superscript subscript codeformat | formats blockformats fontformats fontsizes align lineheight | forecolor backcolor | removeformat' },
-              tools: { title: 'Ferramentas', items: 'spellchecker spellcheckerlanguage | code wordcount' },
-              table: { title: 'Tabela', items: 'inserttable | cell row column | tableprops deletetable' },
-              help: { title: 'Ajuda', items: 'help' }
-            }
-          }}
-        />
-        <button className={styles.button} onClick={handleCreate}>Criar</button>
+    <div className={style.pageContainer}>
+      <div className={style.header}>
+        <h1>Gerenciar Projetos</h1>
+        <p>Área exclusiva para administradores</p>
       </div>
 
-      <div className={styles.listContainer}>
-        {projetos.map(projeto => (
-          <div key={projeto.id} className={styles.card}>
-            <h3>{projeto.titulo}</h3>
-            {projeto.autor && (
-              <p className={styles.autor}>Autor: {projeto.autor}</p>
-            )}
-            {projeto.imagem && (
-              <div className={styles.imageContainer}>
-                <img 
-                  src={projeto.imagem} 
-                  alt={projeto.titulo}
-                  className={styles.projetoImage}
-                />
-              </div>
-            )}
-            <div 
-              className={styles.content}
-              dangerouslySetInnerHTML={{ __html: projeto.conteudo }}
-            />
-            <div className={styles.dates}>
-              <p>
-                <strong>Data de Criação:</strong> {formatarData(projeto.data_criacao)}
-              </p>
-              <p>
-                <strong>Data de Atualização:</strong> {formatarData(projeto.data_atualizacao)}
-              </p>
-            </div>
-            <button 
-              className={styles.deleteButton}
-              onClick={() => handleDelete(projeto.id)}
-            >
-              Deletar
-            </button>
-          </div>
-        ))}
+      {error && (
+        <div className={style.error}>
+          <p>{error}</p>
+        </div>
+      )}
+
+      <button 
+        className={style.createButton}
+        onClick={() => router.push('/Admin/Projetos/criar')}
+      >
+        Adicionar Novo Projeto
+      </button>
+
+      <div className={style.content}>
+        <table className={style.table}>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Autor</th>
+              <th>Imagem</th>
+              <th>Data de Criação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {projetos.map(projeto => (
+              <tr key={projeto.id}>
+                <td>{projeto.titulo}</td>
+                <td>{projeto.autor || 'Não informado'}</td>
+                <td>
+                  {projeto.imagem ? (
+                    <div style={{ width: '50px', height: '30px', overflow: 'hidden', borderRadius: '4px' }}>
+                      <img 
+                        src={projeto.imagem} 
+                        alt={projeto.titulo}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    </div>
+                  ) : (
+                    <span style={{ color: '#999', fontSize: '0.9rem' }}>Sem imagem</span>
+                  )}
+                </td>
+                <td>{formatarData(projeto.data_criacao)}</td>
+                <td className={style.actions}>
+                  <button 
+                    className={style.editButton}
+                    onClick={() => router.push(`/Admin/Projetos/editar/${projeto.id}`)}
+                  >
+                    Editar
+                  </button>
+                  <button 
+                    className={`${style.deleteButton} ${deleteLoading === projeto.id ? style.buttonLoading : ''}`}
+                    onClick={() => handleDelete(projeto.id)}
+                    disabled={deleteLoading === projeto.id}
+                  >
+                    {deleteLoading === projeto.id ? 'Excluindo...' : 'Excluir'}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className={style.infoMessage}>
+        <p>
+          <strong>Atenção:</strong> Esta é uma área restrita. 
+          Apenas administradores podem gerenciar projetos do sistema.
+        </p>
       </div>
     </div>
   );

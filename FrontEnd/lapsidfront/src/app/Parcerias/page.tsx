@@ -50,8 +50,8 @@ export default function Parcerias() {
                                         <Image
                                             src={parceria.imagem_url}
                                             alt={parceria.nome_parceria}
-                                            width={300}
-                                            height={200}
+                                            width={350}
+                                            height={250}
                                             className={style.parceriaImage}
                                         />
                                     </div>
