@@ -79,6 +79,7 @@ class Projetos(models.Model):
     autor = models.CharField(max_length=255, blank=True, null=True)
     data_criacao = models.DateTimeField(blank=True, null=True)
     data_atualizacao = models.DateTimeField(blank=True, null=True)
+    imagem = models.ImageField(upload_to='projetos/',max_length=255, blank=True, null=True)  # Adicionado campo imagem
 
     class Meta:
         db_table = 'projetos'
