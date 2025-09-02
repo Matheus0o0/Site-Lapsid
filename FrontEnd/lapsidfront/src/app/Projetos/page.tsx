@@ -56,14 +56,13 @@ export default function Projetos() {
                                             />
                                         </div>
                                     )}
-                                    <div 
-                                        className={style.pPrj}
-                                        dangerouslySetInnerHTML={{ __html: projeto.conteudo }}
-                                    />
-                                    <p><b>Data de criação:</b> {projeto.data_criacao ? new Date(projeto.data_criacao).toLocaleDateString('pt-BR') : 'Indefinida'}</p>
-                                    {projeto.autor && (
-                                        <p><b>Autor:</b> {projeto.autor}</p>
-                                    )}
+                                    <div className={style.pPrj}>
+                                        <div dangerouslySetInnerHTML={{ __html: projeto.conteudo }} />
+                                        <p><b>Data de criação:</b> {projeto.data_criacao ? new Date(projeto.data_criacao).toLocaleDateString('pt-BR') : 'Indefinida'}</p>
+                                        {projeto.autor && (
+                                            <p><b>Autor:</b> {projeto.autor}</p>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>

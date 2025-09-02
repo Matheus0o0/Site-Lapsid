@@ -11,7 +11,7 @@ export default function Noticias() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [pagina, setPagina] = useState(1);
-    const noticiasPorPagina = 20;
+    const noticiasPorPagina = 3;
     const totalPaginas = Math.ceil((noticias.length - 1) / noticiasPorPagina);
     const noticiasPaginadas = noticias.slice(1).slice((pagina - 1) * noticiasPorPagina, pagina * noticiasPorPagina);
 
@@ -23,7 +23,13 @@ export default function Noticias() {
         try {
             setIsLoading(true);
             const data = await getNoticias();
-            setNoticias(data);
+            // Ordena por data_noticia (ou data_criacao caso não exista)
+            const noticiasOrdenadas = [...data].sort((a, b) => {
+                const dataA = new Date(a.data_noticia || a.data_criacao || '').getTime();
+                const dataB = new Date(b.data_noticia || b.data_criacao || '').getTime();
+                return dataB - dataA; // Mais recente primeiro
+            });
+            setNoticias(noticiasOrdenadas);
             setError(null);
         } catch (error) {
             setError('Erro ao carregar notícias');
